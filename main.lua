@@ -3,6 +3,7 @@ tick.framerate = 30
 
 global = {
     gameState = 'BattleEngine',
+    battleState = 'buttons',
     choice = 0,
     subChoice = 0
 }
@@ -33,9 +34,9 @@ function love.keypressed(key)
     elseif key == 'right' then
         input.right = true
     elseif key == 'z' or key == 'enter' then
-        input.left = true
+        input.primary = true
     elseif key == 'x' or key == 'rshift' or key == 'lshift' then
-        input.right = true
+        input.secondary = true
     end
 end
 
