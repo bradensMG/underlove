@@ -2,7 +2,7 @@ tick = require "lib.tick"
 tick.framerate = 30
 
 global = {
-    gameState = 'TestTextRoom',
+    gameState = 'BattleEngine',
     battleState = 'buttons',
     choice = 0,
     subChoice = 0
