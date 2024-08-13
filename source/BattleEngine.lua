@@ -2,17 +2,19 @@ BattleEngine = {}
 
 function BattleEngine:load()
     Ui = require('source.BattleEngine.ui')
-    -- love.graphics.setBackgroundColor(.3, .3, .5)
+    Player = require('source.BattleEngine.player')
 
-    playerStats = {name = 'Chara', love = 1, hp = 20, maxhp = 20}
+    -- love.graphics.setBackgroundColor(.3, .3, .5)
 end
 
 function BattleEngine:update(dt)
-    
+    Ui:update(dt)
+    Player:update(dt)
 end
 
 function BattleEngine:draw()
-    Ui.draw()
+    Ui:draw()
+    Player:draw()
 end
 
 return BattleEngine

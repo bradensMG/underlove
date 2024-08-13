@@ -23,6 +23,13 @@ local arenaCur = {
     height = 135
 }
 
+Ui.arenaTo = {
+    x = 320,
+    y = 320,
+    width = 569,
+    height = 135
+}
+
 local function buttons()
     love.graphics.setColor(1, 1, 1)
     
@@ -36,41 +43,51 @@ local function buttons()
     for i, name in ipairs(buttonNames) do
         love.graphics.draw(
             buttonImages[name .. 'bt'], 
-            buttonQuads[name .. 'Quads'][(buttonOn == (i-1)) and 2 or 1],
+            buttonQuads[name .. 'Quads'][(global.choice == (i-1)) and 2 or 1],
             positions[name], 
             432
         )
     end
 end
 
-
-
 local function stats()
     love.graphics.setColor(1, 1, 1)
     love.graphics.setFont(fonts.mnc)
-    love.graphics.print(playerStats.name .. '   LV ' .. playerStats.love, 30, 400)
+    love.graphics.print(Player.stats.name .. '   LV ' .. Player.stats.love, 30, 400)
     love.graphics.draw(hpname, 240, 400)
 
     love.graphics.setColor(0.75, 0, 0, 1)
-    love.graphics.rectangle('fill', 275, 400, (playerStats.maxhp * 1.2), 21)
+    love.graphics.rectangle('fill', 275, 400, (Player.stats.maxhp * 1.2), 21)
     love.graphics.setColor(0.98, 1, 0, 1)
-    love.graphics.rectangle('fill', 275, 400, (playerStats.hp * 1.2), 21)
+    love.graphics.rectangle('fill', 275, 400, (Player.stats.hp * 1.2), 21)
 
     love.graphics.setColor(1, 1, 1)
-    if (playerStats.hp > -1 and playerStats.hp < 10) then
-        love.graphics.print("0" .. playerStats.hp .. " / " .. playerStats.maxhp, 289 + (playerStats.maxhp * 1.2), 400)
+    if (Player.stats.hp > -1 and Player.stats.hp < 10) then
+        love.graphics.print("0" .. Player.stats.hp .. " / " .. Player.stats.maxhp, 289 + (Player.stats.maxhp * 1.2), 400)
     else
-        love.graphics.print(playerStats.hp .. " / " .. playerStats.maxhp, 289 + (playerStats.maxhp * 1.2), 400)
+        love.graphics.print(Player.stats.hp .. " / " .. Player.stats.maxhp, 289 + (Player.stats.maxhp * 1.2), 400)
     end
 end
 
 local function arena()
-    love.graphics.setColor(0, 0, 0)
+    love.graphics.setColor(0, 0, 0, .5)
     love.graphics.rectangle('fill', arenaCur.x - (arenaCur.width / 2), arenaCur.y - (arenaCur.height / 2), arenaCur.width, arenaCur.height)
+
     love.graphics.setColor(1, 1, 1)
     love.graphics.setLineStyle('rough')
     love.graphics.setLineWidth(5)
     love.graphics.rectangle('line', arenaCur.x - (arenaCur.width / 2), arenaCur.y - (arenaCur.height / 2), arenaCur.width, arenaCur.height)
+end
+
+local function updateArena()
+    arenaCur.x = math.floor(arenaCur.x + ((Ui.arenaTo.x - arenaCur.x) / 8))
+    arenaCur.y = math.floor(arenaCur.y + ((Ui.arenaTo.y - arenaCur.y) / 8))
+    arenaCur.width = math.floor(arenaCur.width + ((Ui.arenaTo.width - arenaCur.width) / 8))
+    arenaCur.height = math.floor(arenaCur.height + ((Ui.arenaTo.height - arenaCur.height) / 8))
+end
+
+function Ui:load()
+    
 end
 
 function Ui:draw()
@@ -79,6 +96,10 @@ function Ui:draw()
     arena()
     love.graphics.setColor(1, 1, 1, .5)
     -- love.graphics.draw(ref)
+end
+
+function Ui:update(dt)
+    updateArena()
 end
 
 return Ui
