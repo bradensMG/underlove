@@ -16,10 +16,6 @@ fonts = {
     mnc = love.graphics.newFont('assets/fonts/Mars_Needs_Cunnilingus.ttf', 23)
 }
 
-for _, font in pairs(fonts) do
-    font:setFilter("nearest", "nearest")
-end
-
 input = {up = false, down = false, left = false, right = false, primary = false, secondary = false,}
 
 function love.keypressed(key)

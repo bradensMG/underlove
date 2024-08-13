@@ -7,7 +7,7 @@ function BattleEngine:load()
 
     love.graphics.setBackgroundColor(.3, .3, .5)
 
-    Writer:setParams('[clear]* Hello, world!', 52, 274, fonts.determination, 1 / 30)
+    Writer:setParams('[clear]* Hello, world!', 52, 274, fonts.determination, 1 / 30, 1)
 end
 
 function BattleEngine:update(dt)

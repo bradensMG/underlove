@@ -10,6 +10,9 @@ local color = 'white'
 local animation = 'idle'
 local updateI
 
+local textSounds = {}
+textSounds[1] = love.audio.newSource('assets/sound/sfx/Voices/uifont.wav', 'static')
+
 local colors = {
     white = {1, 1, 1},
     red = {1, 0, 0},
@@ -19,7 +22,7 @@ local colors = {
     yellow = {1, 1, 0}
 }
 
-function Writer:setParams(string, x, y, font, time)
+function Writer:setParams(string, x, y, font, time, sound)
     text = string
     progString = ""
     startX = x
@@ -27,13 +30,18 @@ function Writer:setParams(string, x, y, font, time)
     timeSince = 0
     timeInterval = time
     textFont = font
+    textSound = sound
     i = 1
 end
 
 function Writer:update(dt)
     timeSince = timeSince + tick.dt
     local char = text:sub(i, i)
-    if timeSince > timeInterval then
+    if timeSince > timeInterval and #progString ~= #text and not input.secondary then
+        if char ~= ' ' then
+            textSounds[textSound]:stop()
+            textSounds[textSound]:play()
+        end
         if i <= #text then
             progString = text:sub(1, i)
             i = i + 1
@@ -44,6 +52,10 @@ function Writer:update(dt)
         local codeEnd = text:find("]", i)
         local code = text:sub(i + 1, codeEnd - 1)
         i = codeEnd + 1
+    end
+    if input.secondary then
+        progString = text
+        i = #text
     end
 end
 
@@ -61,13 +73,14 @@ function Writer:draw()
 
     while i <= #text do
         local char = progString:sub(i, i)
+        
         if char == '[' then
             local code = progString:match("%[%w+%]", i)
             if code then
                 code = code:sub(2, -2)
                 if code == 'break' then
                     x = startX
-                    y = y + love.graphics.getFont():getHeight()
+                    y = y + 32
                 elseif code == 'wave' then
                     animation = 'wave'
                 elseif code == 'clear' then
@@ -84,8 +97,8 @@ function Writer:draw()
             end
         else
             if animation == 'wave' then
-                shakeX = math.sin(love.timer.getTime() * -8 + animi) * 1
-                shakeY = math.cos(love.timer.getTime() * -8 + animi) * 1
+                shakeX = math.sin(love.timer.getTime() * -8 + animi) * 1.5
+                shakeY = math.cos(love.timer.getTime() * -8 + animi) * 1.5
             elseif animation == 'shake' then
                 letterShakeAmount = 1
                 shakeX = love.math.random(-letterShakeAmount, letterShakeAmount)
