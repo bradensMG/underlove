@@ -7,18 +7,23 @@ global = {
 
 BattleEngine = require 'source.BattleEngine'
 
+fonts = {
+    determination = love.graphics.newFont('assets/fonts/determination-mono.ttf', 32),
+    mnc = love.graphics.newFont('assets/fonts/Mars_Needs_Cunnilingus.ttf', 23)
+}
+
 function love.load(arg)
-    BattleEngine.load()
+    BattleEngine:load()
 end
 
 function love.update(dt)
     if global.gameState == 'BattleEngine' then
-        BattleEngine.update(dt)
+        BattleEngine:update(dt)
     end
 end
 
 function love.draw()
     if global.gameState == 'BattleEngine' then
-        BattleEngine.draw()
+        BattleEngine:draw()
     end
 end
