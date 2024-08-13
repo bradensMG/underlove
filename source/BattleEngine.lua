@@ -4,7 +4,7 @@ function BattleEngine:load()
     Ui = require('source.BattleEngine.ui')
     Player = require('source.BattleEngine.player')
 
-    -- love.graphics.setBackgroundColor(.3, .3, .5)
+    love.graphics.setBackgroundColor(.3, .3, .5)
 end
 
 function BattleEngine:update(dt)
