@@ -1,15 +1,13 @@
-tick = require "lib.tick"
-tick.framerate = 30
-
 global = {
     gameState = 'BattleEngine',
-    battleState = 'buttons',
-    choice = 0,
+    battleState = 'enemyTurn',
+    choice = -1,
     subChoice = 0
 }
 
 BattleEngine = require 'source.BattleEngine'
 TestTextRoom = require 'source.TestTextRoom'
+
 
 fonts = {
     determination = love.graphics.newFont('assets/fonts/determination-mono.ttf', 32),
@@ -28,6 +26,7 @@ function love.keypressed(key)
 end
 
 function love.load(arg)
+    love.graphics.setDefaultFilter('nearest', 'nearest')
     if global.gameState == 'BattleEngine' then BattleEngine:load() end
     if global.gameState == 'TestTextRoom' then TestTextRoom:load() end
 end
@@ -41,4 +40,5 @@ end
 function love.draw()
     if global.gameState == 'BattleEngine' then BattleEngine:draw() end
     if global.gameState == 'TestTextRoom' then TestTextRoom:draw() end
+    love.graphics.print(math.floor(1 / love.timer.getDelta()))
 end
