@@ -34,7 +34,7 @@ function gotoMenu()
         width = 569,
         height = 135
     }
-    Writer:setParams('[clear]* Hello, world!', 52, 274, fonts.determination, 1 / 60, 1)
+    Writer:setParams('[clear]* Hello, world!', 52, 274, fonts.determination, 1 / 30, 1)
 end
 
 return BattleEngine

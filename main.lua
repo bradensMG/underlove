@@ -1,13 +1,12 @@
 global = {
     gameState = 'BattleEngine',
-    battleState = 'enemyTurn',
-    choice = -1,
+    battleState = 'buttons',
+    choice = 0,
     subChoice = 0
 }
 
 BattleEngine = require 'source.BattleEngine'
 TestTextRoom = require 'source.TestTextRoom'
-
 
 fonts = {
     determination = love.graphics.newFont('assets/fonts/determination-mono.ttf', 32),
