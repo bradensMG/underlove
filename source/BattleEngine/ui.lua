@@ -24,10 +24,10 @@ local arenaCur = {
 }
 
 local function setHeartParams()
-    maxLeft = arenaCur.x - (arenaCur.width / 2) + 3
-    maxUp = arenaCur.y - (arenaCur.height / 2) + 3
-    maxDown = arenaCur.y + (arenaCur.height / 2) - 18
-    maxRight = arenaCur.x + (arenaCur.width / 2) - 18
+    maxLeft = math.floor(arenaCur.x - (arenaCur.width / 2) + 3)
+    maxUp = math.floor(arenaCur.y - (arenaCur.height / 2) + 3)
+    maxDown = math.floor(arenaCur.y + (arenaCur.height / 2) - 18)
+    maxRight = math.floor(arenaCur.x + (arenaCur.width / 2) - 18)
 end
 
 local function buttons()

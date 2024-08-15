@@ -2,8 +2,8 @@ Player = {}
 
 local heart = {
     image = love.graphics.newImage('assets/images/ut-heart.png'),
-    x = 0,
-    y = 0
+    x = Ui.arenaTo.x - 8,
+    y = Ui.arenaTo.y - 8
 }
 
 local sfx = {
@@ -12,20 +12,12 @@ local sfx = {
 
 Player.stats = {name = 'Chara', love = 1, hp = 20, maxhp = 20}
 
-local function trapheart()
-    if heart.x < maxLeft then
-        heart.x = maxLeft
-    end
-    if heart.y < maxUp then
-        heart.y = maxUp
-    end
-    if heart.y > maxDown then
-        heart.y = maxDown
-    end
-    if heart.x > maxRight then
-        heart.x = maxRight
-    end
-end
+Player.inventory = {
+    'Pie',
+    'Monster Candy',
+    'Monster Candy',
+    'Tough Glove'
+}
 
 if global.battleState == 'enemyTalk' then
     heart.x = Ui.arenaTo.x - 8
@@ -57,7 +49,8 @@ function Player:update(dt)
     if global.battleState == 'enemyTurn' then
         heart.x = heart.x + ((love.keyboard.isDown('right')and 1 or 0) - (love.keyboard.isDown('left')and 1 or 0)) * 4 / ((love.keyboard.isDown('x')and 1 or 0) + 1) * love.timer.getDelta() * 30
         heart.y = heart.y + ((love.keyboard.isDown('down')and 1 or 0) - (love.keyboard.isDown('up')and 1 or 0)) * 4 / ((love.keyboard.isDown('x')and 1 or 0) + 1) * love.timer.getDelta() * 30
-        trapheart()
+        heart.x = math.max(maxLeft, math.min(heart.x, maxRight))
+        heart.y = math.max(maxUp, math.min(heart.y, maxDown))
     end
 end
 
