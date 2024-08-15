@@ -23,6 +23,13 @@ local arenaCur = {
     height = 135
 }
 
+local function setHeartParams()
+    maxLeft = arenaCur.x - (arenaCur.width / 2) + 3
+    maxUp = arenaCur.y - (arenaCur.height / 2) + 3
+    maxDown = arenaCur.y + (arenaCur.height / 2) - 18
+    maxRight = arenaCur.x + (arenaCur.width / 2) - 18
+end
+
 local function buttons()
     love.graphics.setColor(1, 1, 1)
     
@@ -63,11 +70,6 @@ local function stats()
 end
 
 local function arena()
-    maxLeft = arenaCur.x - (arenaCur.width / 2) + 3
-    maxUp = arenaCur.y - (arenaCur.height / 2) + 3
-    maxDown = arenaCur.y + (arenaCur.height / 2) - 18
-    maxRight = arenaCur.x + (arenaCur.width / 2) - 18
-    
     love.graphics.setColor(0, 0, 0, .5)
     love.graphics.rectangle('fill', arenaCur.x - (arenaCur.width / 2), arenaCur.y - (arenaCur.height / 2), arenaCur.width, arenaCur.height)
 
@@ -78,10 +80,11 @@ local function arena()
 end
 
 local function updateArena()
-    arenaCur.x = math.floor(arenaCur.x + ((Ui.arenaTo.x - arenaCur.x) / 8) * love.timer.getDelta() * 30)
-    arenaCur.y = math.floor(arenaCur.y + ((Ui.arenaTo.y - arenaCur.y) / 8) * love.timer.getDelta() * 30)
-    arenaCur.width = math.floor(arenaCur.width + ((Ui.arenaTo.width - arenaCur.width) / 8) * love.timer.getDelta() * 30)
-    arenaCur.height = math.floor(arenaCur.height + ((Ui.arenaTo.height - arenaCur.height) / 8) * love.timer.getDelta() * 30)
+    arenaCur.x = math.floor(arenaCur.x + ((Ui.arenaTo.x - arenaCur.x) / 6) * love.timer.getDelta() * 30)
+    arenaCur.y = math.floor(arenaCur.y + ((Ui.arenaTo.y - arenaCur.y) / 6) * love.timer.getDelta() * 30)
+    arenaCur.width = math.floor(arenaCur.width + ((Ui.arenaTo.width - arenaCur.width) / 6) * love.timer.getDelta() * 30)
+    arenaCur.height = math.floor(arenaCur.height + ((Ui.arenaTo.height - arenaCur.height) / 6) * love.timer.getDelta() * 30)
+    setHeartParams()
 end
 
 function Ui:load()

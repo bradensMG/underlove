@@ -1,5 +1,4 @@
 global = {gameState = 'BattleEngine', battleState = 'enemyTurn', choice = 0, subChoice = 0}
-gameSettings = {fps = 60}
 
 BattleEngine = require 'source.BattleEngine'
 TestTextRoom = require 'source.TestTextRoom'
@@ -30,7 +29,6 @@ function love.update(dt)
     if global.gameState == 'BattleEngine' then BattleEngine:update(dt) end
     if global.gameState == 'TestTextRoom' then TestTextRoom:update(dt) end
     input = {up = false, down = false, left = false, right = false, primary = false, secondary = false}
-    love.timer.sleep(1 / (gameSettings.fps * 2))
 end
 
 function love.draw()
