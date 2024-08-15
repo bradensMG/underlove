@@ -1,9 +1,4 @@
-global = {
-    gameState = 'BattleEngine',
-    battleState = 'buttons',
-    choice = 0,
-    subChoice = 0
-}
+global = {gameState = 'BattleEngine', battleState = 'buttons', choice = 0, subChoice = 0}
 
 BattleEngine = require 'source.BattleEngine'
 TestTextRoom = require 'source.TestTextRoom'
