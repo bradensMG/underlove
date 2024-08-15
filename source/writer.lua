@@ -24,6 +24,12 @@ local colors = {
     yellow = {1, 1, 0}
 }
 
+function Writer:stop()
+    doingText = false
+    i = #text
+    progString = ''
+end
+
 function Writer:setParams(string, x, y, font, time, sound)
     text = string
     progString = ""
@@ -56,7 +62,7 @@ function Writer:update(dt)
             local codeEnd = text:find("]", i)
             local code = text:sub(i + 1, codeEnd - 1)
             if code == 's' then
-                -- do nothing ; i don't recommend using this command
+                -- do nothing ; i don't recommend using this command, as it makes sound and i don't know how to fix it
             end
             i = codeEnd + 1
         end

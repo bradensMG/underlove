@@ -18,7 +18,7 @@ function love.keypressed(key)
     elseif key == 'down' then input.down = true
     elseif key == 'left' then input.left = true
     elseif key == 'right' then input.right = true
-    elseif key == 'z' or key == 'enter' then input.primary = true
+    elseif key == 'z' or key == 'return' then input.primary = true
     elseif key == 'x' or key == 'rshift' or key == 'lshift' then input.secondary = true end
 end
 

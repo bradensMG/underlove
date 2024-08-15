@@ -28,6 +28,7 @@ function BattleEngine:draw()
 end
 
 function gotoMenu()
+    global.battleState = 'buttons'
     Ui.arenaTo = {
         x = 320,
         y = 320,
