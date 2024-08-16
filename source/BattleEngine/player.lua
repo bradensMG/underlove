@@ -10,7 +10,7 @@ local sfx = {
     move = love.audio.newSource('assets/sound/sfx/menumove.wav', 'static')
 }
 
-Player.stats = {name = 'Chara', love = 1, hp = 20, maxhp = 20}
+Player.stats = {name = 'chara', love = 1, hp = 20, maxhp = 20}
 
 Player.inventory = {
     'Pie',
@@ -46,14 +46,20 @@ function Player:update(dt)
             end
         elseif input.primary then
             if global.choice == 2 then
-                Writer:stop()
                 global.battleState = 'item'
+                Writer:stop()
             end
         end
-        if global.choice == 0 then heart.x, heart.y = 40, 446
-        elseif global.choice == 1 then heart.x, heart.y = 193, 446
-        elseif global.choice == 2 then heart.x, heart.y = 353, 446
-        elseif global.choice == 3 then heart.x, heart.y = 508, 446 end
+        heart.y = 446
+        if global.choice == 0 then 
+            heart.x = 40
+        elseif global.choice == 1 then
+            heart.x = 193
+        elseif global.choice == 2 then
+            heart.x = 353
+        elseif global.choice == 3 then
+            heart.x = 508
+        end
     end
     if global.battleState == 'enemyTurn' then
         heart.x = heart.x + ((love.keyboard.isDown('right')and 1 or 0) - (love.keyboard.isDown('left')and 1 or 0)) * 4 / ((love.keyboard.isDown('x')and 1 or 0) + 1) * love.timer.getDelta() * 30
@@ -62,6 +68,7 @@ function Player:update(dt)
         heart.y = math.max(maxUp, math.min(heart.y, maxDown))
     end
     if global.battleState == 'item' then
+        heart.x, heart.y = 469, 348
         if input.secondary then
             input.secondary = false
             gotoMenu()

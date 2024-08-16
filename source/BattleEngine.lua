@@ -12,7 +12,7 @@ function BattleEngine:load()
 
     Player = require('source.BattleEngine.player')
 
-    love.graphics.setBackgroundColor(.3, .3, .5)
+    love.graphics.setBackgroundColor(.1, 0, .2)
 end
 
 function BattleEngine:update(dt)

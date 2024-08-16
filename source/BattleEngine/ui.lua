@@ -90,12 +90,10 @@ end
 local function doItemText()
     love.graphics.setColor(1, 1, 1)
     love.graphics.setFont(fonts.determination)
-
-    love.graphics.print('* ' .. Player.inventory[1], 98, 274)
-    love.graphics.print('* ' .. Player.inventory[2], 340, 274)
-    love.graphics.print('* ' .. Player.inventory[3], 98, 306)
-    love.graphics.print('* ' .. Player.inventory[4], 340, 306)
-    love.graphics.print('PAGE 1', 388, 338)
+     
+    love.graphics.print("* Item -- Healing amount", 52, 274)
+    love.graphics.print("* Item note -- with space for\n  multiple lines", 52, 302)
+    love.graphics.print("<  1/8 >", 448, 342)
 end
 
 function Ui:load()
