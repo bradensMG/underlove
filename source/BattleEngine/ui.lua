@@ -41,12 +41,7 @@ local function buttons()
     }
     
     for i, name in ipairs(buttonNames) do
-        love.graphics.draw(
-            buttonImages[name .. 'bt'], 
-            buttonQuads[name .. 'Quads'][(global.choice == (i-1)) and 2 or 1],
-            positions[name], 
-            432
-        )
+        love.graphics.draw(buttonImages[name .. 'bt'], buttonQuads[name .. 'Quads'][(global.choice == (i-1)) and 2 or 1], positions[name], 432)
     end
 end
 

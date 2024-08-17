@@ -42,5 +42,5 @@ end
 
 function love.draw()
     if global.gameState == 'BattleEngine' then BattleEngine:draw() end
-    -- love.graphics.print(love.timer.getFPS())
+    --  love.graphics.print(love.timer.getFPS())
 end

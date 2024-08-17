@@ -54,11 +54,11 @@ function Player:update(dt)
         if global.choice == 0 then 
             heart.x = 40
         elseif global.choice == 1 then
-            heart.x = 193
+            heart.x = 194
         elseif global.choice == 2 then
             heart.x = 353
         elseif global.choice == 3 then
-            heart.x = 508
+            heart.x = 507
         end
     end
     if global.battleState == 'enemyTurn' then
