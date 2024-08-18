@@ -19,7 +19,7 @@ local hpname = love.graphics.newImage("assets/images/ui/spr_hpname_0.png")
 local arenaCur = {
     x = 320,
     y = 320,
-    width = 569,
+    width = 570,
     height = 135
 }
 
@@ -86,9 +86,27 @@ local function doItemText()
     love.graphics.setColor(1, 1, 1)
     love.graphics.setFont(fonts.determination)
      
-    love.graphics.print("* Item -- Healing amount", 52, 274)
-    love.graphics.print("* Item note -- with space for\n  multiple lines", 52, 302)
-    love.graphics.print("<  1/8 >", 448, 342)
+    love.graphics.print("* " .. Player.inventory[global.subChoice + 1].name .. ' -- ' .. Player.inventory[global.subChoice + 1].change .. ' HP', 52, 274)
+    love.graphics.print("* " .. Player.inventory[global.subChoice + 1].note, 52, 302)
+
+    if global.subChoice == 0 then
+        love.graphics.setColor(1, 1, 1, .25)
+    else
+        love.graphics.setColor(1, 1, 1)
+    end
+
+    love.graphics.print("<", 448, 342)
+
+    love.graphics.setColor(1, 1, 1)
+    love.graphics.print(global.subChoice+1 .. "/" .. #Player.inventory, 502, 342)
+
+    if global.subChoice == #Player.inventory - 1 then
+        love.graphics.setColor(1, 1, 1, .25)
+    else
+        love.graphics.setColor(1, 1, 1)
+    end
+
+    love.graphics.print(">", 556, 342)
 end
 
 function Ui:load()

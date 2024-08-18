@@ -38,9 +38,10 @@ end
 function love.update(dt)
     if global.gameState == 'BattleEngine' then BattleEngine:update(dt) end
     input = {up = false, down = false, left = false, right = false, primary = false, secondary = false}
+    -- love.timer.sleep(1/60)  30fps
 end
 
 function love.draw()
     if global.gameState == 'BattleEngine' then BattleEngine:draw() end
-    --  love.graphics.print(love.timer.getFPS())
+    -- love.graphics.print(love.timer.getFPS())
 end

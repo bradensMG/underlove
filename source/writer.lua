@@ -41,6 +41,7 @@ function Writer:setParams(string, x, y, font, time, sound)
     textSound = sound
     i = 1
     doingText = true
+    textDone = false
 end
 
 function Writer:update(dt)
@@ -57,6 +58,8 @@ function Writer:update(dt)
                 i = i + 1
                 timeSince = 0
             end
+        else
+            textDone = true
         end
         if char == '[' then
             local codeEnd = text:find("]", i)
@@ -69,6 +72,7 @@ function Writer:update(dt)
         if input.secondary then
             progString = text
             i = #text
+            textDone = true
         end
     end
 end

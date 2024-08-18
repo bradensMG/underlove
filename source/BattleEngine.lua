@@ -32,7 +32,7 @@ function gotoMenu()
     Ui.arenaTo = {
         x = 320,
         y = 320,
-        width = 569,
+        width = 570,
         height = 135
     }
     Writer:setParams('* Hello, world!', 52, 274, fonts.determination, 0.02, 1)
