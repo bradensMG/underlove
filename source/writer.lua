@@ -12,6 +12,8 @@ local updateI
 local doingText
 local isSleeping
 
+Writer.isDone = nil
+
 local textSounds = {}
 textSounds[1] = love.audio.newSource('assets/sound/sfx/Voices/uifont.wav', 'static')
 
@@ -41,7 +43,7 @@ function Writer:setParams(string, x, y, font, time, sound)
     textSound = sound
     i = 1
     doingText = true
-    textDone = false
+    Writer.isDone = false
 end
 
 function Writer:update(dt)
@@ -59,7 +61,9 @@ function Writer:update(dt)
                 timeSince = 0
             end
         else
-            textDone = true
+            if #progString == #text then
+                Writer.isDone = true
+            end
         end
         if char == '[' then
             local codeEnd = text:find("]", i)
@@ -72,7 +76,7 @@ function Writer:update(dt)
         if input.secondary then
             progString = text
             i = #text
-            textDone = true
+            Writer.isDone = true
         end
     end
 end
@@ -102,11 +106,11 @@ function Writer:draw()
                         y = y + 32
                     elseif code == 'wave' then
                         animation = 'wave'
-                    elseif code == 'clear' then
-                        animation = 'idle'
-                        color = 'white'
                     elseif code == 'shake' then
                         animation = 'shake'
+                    elseif code == 'clear' then
+                        animation = nil
+                        color = 'white'
                     else
                         if colors[code] then
                             color = code
@@ -115,13 +119,15 @@ function Writer:draw()
                     i = i + #code + 1
                 end
             else
-                if animation == 'wave' then
-                    shakeX = math.sin(love.timer.getTime() * -8 + animi) * 1.5
-                    shakeY = math.cos(love.timer.getTime() * -8 + animi) * 1.5
-                elseif animation == 'shake' then
-                    letterShakeAmount = 1
-                    shakeX = love.math.random(-letterShakeAmount, letterShakeAmount)
-                    shakeY = love.math.random(-letterShakeAmount, letterShakeAmount)
+                if not animation ~= nil then
+                    if animation == 'wave' then
+                        shakeX = math.sin(love.timer.getTime() * -8 + animi) * 1.5
+                        shakeY = math.cos(love.timer.getTime() * -8 + animi) * 1.5
+                    elseif animation == 'shake' then
+                        letterShakeAmount = 1
+                        shakeX = love.math.random(-letterShakeAmount, letterShakeAmount)
+                        shakeY = love.math.random(-letterShakeAmount, letterShakeAmount)
+                    end
                 end
                 local currentColor = colors[color] or colors['white']
                 love.graphics.setColor(currentColor)

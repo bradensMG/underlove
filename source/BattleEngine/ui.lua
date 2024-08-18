@@ -46,6 +46,10 @@ local function buttons()
 end
 
 local function stats()
+    if Player.stats.hp > Player.stats.maxhp then
+        Player.stats.hp = Player.stats.maxhp
+    end
+
     love.graphics.setColor(1, 1, 1)
     love.graphics.setFont(fonts.mnc)
     love.graphics.print(Player.stats.name .. '   LV ' .. Player.stats.love, 30, 400)
@@ -85,8 +89,12 @@ end
 local function doItemText()
     love.graphics.setColor(1, 1, 1)
     love.graphics.setFont(fonts.determination)
-     
-    love.graphics.print("* " .. Player.inventory[global.subChoice + 1].name .. ' -- ' .. Player.inventory[global.subChoice + 1].change .. ' HP', 52, 274)
+    
+    if Player.inventory[global.subChoice + 1].type == 'weapon' then
+        love.graphics.print("* " .. Player.inventory[global.subChoice + 1].name .. ' -- ' .. Player.inventory[global.subChoice + 1].change .. ' ATT', 52, 274)
+    else
+        love.graphics.print("* " .. Player.inventory[global.subChoice + 1].name .. ' -- ' .. Player.inventory[global.subChoice + 1].change .. ' HP', 52, 274)
+    end
     love.graphics.print("* " .. Player.inventory[global.subChoice + 1].note, 52, 302)
 
     if global.subChoice == 0 then

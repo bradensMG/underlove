@@ -1,5 +1,7 @@
 Player = {}
 
+local hideHeart = false
+
 local heart = {
     image = love.graphics.newImage('assets/images/ut-heart.png'),
     x = Ui.arenaTo.x - 8,
@@ -8,17 +10,18 @@ local heart = {
 
 local sfx = {
     move = love.audio.newSource('assets/sound/sfx/menumove.wav', 'static'),
-    select = love.audio.newSource('assets/sound/sfx/menuconfirm.wav', 'static')
+    select = love.audio.newSource('assets/sound/sfx/menuconfirm.wav', 'static'),
+    heal = love.audio.newSource('assets/sound/sfx/snd_heal_c.wav', 'static')
 }
 
 Player.stats = {name = 'chara', love = 1, hp = 20, maxhp = 20}
 
 Player.inventory = {}
-Player.inventory[1] = {name = 'Butterscotch Pie', type = 'consumable', change = 'All', note = 'A butterscotch cinnamon pie.'}
-Player.inventory[2] = {name = 'Monster Candy', type = 'consumable', change = 10, note = 'Has a distinct, non licorice\n  flavor.'}
-Player.inventory[3] = {name = 'Monster Candy', type = 'consumable', change = 10, note = 'She said not to take more than\n  one.'}
-Player.inventory[4] = {name = 'Snowman Piece', type = 'consumable', change = 45, note = 'Wants to see the surface.'}
-Player.inventory[5] = {name = 'Tough Glove', type = 'weapon', change = '11', note = 'beat up.. no'}
+Player.inventory[1] = {name = 'Butterscotch Pie', type = 'consumable', change = 'All', note = 'Butterscotch-cinnamon pie, one\n  slice.'}
+Player.inventory[2] = {name = 'Monster Candy', type = 'consumable', change = 10, note = 'Has a distinct, non-licorice\n  flavor.'}
+Player.inventory[3] = {name = 'Monster Candy', type = 'consumable', change = 10, note = 'She said not to take more\n  than one.'}
+Player.inventory[4] = {name = 'Snowman Piece', type = 'consumable', change = 45, note = 'Please take this to the ends\n  of the earth.'}
+Player.inventory[5] = {name = 'Tough Glove', type = 'weapon', change = '11', note = 'A worn pink leather glove. For\n  five-fingered folk.'}
 
 if global.battleState == 'enemyTalk' then
     heart.x = Ui.arenaTo.x - 8
@@ -48,6 +51,7 @@ function Player:update(dt)
                 global.battleState = 'item'
                 Writer:stop()
             end
+            input.primary = false
         end
         heart.y = 446
         if global.choice == 0 then 
@@ -71,6 +75,16 @@ function Player:update(dt)
         if input.secondary then
             input.secondary = false
             gotoMenu()
+        end
+        if input.primary then
+            sfx.heal:stop()
+            sfx.heal:play()
+
+            hideHeart = true
+            global.choice = -1
+            global.battleState = 'useItem'
+
+            Writer:setParams('[clear]* Placeholder text you didnt[break]  equip anything sorry    [green][break]* Heres some green text instead[clear] ', 52, 274, fonts.determination, 0.02, 1)
         end
         if input.right then
             if global.subChoice ~= #Player.inventory - 1 then
@@ -97,7 +111,9 @@ end
 
 function Player:draw()
     love.graphics.setColor(1, 0, 0)
-    love.graphics.draw(heart.image, math.floor(heart.x), math.floor(heart.y))
+    if not hideHeart then
+        love.graphics.draw(heart.image, math.floor(heart.x), math.floor(heart.y))
+    end
 end
 
 return Player
