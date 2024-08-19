@@ -1,6 +1,7 @@
 Player = {}
 
 local hideHeart = false
+local lastButton
 
 local heart = {
     image = love.graphics.newImage('assets/images/ut-heart.png'),
@@ -14,14 +15,16 @@ local sfx = {
     heal = love.audio.newSource('assets/sound/sfx/snd_heal_c.wav', 'static')
 }
 
-Player.stats = {name = 'chara', love = 1, hp = 20, maxhp = 20}
+Player.stats = {name = 'Chara', love = 1, hp = 1, maxhp = 20, armor = 'Bandage', weapon = 'Stick'}
+Player.vars = {def = 1, atk = 1} -- don't edit these
 
 Player.inventory = {}
 Player.inventory[1] = {name = 'Butterscotch Pie', type = 'consumable', change = 'All', note = 'Butterscotch-cinnamon pie, one\n  slice.'}
 Player.inventory[2] = {name = 'Monster Candy', type = 'consumable', change = 10, note = 'Has a distinct, non-licorice\n  flavor.'}
 Player.inventory[3] = {name = 'Monster Candy', type = 'consumable', change = 10, note = 'She said not to take more\n  than one.'}
 Player.inventory[4] = {name = 'Snowman Piece', type = 'consumable', change = 45, note = 'Please take this to the ends\n  of the earth.'}
-Player.inventory[5] = {name = 'Tough Glove', type = 'weapon', change = '11', note = 'A worn pink leather glove. For\n  five-fingered folk.'}
+Player.inventory[5] = {name = 'Tough Glove', type = 'weapon', change = 11, note = 'A worn pink leather glove. For\n  five-fingered folk.'}
+Player.inventory[6] = {name = 'Faded Ribbon', type = 'armor', change = 3, note = "If you're cuter, monsters\n  won't hit you as hard."}
 
 if global.battleState == 'enemyTalk' then
     heart.x = Ui.arenaTo.x - 8
@@ -81,10 +84,10 @@ function Player:update(dt)
             sfx.heal:play()
 
             hideHeart = true
+            lastButton = global.choice
             global.choice = -1
+            useItem()
             global.battleState = 'useItem'
-
-            Writer:setParams('[clear]* Placeholder text you didnt[break]  equip anything sorry    [green][break]* Heres some green text instead[clear] ', 52, 274, fonts.determination, 0.02, 1)
         end
         if input.right then
             if global.subChoice ~= #Player.inventory - 1 then
@@ -105,6 +108,13 @@ function Player:update(dt)
             if global.subChoice == -1 then
                 global.subChoice = 0
             end
+        end
+    end
+    if global.battleState == 'useItem' then
+        if Writer.isDone and input.primary then
+            gotoMenu()
+            global.choice = lastButton
+            hideHeart = false
         end
     end
 end

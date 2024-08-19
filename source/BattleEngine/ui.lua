@@ -92,6 +92,8 @@ local function doItemText()
     
     if Player.inventory[global.subChoice + 1].type == 'weapon' then
         love.graphics.print("* " .. Player.inventory[global.subChoice + 1].name .. ' -- ' .. Player.inventory[global.subChoice + 1].change .. ' ATT', 52, 274)
+    elseif Player.inventory[global.subChoice + 1].type == 'armor' then
+        love.graphics.print("* " .. Player.inventory[global.subChoice + 1].name .. ' -- ' .. Player.inventory[global.subChoice + 1].change .. ' DEF', 52, 274)
     else
         love.graphics.print("* " .. Player.inventory[global.subChoice + 1].name .. ' -- ' .. Player.inventory[global.subChoice + 1].change .. ' HP', 52, 274)
     end
