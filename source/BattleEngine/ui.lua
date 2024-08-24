@@ -90,32 +90,12 @@ local function doItemText()
     love.graphics.setColor(1, 1, 1)
     love.graphics.setFont(fonts.determination)
     
-    if Player.inventory[global.subChoice + 1].type == 'weapon' then
-        love.graphics.print("* " .. Player.inventory[global.subChoice + 1].name .. ' -- ' .. Player.inventory[global.subChoice + 1].change .. ' ATT', 52, 274)
-    elseif Player.inventory[global.subChoice + 1].type == 'armor' then
-        love.graphics.print("* " .. Player.inventory[global.subChoice + 1].name .. ' -- ' .. Player.inventory[global.subChoice + 1].change .. ' DEF', 52, 274)
-    else
-        love.graphics.print("* " .. Player.inventory[global.subChoice + 1].name .. ' -- ' .. Player.inventory[global.subChoice + 1].change .. ' HP', 52, 274)
-    end
-    love.graphics.print("* " .. Player.inventory[global.subChoice + 1].note, 52, 302)
+    love.graphics.print('* Item -- Healing ammount', 52, 274)
 
-    if global.subChoice == 0 then
-        love.graphics.setColor(1, 1, 1, .25)
-    else
-        love.graphics.setColor(1, 1, 1)
-    end
+    love.graphics.print("* Item note. There's room for\n  indentation, too.", 52, 302)
 
     love.graphics.print("<", 448, 342)
-
-    love.graphics.setColor(1, 1, 1)
-    love.graphics.print(global.subChoice+1 .. "/" .. #Player.inventory, 502, 342)
-
-    if global.subChoice == #Player.inventory - 1 then
-        love.graphics.setColor(1, 1, 1, .25)
-    else
-        love.graphics.setColor(1, 1, 1)
-    end
-
+    love.graphics.print('1/8', 502, 342)
     love.graphics.print(">", 556, 342)
 end
 
