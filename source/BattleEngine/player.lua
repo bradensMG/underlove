@@ -73,6 +73,11 @@ function Player:update(dt)
     end
     if global.battleState == 'item' then
         heart.x, heart.y = 472, 348
+        if input.secondary then
+            input.secondary = false
+            buttonPos()
+            gotoMenu()
+        end
     end
     if global.battleState == 'useItem' then
         if Writer.isDone and input.primary then
