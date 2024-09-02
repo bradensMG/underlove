@@ -15,7 +15,7 @@ local sfx = {
     heal = love.audio.newSource('assets/sound/sfx/snd_heal_c.wav', 'static')
 }
 
-Player.stats = {name = 'Chara', love = 1, hp = 1, maxhp = 20, armor = 'Bandage', weapon = 'Stick'}
+Player.stats = {name = 'Chara', love = 1, hp = 20, maxhp = 20, armor = 'Bandage', weapon = 'Stick'}
 Player.vars = {def = 1, atk = 1} -- don't edit these
 
 Player.inventory = {}

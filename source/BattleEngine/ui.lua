@@ -90,7 +90,7 @@ local function doItemText()
     love.graphics.setColor(1, 1, 1)
     love.graphics.setFont(fonts.determination)
     
-    love.graphics.print('* Item -- Healing ammount', 52, 274)
+    love.graphics.print('* Item -- Healing amount', 52, 274)
 
     love.graphics.print("* Item note. There's room for\n  indentation, too.", 52, 302)
 

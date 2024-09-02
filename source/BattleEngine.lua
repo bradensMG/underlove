@@ -12,6 +12,8 @@ function BattleEngine:load()
 
     Player = require('source.BattleEngine.player')
 
+    itemManager = require('source.BattleEngine.itemManager')
+
     love.graphics.setBackgroundColor(0, .5, 0)
 end
 
