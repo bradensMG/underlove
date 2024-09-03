@@ -19,7 +19,7 @@ local itemStats = {
 }
 
 local itemDescs = {
-    'Has a distinct, non-licorice flavor.',
+    'Has a distinct, non-licorice\n  flavor.',
     'Its bark is worse than its bite.',
     'It has already been used several times.',
     'Butterscotch-cinnamon pie, one slice.',
@@ -28,14 +28,13 @@ local itemDescs = {
 }
 
 function itemManager:getPropertyfromID(id, property)
-        if property == 'name' then
-            output = itemNames[id]
-        elseif property == 'stat' then
-            output = itemStats[id]
-        elseif property == 'description' then
-            output = itemNames[id]
-        end
-    return
+    if property == 'name' then
+        return itemNames[id]
+    elseif property == 'stat' then
+        return itemStats[id]
+    elseif property == 'description' then
+        return itemDescs[id]
+    end
 end
 
 return itemManager

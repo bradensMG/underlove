@@ -90,9 +90,9 @@ local function doItemText()
     love.graphics.setColor(1, 1, 1)
     love.graphics.setFont(fonts.determination)
     
-    love.graphics.print('* Item -- Healing amount', 52, 274)
+    love.graphics.print('* ' .. (itemManager:getPropertyfromID(1, 'name') or 'None') .. ' -- ' .. (itemManager:getPropertyfromID(1, 'stat') or 'None'), 52, 274)
 
-    love.graphics.print("* Item note. There's room for\n  indentation, too.", 52, 302)
+    love.graphics.print("* " .. (itemManager:getPropertyfromID(1, 'description') or 'None'), 52, 302)
 
     love.graphics.print("<", 448, 342)
     love.graphics.print('1/8', 502, 342)
