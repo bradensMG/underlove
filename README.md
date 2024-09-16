@@ -4,3 +4,6 @@
 # Engine Screenshots
 !["9/16/24 screenshot - Menu."](./github/1.png "9/16/24 screenshot - Menu.")
 !["9/16/24 screenshot - Items."](./github/2.png "9/16/24 screenshot - Items.")
+!["9/16/24 recording - Red soul."](./github/3.gif "9/16/24 recording - Red soul.")
+!["9/16/24 recording - Menu."](./github/4.gif "9/16/24 recording - Items.")
+!["9/16/24 recording - Blue soul."](./github/5.gif "9/16/24 recording - Blue soul.")
