@@ -9,6 +9,6 @@
 !["9/16/24 recording - Blue soul."](./github/5.gif "9/16/24 recording - Blue soul.")
 
 # Credits
-[bradensmediocregames](https://github.com/bradensMG/) - I am the only one working on this engine.
-[Toby Fox](https://x.com/tobyfox) - Developer of UNDERTALE
+[bradensmediocregames](https://github.com/bradensMG/) - I am the only one working on this engine. </br>
+[Toby Fox](https://x.com/tobyfox) - Developer of UNDERTALE </br>
 [Temmie Chang](https://x.com/tuyoki) - Developer of UNDERTALE
