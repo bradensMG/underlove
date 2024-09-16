@@ -5,7 +5,8 @@ BattleEngine = require 'source.BattleEngine'
 fonts = {
     determination = love.graphics.newFont('assets/fonts/determination-mono.ttf', 32),
     mnc = love.graphics.newFont('assets/fonts/Mars_Needs_Cunnilingus.ttf', 23),
-    dotumche = love.graphics.newFont('assets/fonts/dotumche.ttf')
+    dotumche = love.graphics.newFont('assets/fonts/dotumche.ttf'),
+    default = love.graphics.newFont(12)
 }
 
 for _, font in pairs(fonts) do
@@ -42,5 +43,9 @@ end
 
 function love.draw()
     if global.gameState == 'BattleEngine' then BattleEngine:draw() end
-    -- love.graphics.print(love.timer.getFPS())
+
+    love.graphics.setFont(fonts.default)
+    love.graphics.setColor(1, 1, 1)
+
+    love.graphics.print(love.timer.getFPS() .. '\n' .. global.battleState .. '\n' .. global.gameState)
 end

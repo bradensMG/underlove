@@ -89,14 +89,21 @@ end
 local function doItemText()
     love.graphics.setColor(1, 1, 1)
     love.graphics.setFont(fonts.determination)
+
+    local offset = math.sin(love.timer.getTime()*4)
     
-    love.graphics.print('* ' .. (itemManager:getPropertyfromID(1, 'name') or 'None') .. ' -- ' .. (itemManager:getPropertyfromID(1, 'stat') or 'None'), 52, 274)
+    love.graphics.print('* ' .. (itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'name') or 'None') .. ' (' .. (itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'stat') or 'None') .. ')', 52, 274)
 
-    love.graphics.print("* " .. (itemManager:getPropertyfromID(1, 'description') or 'None'), 52, 302)
+    love.graphics.print("* " .. (itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'description') or 'None'), 52, 302)
 
-    love.graphics.print("<", 448, 342)
-    love.graphics.print('1/8', 502, 342)
-    love.graphics.print(">", 556, 342)
+    if global.subChoice == 0 then love.graphics.setColor(1, 1, 1, .5) else love.graphics.setColor(1, 1, 1, 1) end
+    love.graphics.print("<", 448 - offset, 342)
+
+    love.graphics.setColor(1, 1, 1, 1)
+    love.graphics.print(global.subChoice + 1 .. '/' .. #Player.inventory, 502, 342)
+
+    if global.subChoice == #Player.inventory - 1 then love.graphics.setColor(1, 1, 1, .5) else love.graphics.setColor(1, 1, 1, 1) end
+    love.graphics.print(">", 556 + offset, 342)
 end
 
 function Ui:load()
@@ -107,7 +114,7 @@ function Ui:draw()
     buttons()
     stats()
     arena()
-    love.graphics.setColor(1, 1, 1, .5)
+    -- love.graphics.setColor(1, 1, 1, .5)
     -- love.graphics.draw(ref)
     if global.battleState == 'item' then
         doItemText()

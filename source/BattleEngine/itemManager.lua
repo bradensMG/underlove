@@ -13,7 +13,7 @@ local itemStats = {
     10,
     1,
     10,
-    'all',
+    'All',
     5,
     3
 }
@@ -22,9 +22,18 @@ local itemDescs = {
     'Has a distinct, non-licorice\n  flavor.',
     'Its bark is worse than its bite.',
     'It has already been used several times.',
-    'Butterscotch-cinnamon pie, one slice.',
-    'A worn pink leather glove. For five-fingered folk.',
-    "If you're cuter, monsters won't hit you as hard."
+    'Butterscotch-cinnamon pie,\n  one slice.',
+    'A worn pink leather glove. For\n  five-fingered folk.',
+    "If you're cuter, monsters won't\n  hit you as hard."
+}
+
+local itemType = {
+    'consumable',
+    'weapon',
+    'consumable',
+    'consumable',
+    'weapon',
+    'armor'
 }
 
 function itemManager:getPropertyfromID(id, property)

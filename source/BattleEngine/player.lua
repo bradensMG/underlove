@@ -6,7 +6,10 @@ local lastButton
 local heart = {
     image = love.graphics.newImage('assets/images/ut-heart.png'),
     x = Ui.arenaTo.x - 8,
-    y = Ui.arenaTo.y - 8
+    y = Ui.arenaTo.y - 8,
+    gravity = 0,
+    jumpstage = 3,
+    jumptimer = 0
 }
 
 local sfx = {
@@ -18,7 +21,9 @@ local sfx = {
 Player.stats = {name = 'Chara', love = 1, hp = 20, maxhp = 20, armor = 'Bandage', weapon = 'Stick'}
 Player.vars = {def = 1, atk = 1} -- don't edit these
 
-Player.inventory = {}
+Player.mode = 'blue'
+
+Player.inventory = {4, 1, 1, 1, 5, 6, 1, 1}
 
 if global.battleState == 'enemyTalk' then
     heart.x = Ui.arenaTo.x - 8
@@ -58,16 +63,43 @@ function Player:update(dt)
             sfx.select:stop()
             sfx.select:play()
             if global.choice == 2 then
-                global.battleState = 'item'
                 Writer:stop()
+                global.battleState = 'item'
             end
             input.primary = false
         end
         buttonPos()
     end
     if global.battleState == 'enemyTurn' then
-        heart.x = heart.x + ((love.keyboard.isDown('right')and 1 or 0) - (love.keyboard.isDown('left')and 1 or 0)) * 4 / ((love.keyboard.isDown('x')and 1 or 0) + 1) * love.timer.getDelta() * 30
-        heart.y = heart.y + ((love.keyboard.isDown('down')and 1 or 0) - (love.keyboard.isDown('up')and 1 or 0)) * 4 / ((love.keyboard.isDown('x')and 1 or 0) + 1) * love.timer.getDelta() * 30
+        if Player.mode == 'red' then
+            heart.x = heart.x + ((love.keyboard.isDown('right')and 1 or 0) - (love.keyboard.isDown('left')and 1 or 0)) * 4 / ((love.keyboard.isDown('x')and 1 or 0) + 1) * love.timer.getDelta() * 30
+            heart.y = heart.y + ((love.keyboard.isDown('down')and 1 or 0) - (love.keyboard.isDown('up')and 1 or 0)) * 4 / ((love.keyboard.isDown('x')and 1 or 0) + 1) * love.timer.getDelta() * 30
+        end
+        if Player.mode == 'blue' then
+            heart.x = heart.x + ((love.keyboard.isDown('right')and 1 or 0) - (love.keyboard.isDown('left')and 1 or 0)) * 4 / ((love.keyboard.isDown('x')and 1 or 0) + 1) * love.timer.getDelta() * 30
+            heart.gravity = heart.gravity + .5 * love.timer.getDelta() * 30
+            heart.y = heart.y + heart.gravity
+            if heart.y >= maxDown then
+                heart.gravity = 0
+                heart.jumpstage = 1
+                heart.jumptimer = 0
+            end
+            if heart.jumpstage ~= 3 then
+                if love.keyboard.isDown('up') then
+                    heart.gravity = -6 * love.timer.getDelta() * 30
+                    heart.jumpstage = 2
+                    heart.jumptimer = heart.jumptimer + 1 * (love.timer.getDelta() * 30)
+                else
+                    if heart.y < maxDown then
+                        heart.gravity = -.5 * love.timer.getDelta() * 30
+                        heart.jumpstage = 3
+                    end
+                end
+                if heart.jumptimer > 10 then
+                    heart.jumpstage = 3
+                end
+            end
+        end
         heart.x = math.max(maxLeft, math.min(heart.x, maxRight))
         heart.y = math.max(maxUp, math.min(heart.y, maxDown))
     end
@@ -77,6 +109,20 @@ function Player:update(dt)
             input.secondary = false
             buttonPos()
             gotoMenu()
+        end
+        if input.left then
+            if global.subChoice ~= 0 then
+                sfx.move:stop()
+                sfx.move:play()
+                global.subChoice = global.subChoice - 1
+            end
+        end
+        if input.right then
+            if global.subChoice ~= #Player.inventory - 1 then
+                sfx.move:stop()
+                sfx.move:play()
+                global.subChoice = global.subChoice + 1
+            end
         end
     end
     if global.battleState == 'useItem' then
@@ -90,7 +136,11 @@ function Player:update(dt)
 end
 
 function Player:draw()
-    love.graphics.setColor(1, 0, 0)
+    if Player.mode == 'red' then
+        love.graphics.setColor(1, 0, 0)
+    elseif Player.mode == 'blue' then
+        love.graphics.setColor(0, 0, 1)
+    end
     if not hideHeart then
         love.graphics.draw(heart.image, heart.x, heart.y)
     end
