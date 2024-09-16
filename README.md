@@ -1,5 +1,5 @@
 # UNDERLÖVE Engine
-<p>UNDERLÖVE is an UNDERTALE engine made with the LÖVE2D game framework.</br>This is a remake of my previous engine, being remade entirely from scratch to put development convinience over accuracy.</p>
+<p>UNDERLÖVE is an UNDERTALE engine made with the LÖVE2D game framework.</br>This is a remake of my previous engine, being remade entirely from scratch to put development convinience over accuracy.</br>This is very much a work in progress still but I decided to make this repository public in case anyone wanted to see the engine remake's development.</p>
 
 # Engine Screenshots
 !["9/16/24 screenshot - Menu."](./github/1.png "9/16/24 screenshot - Menu.")
