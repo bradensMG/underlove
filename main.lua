@@ -1,4 +1,4 @@
-global = {gameState = 'BattleEngine', battleState = 'buttons', choice = 0, subChoice = 0}
+global = {gameState = 'BattleEngine', battleState = 'enemyTurn', choice = 0, subChoice = 0}
 
 BattleEngine = require 'source.BattleEngine'
 
@@ -46,6 +46,5 @@ function love.draw()
 
     love.graphics.setFont(fonts.default)
     love.graphics.setColor(1, 1, 1)
-
     love.graphics.print(love.timer.getFPS() .. '\n' .. global.battleState .. '\n' .. global.gameState)
 end

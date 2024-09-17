@@ -27,7 +27,7 @@ local itemDescs = {
     "If you're cuter, monsters won't\n  hit you as hard."
 }
 
-local itemType = {
+local itemTypes = {
     'consumable',
     'weapon',
     'consumable',
@@ -43,6 +43,8 @@ function itemManager:getPropertyfromID(id, property)
         return itemStats[id]
     elseif property == 'description' then
         return itemDescs[id]
+    elseif property == 'type' then
+        return itemTypes[id]
     end
 end
 

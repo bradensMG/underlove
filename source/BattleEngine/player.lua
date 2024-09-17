@@ -21,7 +21,7 @@ local sfx = {
 Player.stats = {name = 'Chara', love = 1, hp = 20, maxhp = 20, armor = 'Bandage', weapon = 'Stick'}
 Player.vars = {def = 1, atk = 1} -- don't edit these
 
-Player.mode = 'red'
+Player.mode = 'blue'
 
 Player.inventory = {4, 1, 1, 1, 5, 6, 1, 1}
 
@@ -77,7 +77,7 @@ function Player:update(dt)
         end
         if Player.mode == 'blue' then
             heart.x = heart.x + ((love.keyboard.isDown('right')and 1 or 0) - (love.keyboard.isDown('left')and 1 or 0)) * 4 / ((love.keyboard.isDown('x')and 1 or 0) + 1) * love.timer.getDelta() * 30
-            heart.gravity = heart.gravity + .5 * love.timer.getDelta() * 30
+            heart.gravity = heart.gravity + (.5 * (love.timer.getDelta() * 30))
             heart.y = heart.y + heart.gravity
             if heart.y >= maxDown then
                 heart.gravity = 0
@@ -88,7 +88,7 @@ function Player:update(dt)
                 if love.keyboard.isDown('up') then
                     heart.gravity = -6 * love.timer.getDelta() * 30
                     heart.jumpstage = 2
-                    heart.jumptimer = heart.jumptimer + 1 * (love.timer.getDelta() * 30)
+                    heart.jumptimer = heart.jumptimer + 1 * love.timer.getDelta() * 30
                 else
                     if heart.y < maxDown then
                         heart.gravity = -.5 * love.timer.getDelta() * 30
