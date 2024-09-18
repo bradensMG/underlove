@@ -21,7 +21,7 @@ local sfx = {
 Player.stats = {name = 'Chara', love = 1, hp = 20, maxhp = 20, armor = 'Bandage', weapon = 'Stick'}
 Player.vars = {def = 1, atk = 1} -- don't edit these
 
-Player.mode = 'red'
+Player.mode = 'blue'
 
 Player.inventory = {4, 1, 1, 1, 5, 6, 1, 1}
 
@@ -78,22 +78,22 @@ function Player:update(dt)
             heart.y = heart.y + ((love.keyboard.isDown('down')and 1 or 0) - (love.keyboard.isDown('up')and 1 or 0)) * 4 / ((love.keyboard.isDown('x')and 1 or 0) + 1) * dt * 30
         end
         if Player.mode == 'blue' then
-            heart.x = heart.x + ((love.keyboard.isDown('right')and 1 or 0) - (love.keyboard.isDown('left')and 1 or 0)) * 4 / ((love.keyboard.isDown('x')and 1 or 0) + 1) * dt * 30
-            heart.gravity = heart.gravity + (.5 * (dt * 30))
             heart.y = heart.y + heart.gravity
+            heart.x = heart.x + ((love.keyboard.isDown('right')and 1 or 0) - (love.keyboard.isDown('left')and 1 or 0)) * 4 / ((love.keyboard.isDown('x')and 1 or 0) + 1) * dt * 30
             if heart.y >= maxDown then
-                heart.gravity = 0
                 heart.jumpstage = 1
                 heart.jumptimer = 0
             end
-            if heart.jumpstage ~= 3 then
+            if heart.jumpstage == 3 then
+                heart.gravity = heart.gravity + 1 * (dt * 30)
+            end
+            if heart.jumpstage == 1 then
                 if love.keyboard.isDown('up') then
-                    heart.gravity = -6 * dt * 30
-                    heart.jumpstage = 2
-                    heart.jumptimer = heart.jumptimer + 1 * dt * 30
+                    heart.gravity = -6 * (dt * 30)
+                    heart.jumptimer = heart.jumptimer + (dt * 30)
                 else
                     if heart.y < maxDown then
-                        heart.gravity = -.5 * dt * 30
+                        heart.gravity = -1 * dt * 30
                         heart.jumpstage = 3
                     end
                 end
