@@ -85,7 +85,7 @@ function Player:update(dt)
                 heart.jumptimer = 0
             end
             if heart.jumpstage == 3 then
-                heart.gravity = heart.gravity + 1 * (dt * 30)
+                heart.gravity = heart.gravity + .5 * (dt * 30)
             end
             if heart.jumpstage == 1 then
                 if love.keyboard.isDown('up') then
