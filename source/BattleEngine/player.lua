@@ -1,6 +1,5 @@
 Player = {}
 
-local hideHeart = false
 local lastButton
 
 local heart = {
@@ -9,7 +8,8 @@ local heart = {
     y = Ui.arenaTo.y - 8,
     gravity = 0,
     jumpstage = 3,
-    jumptimer = 0
+    jumptimer = 0,
+    show = true
 }
 
 local sfx = {
@@ -24,6 +24,8 @@ Player.vars = {def = 1, atk = 1} -- don't edit these
 Player.mode = 'red'
 
 Player.inventory = {4, 1, 1, 1, 5, 6, 1, 1}
+
+local lastButton
 
 if global.battleState == 'enemyTalk' then
     heart.x = Ui.arenaTo.x - 8
@@ -124,13 +126,23 @@ function Player:update(dt)
                 global.subChoice = global.subChoice + 1
             end
         end
+        if input.primary then
+            lastButton = global.choice
+            heart.show = false
+            global.battleState = 'useItem'
+            global.choice = -1
+            sfx.heal:stop()
+            sfx.heal:play()
+            useItem()
+        end
     end
     if global.battleState == 'useItem' then
         if Writer.isDone and input.primary then
-            gotoMenu()
             global.choice = lastButton
+            global.battleState = 'buttons'
+            gotoMenu()
             buttonPos()
-            hideHeart = false
+            heart.show = true
         end
     end
 end
@@ -141,7 +153,7 @@ function Player:draw()
     elseif Player.mode == 'blue' then
         love.graphics.setColor(0, 0, 1)
     end
-    if not hideHeart then
+    if heart.show then
         love.graphics.draw(heart.image, heart.x, heart.y)
     end
 end

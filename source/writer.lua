@@ -33,14 +33,14 @@ function Writer:stop()
 end
 
 function Writer:setParams(string, x, y, font, time, sound)
-    text = string
+    text = string or 'no string provided :/'
     progString = ""
-    startX = x
-    startY = y
+    startX = x or 0
+    startY = y or 0
     timeSince = 0
-    timeInterval = time
-    textFont = font
-    textSound = sound
+    timeInterval = time or 0.01
+    textFont = font or fonts.default
+    textSound = sound or 1
     i = 1
     doingText = true
     Writer.isDone = false

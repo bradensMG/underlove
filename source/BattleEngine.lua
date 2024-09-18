@@ -41,7 +41,7 @@ function gotoMenu()
 end
 
 function useItem()
-
+    Writer:setParams("* You ate nothing.     [break]* I haven't coded this is fully[break]  yet.", 52, 274, fonts.determination, 0.02, 1)
 end
 
 return BattleEngine
