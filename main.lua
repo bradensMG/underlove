@@ -1,6 +1,10 @@
-global = {gameState = 'BattleEngine', battleState = 'enemyTurn', choice = 0, subChoice = 0}
+global = {gameState = 'BattleEngine', battleState = 'buttons', choice = 0, subChoice = 0}
 
 BattleEngine = require 'source.BattleEngine'
+
+tick = require 'lib.tick'
+tick.framerate = 30
+tick.rate = 1 / tick.framerate
 
 fonts = {
     determination = love.graphics.newFont('assets/fonts/determination-mono.ttf', 32),
