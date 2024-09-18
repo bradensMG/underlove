@@ -20,8 +20,8 @@ local itemStats = {
 
 local itemDescs = {
     'Has a distinct, non-licorice\n  flavor.',
-    'Its bark is worse than its bite.',
-    'It has already been used several times.',
+    'Its bark is worse than its\n  bite.',
+    'It has already been used\n  several times.',
     'Butterscotch-cinnamon pie,\n  one slice.',
     'A worn pink leather glove. For\n  five-fingered folk.',
     "If you're cuter, monsters won't\n  hit you as hard."

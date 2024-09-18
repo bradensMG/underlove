@@ -92,7 +92,13 @@ local function doItemText()
 
     local offset = math.sin(love.timer.getTime()*4)
     
-    love.graphics.print('* ' .. (itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'name') or 'None') .. ' (' .. (itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'stat') or 'None') .. ')', 52, 274)
+    if itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'type') == 'consumable' then
+        love.graphics.print('* ' .. (itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'name') or 'None') .. ' (' .. (itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'stat') or 'None') .. ' HP)', 52, 274)
+    elseif itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'type') == 'weapon' then
+        love.graphics.print('* ' .. (itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'name') or 'None') .. ' (' .. (itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'stat') or 'None') .. ' ATT)', 52, 274)
+    elseif itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'type') == 'armor' then
+        love.graphics.print('* ' .. (itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'name') or 'None') .. ' (' .. (itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'stat') or 'None') .. ' DEF)', 52, 274)
+    end
 
     love.graphics.print("* " .. (itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'description') or 'None'), 52, 302)
 

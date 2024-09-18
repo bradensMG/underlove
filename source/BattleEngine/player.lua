@@ -18,18 +18,28 @@ local sfx = {
     heal = love.audio.newSource('assets/sound/sfx/snd_heal_c.wav', 'static')
 }
 
-Player.stats = {name = 'Chara', love = 1, hp = 20, maxhp = 20, armor = 'Bandage', weapon = 'Stick'}
-Player.vars = {def = 1, atk = 1} -- don't edit these
+Player.stats = {name = 'Chara', love = 1, hp = 1, maxhp = 20, armor = 3, weapon = 2, atk = 0, def = 0}
 
-Player.mode = 'blue'
+Player.mode = 'red'
 
-Player.inventory = {4, 1, 1, 1, 5, 6, 1, 1}
+Player.inventory = {4, 1, 1, 5, 6}
 
 local lastButton
 
 if global.battleState == 'enemyTalk' then
     heart.x = Ui.arenaTo.x - 8
     heart.y = Ui.arenaTo.y - 8
+end
+
+local function setDefAtk()
+    if Player.stats.armor == 3 then -- if the current armor is bandage
+        Player.stats.def = 1        -- set defense to 1
+    else                            -- because bandage is a consumable, i have to write custom code for
+                                    -- the bandage to affect the player's defense
+        Player.stats.def = itemManager:getPropertyfromID(Player.stats.armor, 'stat')
+    end
+
+    Player.stats.atk = itemManager:getPropertyfromID(Player.stats.weapon, 'stat')
 end
 
 local function buttonPos()
@@ -46,6 +56,7 @@ local function buttonPos()
 end
 
 function Player:update(dt)
+    setDefAtk()
     if global.battleState == 'buttons' then
         if input.right then
             sfx.move:stop()
@@ -66,6 +77,7 @@ function Player:update(dt)
             sfx.select:play()
             if global.choice == 2 then
                 Writer:stop()
+                global.subChoice = 0
                 global.battleState = 'item'
             end
             input.primary = false
