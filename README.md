@@ -10,6 +10,7 @@
 
 # Credits
 [bradensmediocregames](https://github.com/bradensMG/) - I am the only one working on this engine. </br>
+[RhenaudTheLukark](https://github.com/RhenaudTheLukark) - Creator of CYF, where the Poseur and Posette sprites come from.</br>
 [Toby Fox](https://x.com/tobyfox) - Developer of UNDERTALE. </br>
 [Temmie Chang](https://x.com/tuyoki) - Developer of UNDERTALE. </br> </br>
 
