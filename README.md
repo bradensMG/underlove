@@ -11,4 +11,6 @@
 # Credits
 [bradensmediocregames](https://github.com/bradensMG/) - I am the only one working on this engine. </br>
 [Toby Fox](https://x.com/tobyfox) - Developer of UNDERTALE. </br>
-[Temmie Chang](https://x.com/tuyoki) - Developer of UNDERTALE. </br>
+[Temmie Chang](https://x.com/tuyoki) - Developer of UNDERTALE. </br> </br>
+
+<p>This engine is developed for fun, you're more than welcome to use or make modifications to it! I don't recommend using it in its current state as it's still very unfinished, but hopefully soon it'll be in a state that it can be useful to everyone!</p>
