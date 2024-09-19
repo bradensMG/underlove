@@ -15,8 +15,6 @@ function BattleEngine:load()
     itemManager = require('source.BattleEngine.itemManager')
 
     Enemies = require('assets.enemies.enemies')
-
-    love.graphics.setBackgroundColor(0, 0, 0)
 end
 
 function BattleEngine:update(dt)
@@ -27,7 +25,7 @@ function BattleEngine:update(dt)
 end
 
 function BattleEngine:draw()
-    love.graphics.setColor(0, 0.1, 0.05)
+    love.graphics.setColor(0, 0.3, 0.15)
     love.graphics.rectangle('fill', 0, 0, 640, 480)
     love.graphics.setColor(1, 1, 1)
     

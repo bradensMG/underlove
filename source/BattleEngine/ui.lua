@@ -69,7 +69,7 @@ local function stats()
 end
 
 local function arena()
-    love.graphics.setColor(0, 0, 0, .5)
+    love.graphics.setColor(0, 0, 0)
     love.graphics.rectangle('fill', arenaCur.x - (arenaCur.width / 2), arenaCur.y - (arenaCur.height / 2), arenaCur.width, arenaCur.height)
 
     love.graphics.setColor(1, 1, 1)

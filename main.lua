@@ -36,6 +36,7 @@ end
 
 function love.load(arg)
     love.graphics.setDefaultFilter('nearest', 'nearest')
+    love.graphics.setBackgroundColor(0, 0, 0)
 
     yourCanvasName = love.graphics.newCanvas(640, 480)
     if global.gameState == 'BattleEngine' then BattleEngine:load() end
