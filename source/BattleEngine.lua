@@ -14,6 +14,8 @@ function BattleEngine:load()
 
     itemManager = require('source.BattleEngine.itemManager')
 
+    Enemies = require('assets.enemies.enemies')
+
     love.graphics.setBackgroundColor(0, 0, 0)
 end
 
@@ -21,6 +23,7 @@ function BattleEngine:update(dt)
     Ui:update(dt)
     Player:update(dt)
     Writer:update(dt)
+    Enemies:update(dt)
 end
 
 function BattleEngine:draw()
@@ -31,6 +34,7 @@ function BattleEngine:draw()
     Ui:draw()
     Player:draw()
     Writer:draw()
+    Enemies:draw()
 end
 
 function gotoMenu()
