@@ -15,7 +15,8 @@ local heart = {
 local sfx = {
     move = love.audio.newSource('assets/sound/sfx/menumove.wav', 'static'),
     select = love.audio.newSource('assets/sound/sfx/menuconfirm.wav', 'static'),
-    heal = love.audio.newSource('assets/sound/sfx/snd_heal_c.wav', 'static')
+    heal = love.audio.newSource('assets/sound/sfx/snd_heal_c.wav', 'static'),
+    err = love.audio.newSource('assets/sound/sfx/err.mp3', 'static')
 }
 
 Player.stats = {name = 'Chara', love = 1, hp = 1, maxhp = 20, armor = 3, weapon = 2, atk = 0, def = 0}
@@ -35,7 +36,7 @@ local function setDefAtk()
     if Player.stats.armor == 3 then -- if the current armor is bandage
         Player.stats.def = 1        -- set defense to 1
     else                            -- because bandage is a consumable, i have to write custom code for
-                                    -- the bandage to affect the player's defense
+        --                             the bandage to affect the player's defense
         Player.stats.def = itemManager:getPropertyfromID(Player.stats.armor, 'stat')
     end
 
@@ -73,12 +74,15 @@ function Player:update(dt)
                 global.choice = 3
             end
         elseif input.primary then
-            sfx.select:stop()
-            sfx.select:play()
-            if global.choice == 2 then
+            if global.choice == 2 and #Player.inventory > 0 then
+                sfx.select:stop()
+                sfx.select:play()
                 Writer:stop()
                 global.subChoice = 0
                 global.battleState = 'item'
+            elseif #Player.inventory == 0 then
+                sfx.err:stop()
+                sfx.err:play()
             end
             input.primary = false
         end
@@ -129,6 +133,9 @@ function Player:update(dt)
                 sfx.move:stop()
                 sfx.move:play()
                 global.subChoice = global.subChoice - 1
+            else
+                sfx.err:stop()
+                sfx.err:play()
             end
         end
         if input.right then
@@ -136,6 +143,9 @@ function Player:update(dt)
                 sfx.move:stop()
                 sfx.move:play()
                 global.subChoice = global.subChoice + 1
+            else
+                sfx.err:stop()
+                sfx.err:play()
             end
         end
         if input.primary then
