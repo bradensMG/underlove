@@ -1,34 +1,39 @@
 enemies = {}
 
-one = {
+enemies.one = {
     name = 'Poseur',
     x = 200,
     y = 138,
-    image = love.graphics.newImage('assets/enemies/images/poseur.png')
+    image = love.graphics.newImage('assets/enemies/images/poseur.png'),
+    xOff = 0,
+    yOff = 0
 }
 
-two = {
+enemies.two = {
     name = 'Posette',
     x = 440,
     y = 90,
-    image = love.graphics.newImage('assets/enemies/images/posette.png')
+    image = love.graphics.newImage('assets/enemies/images/posette.png'),
+    xOff = 0,
+    yOff = 0
 }
 
-stats = {amount = 2}
+enemies.stats = {amount = 2}
+
+enemies.encounter = {text = '* The posers pose intensively!'}
 
 function enemies:update(dt)
 
 end
 
 function enemies:draw()
-    if stats.amount > 0 then
-        love.graphics.draw(one.image, one.x - one.image:getWidth()/2, one.y - one.image:getHeight()/2)
+    love.graphics.setColor(1, 1, 1)
+
+    if enemies.stats.amount > 0 then
+        love.graphics.draw(enemies.one.image, enemies.one.x - enemies.one.image:getWidth()/2, enemies.one.y - enemies.one.image:getHeight()/2)
     end
-    if stats.amount > 1 then
-        love.graphics.draw(two.image, two.x - two.image:getWidth()/2, two.y - two.image:getWidth()/2)
-    end
-    if stats.amount > 2 then
-        love.graphics.draw(three.image, three.x, three.y)
+    if enemies.stats.amount > 1 then
+        love.graphics.draw(enemies.two.image, enemies.two.x - enemies.two.image:getWidth()/2, enemies.two.y - enemies.two.image:getWidth()/2)
     end
 end
 

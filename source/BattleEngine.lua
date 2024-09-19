@@ -3,6 +3,7 @@ BattleEngine = {}
 maxLeft, maxUp, maxDown, maxRight = 0, 0, 0, 0
 
 function BattleEngine:load()
+    Enemies = require('assets.enemies.enemies')
     Ui = require('source.BattleEngine.ui')
     Writer = require('source.writer')
 
@@ -13,8 +14,6 @@ function BattleEngine:load()
     Player = require('source.BattleEngine.player')
 
     itemManager = require('source.BattleEngine.itemManager')
-
-    Enemies = require('assets.enemies.enemies')
 end
 
 function BattleEngine:update(dt)
@@ -43,7 +42,7 @@ function gotoMenu()
         width = 570,
         height = 135
     }
-    Writer:setParams('* Hello, world!', 52, 274, fonts.determination, 0.02, 1)
+    Writer:setParams(Enemies.encounter.text, 52, 274, fonts.determination, 0.02, 1)
 end
 
 function useItem()
