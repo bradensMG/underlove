@@ -11,6 +11,7 @@
 # Credits
 [bradensmediocregames](https://github.com/bradensMG/) - I am the only one working on this engine. </br>
 [RhenaudTheLukark](https://github.com/RhenaudTheLukark) - Creator of CYF, where the Poseur and Posette sprites come from.</br>
+[Davidobot's post on the LOVE2D forum](https://love2d.org/forums/viewtopic.php?p=199030&sid=5e50e42e22e4538ca0f3f7b0717aa2f2#p199030) - FPS Limiter </br>
 [Toby Fox](https://x.com/tobyfox) - Developer of UNDERTALE. </br>
 [Temmie Chang](https://x.com/tuyoki) - Developer of UNDERTALE. </br> </br>
 

@@ -19,7 +19,7 @@ local sfx = {
     err = love.audio.newSource('assets/sound/sfx/err.mp3', 'static')
 }
 
-Player.stats = {name = 'Chara', love = 1, hp = 1, maxhp = 20, armor = 3, weapon = 2, atk = 0, def = 0}
+Player.stats = {name = 'Chara', love = 1, hp = 20, maxhp = 20, armor = 3, weapon = 2, atk = 0, def = 0}
 
 Player.mode = 'red'
 
@@ -101,7 +101,7 @@ function Player:update(dt)
                 heart.jumptimer = 0
             end
             if heart.jumpstage == 3 then
-                heart.gravity = heart.gravity + .5 * (dt * 30)
+                heart.gravity = heart.gravity + 1 * (dt * 30)
             end
             if heart.jumpstage == 1 then
                 if love.keyboard.isDown('up') then
