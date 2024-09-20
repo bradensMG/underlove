@@ -102,14 +102,24 @@ local function doItemText()
 
     love.graphics.print("* " .. (itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'description') or 'None'), 52, 302)
 
-    if global.subChoice == 0 then love.graphics.setColor(1, 1, 1, .5) else love.graphics.setColor(1, 1, 1, 1) end
-    love.graphics.print("<", 448 - offset, 342)
+    if global.subChoice == 0 then
+        love.graphics.setColor(1, 1, 1, .5)
+        love.graphics.print("<", 448, 342)
+    else
+        love.graphics.setColor(1, 1, 1, 1)
+        love.graphics.print("<", 448 - offset, 342)
+    end
 
     love.graphics.setColor(1, 1, 1, 1)
     love.graphics.print(global.subChoice + 1 .. '/' .. #Player.inventory, 502, 342)
 
-    if global.subChoice == #Player.inventory - 1 then love.graphics.setColor(1, 1, 1, .5) else love.graphics.setColor(1, 1, 1, 1) end
-    love.graphics.print(">", 556 + offset, 342)
+    if global.subChoice == #Player.inventory - 1 then
+        love.graphics.setColor(1, 1, 1, .5)
+        love.graphics.print(">", 556, 342)
+    else
+        love.graphics.setColor(1, 1, 1, 1)
+        love.graphics.print(">", 556 + offset, 342)
+    end
 end
 
 function Ui:load()
