@@ -20,7 +20,7 @@ enemies.two = {
 
 enemies.stats = {amount = 2}
 
-enemies.encounter = {text = '* The posers pose intensively!'}
+enemies.encounter = {text = '* The potent posers pose[break]  proposterously!'}
 
 function enemies:update(dt)
 
