@@ -7,7 +7,8 @@ fonts = {
     determination = love.graphics.newFont('assets/fonts/determination-mono.ttf', 32),
     mnc = love.graphics.newFont('assets/fonts/Mars_Needs_Cunnilingus.ttf', 23),
     dotumche = love.graphics.newFont('assets/fonts/dotumche.ttf'),
-    default = love.graphics.newFont(12)
+    default = love.graphics.newFont(12),
+	consolas = love.graphics.newFont('assets/fonts/Consolas.ttf', 16)
 }
 
 for _, font in pairs(fonts) do
@@ -68,10 +69,6 @@ local function disconnect()
 	love.graphics.draw(yourCanvasName) -- Draw the canvas
 	love.graphics.pop() -- pop transformation state
 
-    love.graphics.setFont(fonts.default)
-    love.graphics.setColor(1, 1, 1)
-    love.graphics.print(love.timer.getFPS() .. '\n' .. global.battleState .. '\n' .. global.gameState .. '\n' .. Player.stats.armor .. ' ' .. Player.stats.def .. '\n' .. Player.stats.weapon .. ' ' .. Player.stats.atk)
-
 end
 
 function love.draw()
@@ -80,6 +77,15 @@ function love.draw()
     if global.gameState == 'BattleEngine' then BattleEngine:draw() end
 
     disconnect()
+
+	love.graphics.setColor(.1, 0, .05, .5)
+	love.graphics.rectangle('fill', 5, 5, 216, 63, 5)
+	love.graphics.setColor(0, 0, 0, 1)
+	love.graphics.setLineWidth(2)
+	love.graphics.rectangle('line', 5, 5, 216, 63, 5)
+	love.graphics.setFont(fonts.consolas)
+    love.graphics.setColor(1, 1, 1)
+    love.graphics.print('FPS: ' .. love.timer.getFPS() .. '\ngameState: ' .. global.gameState .. '\nbattleState: ' .. global.battleState, 10, 10)
 end
 
 local timerSleep = function () return 1/FPS end
