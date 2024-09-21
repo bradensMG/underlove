@@ -7,7 +7,7 @@ BattleEngine = require 'source.BattleEngine'
 fonts = {
     determination = love.graphics.newFont('assets/fonts/determination-mono.ttf', 32),
     mnc = love.graphics.newFont('assets/fonts/Mars_Needs_Cunnilingus.ttf', 23),
-    dotumche = love.graphics.newFont('assets/fonts/dotumche.ttf'),
+    dotumche = love.graphics.newFont('assets/fonts/dotumche.ttf', 13),
     default = love.graphics.newFont(12),
 	consolas = love.graphics.newFont('assets/fonts/Consolas.ttf', 16)
 }
@@ -57,6 +57,13 @@ end
 function love.update(dt)
     if global.gameState == 'BattleEngine' then BattleEngine:update(dt) end
     input = {up = false, down = false, left = false, right = false, primary = false, secondary = false}
+	--[[
+	local deskwidth, deskheight = love.window.getDesktopDimensions()
+	local width, height = love.window.getMode()
+	local xoffset = math.sin(love.timer.getTime()) * 200
+	local yoffset = math.cos(love.timer.getTime()) * 100
+	love.window.setPosition(deskwidth / 2 - (width / 2) + xoffset, deskheight / 2 - (height / 2) + yoffset)
+	]]
 end
 
 local function connect()
@@ -89,12 +96,16 @@ function love.draw()
     disconnect()
 
 	if debugMode then
-		love.graphics.setColor(.1, 0, .05, .5)
-		love.graphics.rectangle('fill', 5, 5, 216, 62, 5)
+		local width = 230
+		local height = 62
 
-		love.graphics.setColor(0, 0, 0, 1)
-		love.graphics.setLineWidth(2)
-		love.graphics.rectangle('line', 5, 5, 216, 62, 5)
+		love.graphics.setColor(0.05, 0, 0.05, .5)
+		love.graphics.rectangle('fill', 5, 5, width, height, 5)
+
+		love.graphics.setColor(1, 1, 1, 1)
+		love.graphics.setLineWidth(1)
+		love.graphics.setLineStyle('smooth')
+		love.graphics.rectangle('line', 5, 5, width, height, 5)
 		
 		love.graphics.setFont(fonts.consolas)
 		love.graphics.setColor(1, 1, 1)
@@ -246,7 +257,7 @@ function love.errorhandler(msg)
 		love.graphics.print('ERROR!', 5, 5)
 		love.graphics.setColor(1, 1, 1)
 		love.graphics.setFont(fonts.dotumche)
-		love.graphics.print(p, 5, 45)
+		love.graphics.printf(p, 5, 45, 640)
 		love.graphics.setColor(1, 1, 0)
 		love.graphics.setFont(fonts.dotumche)
 		love.graphics.print(control, 5, 200)
@@ -264,7 +275,7 @@ function love.errorhandler(msg)
 
 	control = ''
 	if love.system then
-		control = control .. "\n\nPress CTRL+C or tap to copy this error\nPress CTRL+R to restart the game"
+		control = control .. "\n\nPress CTRL+C or tap to copy this error\nPress CTRL+R to restart the game\nPress ESC to close the game"
 	end
 
 	return function()
@@ -301,5 +312,4 @@ function love.errorhandler(msg)
 			love.timer.sleep(0.1)
 		end
 	end
-
 end

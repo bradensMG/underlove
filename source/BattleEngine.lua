@@ -33,11 +33,11 @@ function BattleEngine:update(dt)
 end
 
 function BattleEngine:draw()
-    love.graphics.setColor(0, 0, 0)
+    love.graphics.setColor(0, 0.3, 0.15)
     love.graphics.rectangle('fill', 0, 0, 640, 480)
     love.graphics.setColor(1, 1, 1)
 
-    love.graphics.draw(bg[0], 0, -1)
+    -- love.graphics.draw(bg[0], 0, -1)
     
     Ui:draw()
     Player:draw()
