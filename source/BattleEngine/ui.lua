@@ -100,6 +100,15 @@ local function doChooseText()
     end
 end
 
+local function doMercyText()
+    love.graphics.setColor(1, 1, 1)
+    love.graphics.setFont(fonts.determination)
+    love.graphics.print('* Spare', 85, 274)
+    if enemies.stats.canFlee then
+        love.graphics.print('* Flee', 85, 306)
+    end
+end
+
 local function doItemText()
     love.graphics.setColor(1, 1, 1)
     love.graphics.setFont(fonts.determination)
@@ -151,6 +160,9 @@ function Ui:draw()
     end
     if global.battleState == 'item' then
         doItemText()
+    end
+    if global.battleState == 'mercy' then
+        doMercyText()
     end
 end
 

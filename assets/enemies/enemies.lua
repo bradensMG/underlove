@@ -18,7 +18,7 @@ enemies.two = {
     yOff = 0
 }
 
-enemies.stats = {amount = 2}
+enemies.stats = {amount = 2, canFlee = true}
 
 enemies.encounter = {text = '* The potent posers pose[break]  proposterously!'}
 

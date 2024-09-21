@@ -80,8 +80,7 @@ function Player:update(dt)
                 Writer:stop()
                 global.subChoice = 0
                 global.battleState = 'chooseEnemy'
-            end
-            if global.choice == 2 then
+            elseif global.choice == 2 then
                 if #Player.inventory > 0 then
                     sfx.select:stop()
                     sfx.select:play()
@@ -92,6 +91,12 @@ function Player:update(dt)
                     sfx.err:stop()
                     sfx.err:play()
                 end
+            elseif global.choice == 3 then
+                sfx.select:stop()
+                sfx.select:play()
+                Writer:stop()
+                global.subChoice = 0
+                global.battleState = 'mercy'
             end
             input.primary = false
         end
@@ -170,6 +175,14 @@ function Player:update(dt)
             sfx.heal:stop()
             sfx.heal:play()
             useItem()
+        end
+    end
+    if global.battleState == 'mercy' then
+        heart.x, heart.y = 55, 279
+        if input.secondary then
+            input.secondary = false
+            buttonPos()
+            gotoMenu()
         end
     end
     if global.battleState == 'useItem' then
