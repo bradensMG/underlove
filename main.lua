@@ -1,6 +1,6 @@
 global = {gameState = 'BattleEngine', battleState = 'buttons', choice = 0, subChoice = 0}
 local FPS = 30
-local debugMode = false
+local debugMode = true
 
 BattleEngine = require 'source.BattleEngine'
 
@@ -12,8 +12,13 @@ fonts = {
 	consolas = love.graphics.newFont('assets/fonts/Consolas.ttf', 16)
 }
 
+local i = 0
+
 for _, font in pairs(fonts) do
-    font:setFilter("nearest", "nearest")
+	i = i + 1
+	if i ~= 5 then
+		font:setFilter("nearest", "nearest")
+	end
 end
 
 input = {up = false, down = false, left = false, right = false, primary = false, secondary = false}
