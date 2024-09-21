@@ -2,7 +2,12 @@ BattleEngine = {}
 
 maxLeft, maxUp, maxDown, maxRight = 0, 0, 0, 0
 
+local bg = {}
+
 function BattleEngine:load()
+    bg[0] = love.graphics.newImage('assets/images/spr_battlebg_0.png')
+    bg[1] = love.graphics.newImage('assets/images/spr_battlebg_1.png')
+
     Enemies = require('assets.enemies.enemies')
     Ui = require('source.BattleEngine.ui')
     Writer = require('source.writer')
@@ -24,9 +29,11 @@ function BattleEngine:update(dt)
 end
 
 function BattleEngine:draw()
-    love.graphics.setColor(0, 0.3, 0.15)
+    love.graphics.setColor(0, 0, 0)
     love.graphics.rectangle('fill', 0, 0, 640, 480)
     love.graphics.setColor(1, 1, 1)
+
+    love.graphics.draw(bg[0], 0, -1)
     
     Ui:draw()
     Player:draw()

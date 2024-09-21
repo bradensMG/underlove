@@ -1,5 +1,6 @@
 global = {gameState = 'BattleEngine', battleState = 'buttons', choice = 0, subChoice = 0}
 local FPS = 30
+local debugMode = false
 
 BattleEngine = require 'source.BattleEngine'
 
@@ -78,14 +79,18 @@ function love.draw()
 
     disconnect()
 
-	love.graphics.setColor(.1, 0, .05, .5)
-	love.graphics.rectangle('fill', 5, 5, 216, 63, 5)
-	love.graphics.setColor(0, 0, 0, 1)
-	love.graphics.setLineWidth(2)
-	love.graphics.rectangle('line', 5, 5, 216, 63, 5)
-	love.graphics.setFont(fonts.consolas)
-    love.graphics.setColor(1, 1, 1)
-    love.graphics.print('FPS: ' .. love.timer.getFPS() .. '\ngameState: ' .. global.gameState .. '\nbattleState: ' .. global.battleState, 10, 10)
+	if debugMode then
+		love.graphics.setColor(.1, 0, .05, .5)
+		love.graphics.rectangle('fill', 5, 5, 216, 63, 5)
+
+		love.graphics.setColor(0, 0, 0, 1)
+		love.graphics.setLineWidth(2)
+		love.graphics.rectangle('line', 5, 5, 216, 63, 5)
+		
+		love.graphics.setFont(fonts.consolas)
+		love.graphics.setColor(1, 1, 1)
+		love.graphics.print('FPS: ' .. love.timer.getFPS() .. '\ngameState: ' .. global.gameState .. '\nbattleState: ' .. global.battleState, 10, 10)
+	end
 end
 
 local timerSleep = function () return 1/FPS end

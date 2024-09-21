@@ -86,6 +86,20 @@ local function updateArena()
     setHeartParams()
 end
 
+local function doChooseText()
+    love.graphics.setColor(1, 1, 1)
+    love.graphics.setFont(fonts.determination)
+    if enemies.stats.amount > 0 then
+        love.graphics.print('* ' .. enemies.one.name, 85, 274)
+    end
+    if enemies.stats.amount > 1 then
+        love.graphics.print('* ' .. enemies.two.name, 85, 306)
+    end
+    if enemies.stats.amount > 2 then
+        love.graphics.print('* ' .. enemies.three.name, 85, 341)
+    end
+end
+
 local function doItemText()
     love.graphics.setColor(1, 1, 1)
     love.graphics.setFont(fonts.determination)
@@ -132,6 +146,9 @@ function Ui:draw()
     arena()
     -- love.graphics.setColor(1, 1, 1, .5)
     -- love.graphics.draw(ref)
+    if global.battleState == 'chooseEnemy' then
+        doChooseText()
+    end
     if global.battleState == 'item' then
         doItemText()
     end

@@ -19,7 +19,7 @@ local sfx = {
     err = love.audio.newSource('assets/sound/sfx/err.mp3', 'static')
 }
 
-Player.stats = {name = 'Chara', love = 1, hp = 20, maxhp = 20, armor = 3, weapon = 2, atk = 0, def = 0}
+Player.stats = {name = 'chara', love = 1, hp = 20, maxhp = 20, armor = 3, weapon = 2, atk = 0, def = 0}
 
 Player.mode = 'red'
 
@@ -74,15 +74,24 @@ function Player:update(dt)
                 global.choice = 3
             end
         elseif input.primary then
-            if global.choice == 2 and #Player.inventory > 0 then
+            if global.choice == 0 or global.choice == 1 then
                 sfx.select:stop()
                 sfx.select:play()
                 Writer:stop()
                 global.subChoice = 0
-                global.battleState = 'item'
-            elseif global.choice == 2 and #Player.inventory == 0 then
-                sfx.err:stop()
-                sfx.err:play()
+                global.battleState = 'chooseEnemy'
+            end
+            if global.choice == 2 then
+                if #Player.inventory > 0 then
+                    sfx.select:stop()
+                    sfx.select:play()
+                    Writer:stop()
+                    global.subChoice = 0
+                    global.battleState = 'item'
+                else
+                    sfx.err:stop()
+                    sfx.err:play()
+                end
             end
             input.primary = false
         end
@@ -121,14 +130,21 @@ function Player:update(dt)
         heart.x = math.max(maxLeft, math.min(heart.x, maxRight))
         heart.y = math.max(maxUp, math.min(heart.y, maxDown))
     end
+    if global.battleState == 'chooseEnemy' then
+        heart.x, heart.y = 55, 279
+        if input.secondary then
+            input.secondary = false
+            buttonPos()
+            gotoMenu()
+        end
+    end
     if global.battleState == 'item' then
         heart.x, heart.y = 472, 348
         if input.secondary then
             input.secondary = false
             buttonPos()
             gotoMenu()
-        end
-        if input.left then
+        elseif input.left then
             if global.subChoice ~= 0 then
                 sfx.move:stop()
                 sfx.move:play()
@@ -137,8 +153,7 @@ function Player:update(dt)
                 sfx.err:stop()
                 sfx.err:play()
             end
-        end
-        if input.right then
+        elseif input.right then
             if global.subChoice ~= #Player.inventory - 1 then
                 sfx.move:stop()
                 sfx.move:play()
@@ -147,8 +162,7 @@ function Player:update(dt)
                 sfx.err:stop()
                 sfx.err:play()
             end
-        end
-        if input.primary then
+        elseif input.primary then
             lastButton = global.choice
             heart.show = false
             global.battleState = 'useItem'
