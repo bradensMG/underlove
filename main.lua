@@ -86,11 +86,11 @@ function love.draw()
 
 	if debugMode then
 		love.graphics.setColor(.1, 0, .05, .5)
-		love.graphics.rectangle('fill', 5, 5, 216, 63, 5)
+		love.graphics.rectangle('fill', 5, 5, 216, 62, 5)
 
 		love.graphics.setColor(0, 0, 0, 1)
 		love.graphics.setLineWidth(2)
-		love.graphics.rectangle('line', 5, 5, 216, 63, 5)
+		love.graphics.rectangle('line', 5, 5, 216, 62, 5)
 		
 		love.graphics.setFont(fonts.consolas)
 		love.graphics.setColor(1, 1, 1)

@@ -112,14 +112,15 @@ function Player:update(dt)
             heart.x = heart.x + ((love.keyboard.isDown('right')and 1 or 0) - (love.keyboard.isDown('left')and 1 or 0)) * 4 / ((love.keyboard.isDown('x')and 1 or 0) + 1) * dt * 30
             if heart.y >= maxDown then
                 heart.jumpstage = 1
+                heart.gravity = 0
                 heart.jumptimer = 0
             end
             if heart.jumpstage == 3 then
-                heart.gravity = heart.gravity + 1 * (dt * 30)
+                heart.gravity = heart.gravity + 1 * dt * 30
             end
             if heart.jumpstage == 1 then
                 if love.keyboard.isDown('up') then
-                    heart.gravity = -6 * (dt * 30)
+                    heart.gravity = -6 * dt * 30
                     heart.jumptimer = heart.jumptimer + (dt * 30)
                 else
                     if heart.y < maxDown then
@@ -136,7 +137,21 @@ function Player:update(dt)
         heart.y = math.max(maxUp, math.min(heart.y, maxDown))
     end
     if global.battleState == 'chooseEnemy' then
-        heart.x, heart.y = 55, 279
+        heart.x, heart.y = 55, 279+(global.subChoice*32)
+        if input.up then
+            if global.subChoice ~= 0 then
+                sfx.move:stop()
+                sfx.move:play()
+                global.subChoice = global.subChoice - 1
+            end
+        end
+        if input.down then
+            if global.subChoice ~= enemies.stats.amount-1 then
+                sfx.move:stop()
+                sfx.move:play()
+                global.subChoice = global.subChoice + 1
+            end
+        end
         if input.secondary then
             input.secondary = false
             buttonPos()
@@ -178,7 +193,21 @@ function Player:update(dt)
         end
     end
     if global.battleState == 'mercy' then
-        heart.x, heart.y = 55, 279
+        heart.x, heart.y = 55, 279+(global.subChoice*32)
+        if input.up then
+            if global.subChoice ~= 0 then
+                sfx.move:stop()
+                sfx.move:play()
+                global.subChoice = global.subChoice - 1
+            end
+        end
+        if input.down then
+            if enemies.stats.canFlee and global.subChoice ~= 1 then
+                sfx.move:stop()
+                sfx.move:play()
+                global.subChoice = global.subChoice + 1
+            end
+        end
         if input.secondary then
             input.secondary = false
             buttonPos()
