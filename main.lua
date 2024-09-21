@@ -47,9 +47,6 @@ end
 function love.update(dt)
     if global.gameState == 'BattleEngine' then BattleEngine:update(dt) end
     input = {up = false, down = false, left = false, right = false, primary = false, secondary = false}
-	if love.keyboard.isDown('lctrl') and love.keyboard.isDown('c') then
-		error('force crash')
-	end
 end
 
 local function connect()
