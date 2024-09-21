@@ -3,8 +3,6 @@ local FPS = 30
 local debugMode = true
 
 BattleEngine = require 'source.BattleEngine'
-camera = require 'lib.camera'
-cam = camera()
 
 fonts = {
     determination = love.graphics.newFont('assets/fonts/determination-mono.ttf', 32),
@@ -96,9 +94,7 @@ end
 function love.draw()
     connect()
 
-	cam:attach()
     if global.gameState == 'BattleEngine' then BattleEngine:draw() end
-	cam:detach()
 
     disconnect()
 
@@ -113,6 +109,11 @@ function love.draw()
 		love.graphics.setLineWidth(1)
 		love.graphics.setLineStyle('smooth')
 		love.graphics.rectangle('line', 5, 5, width, height, 5)
+
+		love.graphics.setColor(0, 0, 0)
+		love.graphics.setLineWidth(1)
+		love.graphics.setLineStyle('smooth')
+		love.graphics.rectangle('line', 4, 4, width + 2, height + 2, 5)
 		
 		love.graphics.setFont(fonts.consolas)
 		love.graphics.setColor(1, 1, 1)
@@ -267,9 +268,9 @@ function love.errorhandler(msg)
 		love.graphics.printf(p, 5, 45, 640)
 		love.graphics.setColor(1, 1, 0)
 		love.graphics.setFont(fonts.dotumche)
-		love.graphics.print(control, 5, 200)
+		love.graphics.print(control, 5, 300)
 		love.graphics.setColor(1, 1, 1)
-		love.graphics.print('hi :-)', 5, 400)
+		love.graphics.print('hi :-)', 5, 458)
 		love.graphics.present()
 	end
 

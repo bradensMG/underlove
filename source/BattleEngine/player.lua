@@ -20,14 +20,15 @@ local sfx = {
 }
 
 Player.stats = {name = 'chara', love = 1, hp = 20, maxhp = 20, armor = 3, weapon = 2, atk = 0, def = 0}
-
 Player.mode = 'red'
-
 Player.inventory = {4, 1, 1, 5, 6}
+Player.chosenEnemy = 0
+Player.actAmount = 0
 
 local color
-
 local lastButton
+local xoff = 0
+local yoff = 0
 
 if global.battleState == 'enemyTalk' then
     heart.x = Ui.arenaTo.x - 8
@@ -175,6 +176,98 @@ function Player:update(dt)
             buttonPos()
             gotoMenu()
         end
+        if input.primary then
+            input.primary = false
+            if global.choice == 1 then
+                Player.chosenEnemy = global.subChoice
+                sfx.select:stop()
+                sfx.select:play()
+                global.subChoice = 0
+                xoff = 0
+                yoff = 0
+                Writer:stop()
+                global.battleState = 'act'
+            end
+        end
+    end
+    if global.battleState == 'act' then
+        heart.x, heart.y = 55+(xoff*215), 279+(yoff*32)
+        local prevXoff, prevYoff = xoff, yoff
+
+        if xoff == 0 then
+            if yoff == 0 then
+                global.subChoice = 0
+            elseif yoff == 1 then
+                global.subChoice = 2
+            elseif yoff == 2 then
+                global.subChoice = 4
+            end
+        elseif xoff == 1 then
+            if yoff == 0 then
+                global.subChoice = 1
+            elseif yoff == 1 then
+                global.subChoice = 3
+            elseif yoff == 2 then
+                global.subChoice = 5
+            end
+        end
+        
+        if input.right and xoff == 0 then
+            if yoff == 0 and Player.actAmount > 1 then
+                xoff = 1
+            elseif yoff == 1 and Player.actAmount > 3 then
+                xoff = 1
+            elseif yoff == 2 and Player.actAmount > 5 then
+                xoff = 1
+            end
+        elseif input.left and xoff == 1 then
+            xoff = 0
+        end
+        
+        if input.up then
+            if yoff == 1 then
+                yoff = 0
+            elseif yoff == 2 then
+                yoff = 1
+            end
+        elseif input.down then
+            if xoff == 0 then
+                if yoff == 1 and Player.actAmount > 4 then
+                    yoff = 2
+                end
+                if yoff == 0 and Player.actAmount > 2 then
+                    yoff = 1
+                end
+            end
+            if xoff == 1 then
+                if yoff == 1 and Player.actAmount > 5 then
+                    yoff = 2
+                end
+                if yoff == 0 and Player.actAmount > 3 then
+                    yoff = 1
+                end
+            end
+        end
+        
+        if (prevXoff ~= xoff or prevYoff ~= yoff) then
+            sfx.move:stop()
+            sfx.move:play()
+        end
+        
+        if input.secondary then
+            global.subChoice = 0
+            heart.x, heart.y = 55, 279+(global.subChoice*32)
+            input.secondary = false
+            global.battleState = 'chooseEnemy'
+        end
+
+        if input.primary then
+            lastButton = global.choice
+            global.battleState = 'doAct'
+            global.choice = -1
+            doAct()
+            heart.show = false
+        end
     end
     if global.battleState == 'item' then
         heart.x, heart.y = 472, 348
@@ -230,6 +323,18 @@ function Player:update(dt)
             input.secondary = false
             buttonPos()
             gotoMenu()
+        end
+    end
+    if global.battleState == 'doAct' then
+        if Writer.isDone and input.primary then
+            if enemies.one.acts[global.subChoice+1] == 'Kill' then
+                error('i told you')
+            end
+            global.choice = lastButton
+            global.battleState = 'buttons'
+            gotoMenu()
+            buttonPos()
+            heart.show = true
         end
     end
     if global.battleState == 'useItem' then

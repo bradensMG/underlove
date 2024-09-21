@@ -1,12 +1,37 @@
 enemies = {}
 
+function doAct()
+    if Player.chosenEnemy == 0 then
+        if enemies.one.acts[global.subChoice+1] == 'Check' then
+            Writer:setParams("* you pressed check but i'm too[break]  lazy to actually do something[break]  with acting right now", 52, 274, fonts.determination, 0.02, 1)
+        end
+        if enemies.one.acts[global.subChoice+1] == 'Pose' then
+            Writer:setParams("* you posed               [break]* ok", 52, 274, fonts.determination, 0.02, 1)
+        end
+        if enemies.one.acts[global.subChoice+1] == 'Kill' then
+            Writer:setParams("* kill! your game crashes", 52, 274, fonts.determination, 0.02, 1)
+        end
+    elseif Player.chosenEnemy == 1 then
+        if enemies.one.acts[global.subChoice+1] == 'Check' then
+            Writer:setParams("* you pressed check but i'm too[break]  lazy to actually do something[break]  with acting right now", 52, 274, fonts.determination, 0.02, 1)
+        end
+        if enemies.one.acts[global.subChoice+1] == 'Pose' then
+            Writer:setParams("* you posed again              [break]* ok", 52, 274, fonts.determination, 0.02, 1)
+        end
+    elseif Player.chosenEnemy == 2 then
+        -- nothing here because there isn't a third enemy
+    end
+end
+
 enemies.one = {
     name = 'Poseur',
     x = 200,
     y = 135,
     image = love.graphics.newImage('assets/enemies/images/poseur.png'),
     xOff = 0,
-    yOff = 0
+    yOff = 0,
+    def = 1,
+    atk = 1
 }
 
 enemies.two = {
@@ -15,8 +40,13 @@ enemies.two = {
     y = 135,
     image = love.graphics.newImage('assets/enemies/images/posette.png'),
     xOff = 0,
-    yOff = 0
+    yOff = 0,
+    def = 5,
+    atk = 5
 }
+
+enemies.one.acts = {'Check', 'Pose', 'Kill'}
+enemies.two.acts = {'Check', 'Pose'}
 
 local color
 
@@ -27,7 +57,7 @@ enemies.bgm = love.audio.newSource('assets/sound/mus/fortheworld.mp3', 'stream')
 
 enemies.bg = love.graphics.newImage('assets/enemies/images/background.png')
 
-local outlineWidth = 1
+local outlineWidth = 0
 
 local function drawGraphic(image, x, y, color, outlineColor)
     for i = -outlineWidth, outlineWidth do

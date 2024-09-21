@@ -20,7 +20,8 @@ local arenaCur = {
     x = 320,
     y = 320,
     width = 570,
-    height = 135
+    height = 135,
+    rotation = 0
 }
 
 local function setHeartParams()
@@ -109,18 +110,30 @@ local function stats()
 end
 
 local function arena()
-    love.graphics.setColor(0, 0, 0, .75)
-    love.graphics.rectangle('fill', arenaCur.x - (arenaCur.width / 2), arenaCur.y - (arenaCur.height / 2), arenaCur.width, arenaCur.height)
+    love.graphics.push()
+    love.graphics.translate(arenaCur.x, arenaCur.y)
+    love.graphics.rotate(math.rad(arenaCur.rotation))
+    local verts = {
+        -arenaCur.width / 2, arenaCur.height / 2,
+        arenaCur.width / 2, arenaCur.height / 2,
+        arenaCur.width / 2, -arenaCur.height / 2,
+        -arenaCur.width / 2, -arenaCur.height / 2
+    }
+    love.graphics.setColor(0, 0, 0, .5)
+    love.graphics.setLineStyle('rough')
+    love.graphics.setLineWidth(5)
+    love.graphics.polygon('fill', verts)
 
     love.graphics.setColor(0, 0, 0)
     love.graphics.setLineStyle('rough')
     love.graphics.setLineWidth(5 + outlineWidth*2)
-    love.graphics.rectangle('line', arenaCur.x - (arenaCur.width / 2), arenaCur.y - (arenaCur.height / 2), arenaCur.width, arenaCur.height)
+    love.graphics.polygon('line', verts)
 
     love.graphics.setColor(1, 1, 1)
     love.graphics.setLineStyle('rough')
     love.graphics.setLineWidth(5)
-    love.graphics.rectangle('line', arenaCur.x - (arenaCur.width / 2), arenaCur.y - (arenaCur.height / 2), arenaCur.width, arenaCur.height)
+    love.graphics.polygon('line', verts)
+    love.graphics.pop()
 end
 
 local function updateArena()
@@ -128,7 +141,57 @@ local function updateArena()
     arenaCur.y = arenaCur.y + ((Ui.arenaTo.y - arenaCur.y) / 6) * love.timer.getDelta() * 30
     arenaCur.width = arenaCur.width + ((Ui.arenaTo.width - arenaCur.width) / 6) * love.timer.getDelta() * 30
     arenaCur.height = arenaCur.height + ((Ui.arenaTo.height - arenaCur.height) / 6) * love.timer.getDelta() * 30
+    arenaCur.rotation = arenaCur.rotation + ((Ui.arenaTo.rotation - arenaCur.rotation) / 6) * love.timer.getDelta() * 30
     setHeartParams()
+end
+
+local function doActText()
+    love.graphics.setFont(fonts.determination)
+    if Player.chosenEnemy == 0 then
+        Player.actAmount = #Enemies.one.acts
+        local xOffset = 85
+        local yOffset = 274
+        local xSpacing = 215
+        local ySpacing = 32
+        
+        for i = 1, #Enemies.one.acts do
+            local act = Enemies.one.acts[i]
+            local x = xOffset + ((i - 1) % 2) * xSpacing
+            local y = yOffset + math.floor((i - 1) / 2) * ySpacing
+            
+            drawText('* ' .. act, x, y, {1, 1, 1}, {0, 0, 0})
+        end
+    end
+    if Player.chosenEnemy == 1 then
+        Player.actAmount = #Enemies.two.acts
+        local xOffset = 85
+        local yOffset = 274
+        local xSpacing = 215
+        local ySpacing = 32
+        
+        for i = 1, #Enemies.two.acts do
+            local act = Enemies.two.acts[i]
+            local x = xOffset + ((i - 1) % 2) * xSpacing
+            local y = yOffset + math.floor((i - 1) / 2) * ySpacing
+            
+            drawText('* ' .. act, x, y, {1, 1, 1}, {0, 0, 0})
+        end
+    end
+    if Player.chosenEnemy == 2 then
+        Player.actAmount = #Enemies.three.acts
+        local xOffset = 85
+        local yOffset = 274
+        local xSpacing = 215
+        local ySpacing = 32
+        
+        for i = 1, #Enemies.two.acts do
+            local act = Enemies.two.acts[i]
+            local x = xOffset + ((i - 1) % 2) * xSpacing
+            local y = yOffset + math.floor((i - 1) / 2) * ySpacing
+            
+            drawText('* ' .. act, x, y, {1, 1, 1}, {0, 0, 0})
+        end
+    end
 end
 
 local function doChooseText()
@@ -196,6 +259,9 @@ function Ui:draw()
     -- love.graphics.draw(ref)
     if global.battleState == 'chooseEnemy' then
         doChooseText()
+    end
+    if global.battleState == 'act' then
+        doActText()
     end
     if global.battleState == 'item' then
         doItemText()
