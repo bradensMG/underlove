@@ -56,6 +56,19 @@ local function drawGraphic(image, x, y, color, outlineColor)
     love.graphics.draw(image, x, y)
 end
 
+local function drawQuad(image, quad, x, y, color, outlineColor)
+    for i = -outlineWidth, outlineWidth do
+        love.graphics.setColor(outlineColor)
+        for j = -outlineWidth, outlineWidth do
+            if i ~= 0 then
+                love.graphics.draw(image, quad, x + i, y + j)
+            end
+        end
+    end
+    love.graphics.setColor(color)
+    love.graphics.draw(image, quad, x, y)
+end
+
 local function buttons()
     local positions = {
         fight = 32,
@@ -65,10 +78,7 @@ local function buttons()
     }
     
     for i, name in ipairs(buttonNames) do
-        love.graphics.setColor(0, 0, 0)
-        love.graphics.rectangle('fill', positions[name] - outlineWidth, 432 - outlineWidth, 110 + outlineWidth*2, 42 + outlineWidth*2)
-        love.graphics.setColor(1, 1, 1)
-        love.graphics.draw(buttonImages[name .. 'bt'], buttonQuads[name .. 'Quads'][(global.choice == (i-1)) and 2 or 1], positions[name], 432)
+        drawQuad(buttonImages[name .. 'bt'], buttonQuads[name .. 'Quads'][(global.choice == (i-1)) and 2 or 1], positions[name], 432, {1, 1, 1}, {0, 0, 0})
     end
 end
 
