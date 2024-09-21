@@ -21,9 +21,11 @@ local sfx = {
 
 Player.stats = {name = 'chara', love = 1, hp = 20, maxhp = 20, armor = 3, weapon = 2, atk = 0, def = 0}
 
-Player.mode = 'blue'
+Player.mode = 'red'
 
 Player.inventory = {4, 1, 1, 5, 6}
+
+local color
 
 local lastButton
 
@@ -54,6 +56,19 @@ local function buttonPos()
     elseif global.choice == 3 then
         heart.x = 507
     end
+end
+
+local function drawGraphic(image, x, y, color, outlineColor)
+    for i = -outlineWidth, outlineWidth do
+        love.graphics.setColor(outlineColor)
+        for j = -outlineWidth, outlineWidth do
+            if i ~= 0 then
+                love.graphics.draw(image, x + i, y + j)
+            end
+        end
+    end
+    love.graphics.setColor(color)
+    love.graphics.draw(image, x, y)
 end
 
 function Player:update(dt)
@@ -232,12 +247,12 @@ end
 
 function Player:draw()
     if Player.mode == 'red' then
-        love.graphics.setColor(1, 0, 0)
+        color = {1, 0, 0}
     elseif Player.mode == 'blue' then
-        love.graphics.setColor(0, 0, 1)
+        color = {0, 0, 1}
     end
     if heart.show then
-        love.graphics.draw(heart.image, heart.x, heart.y)
+        drawGraphic(heart.image, heart.x, heart.y, color, {0, 0, 0})
     end
 end
 

@@ -26,6 +26,19 @@ local colors = {
     yellow = {1, 1, 0}
 }
 
+local function drawText(text, x, y, color, outlineColor)
+    for i = -outlineWidth, outlineWidth do
+        love.graphics.setColor(outlineColor)
+        for j = -outlineWidth, outlineWidth do
+            if i ~= 0 then
+                love.graphics.print(text, x + i, y + j)
+            end
+        end
+    end
+    love.graphics.setColor(color)
+    love.graphics.print(text, x, y)
+end
+
 function Writer:stop()
     doingText = false
     i = #text
@@ -132,7 +145,8 @@ function Writer:draw()
                 local currentColor = colors[color] or colors['white']
                 love.graphics.setColor(currentColor)
     
-                love.graphics.print(char, x + shakeX, y + shakeY)
+                -- love.graphics.print(char, x + shakeX, y + shakeY)
+                drawText(char, x + shakeX, y + shakeY, currentColor, {0, 0, 0})
                 x = x + love.graphics.getFont():getWidth(char)
             end
             i = i + 1

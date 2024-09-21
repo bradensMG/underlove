@@ -30,9 +30,33 @@ local function setHeartParams()
     maxRight = math.floor(arenaCur.x + (arenaCur.width / 2) - 18)
 end
 
+local function drawText(text, x, y, color, outlineColor)
+    for i = -outlineWidth, outlineWidth do
+        love.graphics.setColor(outlineColor)
+        for j = -outlineWidth, outlineWidth do
+            if i ~= 0 then
+                love.graphics.print(text, x + i, y + j)
+            end
+        end
+    end
+    love.graphics.setColor(color)
+    love.graphics.print(text, x, y)
+end
+
+local function drawGraphic(image, x, y, color, outlineColor)
+    for i = -outlineWidth, outlineWidth do
+        love.graphics.setColor(outlineColor)
+        for j = -outlineWidth, outlineWidth do
+            if i ~= 0 then
+                love.graphics.draw(image, x + i, y + j)
+            end
+        end
+    end
+    love.graphics.setColor(color)
+    love.graphics.draw(image, x, y)
+end
+
 local function buttons()
-    love.graphics.setColor(1, 1, 1)
-    
     local positions = {
         fight = 32,
         act = 185,
@@ -41,6 +65,9 @@ local function buttons()
     }
     
     for i, name in ipairs(buttonNames) do
+        love.graphics.setColor(0, 0, 0)
+        love.graphics.rectangle('fill', positions[name] - outlineWidth, 432 - outlineWidth, 110 + outlineWidth*2, 42 + outlineWidth*2)
+        love.graphics.setColor(1, 1, 1)
         love.graphics.draw(buttonImages[name .. 'bt'], buttonQuads[name .. 'Quads'][(global.choice == (i-1)) and 2 or 1], positions[name], 432)
     end
 end
@@ -52,9 +79,12 @@ local function stats()
 
     love.graphics.setColor(1, 1, 1)
     love.graphics.setFont(fonts.mnc)
-    love.graphics.print(Player.stats.name .. '   LV ' .. Player.stats.love, 30, 400)
-    love.graphics.draw(hpname, 240, 400)
+    drawText(Player.stats.name .. '   LV ' .. Player.stats.love, 30, 400, {1, 1, 1}, {0, 0, 0})
 
+    drawGraphic(hpname, 240, 400, {1, 1, 1}, {0, 0, 0})
+
+    love.graphics.setColor(0, 0, 0, 1)
+    love.graphics.rectangle('fill', 275 - outlineWidth, 400 - outlineWidth, (Player.stats.maxhp * 1.2) + outlineWidth*2, 21 + outlineWidth*2)
     love.graphics.setColor(0.75, 0, 0, 1)
     love.graphics.rectangle('fill', 275, 400, (Player.stats.maxhp * 1.2), 21)
     love.graphics.setColor(0.98, 1, 0, 1)
@@ -62,15 +92,20 @@ local function stats()
 
     love.graphics.setColor(1, 1, 1)
     if (Player.stats.hp > -1 and Player.stats.hp < 10) then
-        love.graphics.print("0" .. Player.stats.hp .. " / " .. Player.stats.maxhp, 289 + (Player.stats.maxhp * 1.2), 400)
+        drawText("0" .. Player.stats.hp .. " / " .. Player.stats.maxhp, 289 + (Player.stats.maxhp * 1.2), 400, {1, 1, 1}, {0, 0, 0})
     else
-        love.graphics.print(Player.stats.hp .. " / " .. Player.stats.maxhp, 289 + (Player.stats.maxhp * 1.2), 400)
+        drawText(Player.stats.hp .. " / " .. Player.stats.maxhp, 289 + (Player.stats.maxhp * 1.2), 400, {1, 1, 1}, {0, 0, 0})
     end
 end
 
 local function arena()
-    love.graphics.setColor(0, 0, 0)
+    love.graphics.setColor(0, 0, 0, .5)
     love.graphics.rectangle('fill', arenaCur.x - (arenaCur.width / 2), arenaCur.y - (arenaCur.height / 2), arenaCur.width, arenaCur.height)
+
+    love.graphics.setColor(0, 0, 0)
+    love.graphics.setLineStyle('rough')
+    love.graphics.setLineWidth(5 + outlineWidth*2)
+    love.graphics.rectangle('line', arenaCur.x - (arenaCur.width / 2), arenaCur.y - (arenaCur.height / 2), arenaCur.width, arenaCur.height)
 
     love.graphics.setColor(1, 1, 1)
     love.graphics.setLineStyle('rough')
@@ -87,25 +122,24 @@ local function updateArena()
 end
 
 local function doChooseText()
-    love.graphics.setColor(1, 1, 1)
     love.graphics.setFont(fonts.determination)
     if enemies.stats.amount > 0 then
-        love.graphics.print('* ' .. enemies.one.name, 85, 274)
+        drawText('* ' .. enemies.one.name, 85, 274, {1, 1, 1}, {0, 0, 0})
     end
     if enemies.stats.amount > 1 then
-        love.graphics.print('* ' .. enemies.two.name, 85, 306)
+        drawText('* ' .. enemies.two.name, 85, 306, {1, 1, 1}, {0, 0, 0})
     end
     if enemies.stats.amount > 2 then
-        love.graphics.print('* ' .. enemies.three.name, 85, 341)
+        drawText('* ' .. enemies.three.name, 85, 341, {1, 1, 1}, {0, 0, 0})
     end
 end
 
 local function doMercyText()
     love.graphics.setColor(1, 1, 1)
     love.graphics.setFont(fonts.determination)
-    love.graphics.print('* Spare', 85, 274)
+    drawText('* Spare', 85, 274, {1, 1, 1}, {0, 0, 0})
     if enemies.stats.canFlee then
-        love.graphics.print('* Flee', 85, 306)
+        drawText('* Flee', 85, 306, {1, 1, 1}, {0, 0, 0})
     end
 end
 
@@ -116,32 +150,27 @@ local function doItemText()
     local offset = math.sin(love.timer.getTime()*4)
     
     if itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'type') == 'consumable' then
-        love.graphics.print('* ' .. (itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'name') or 'None') .. ' (' .. (itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'stat') or 'None') .. ' HP)', 52, 274)
+        drawText('* ' .. (itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'name') or 'None') .. ' (' .. (itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'stat') or 'None') .. ' HP)', 52, 274, {1, 1, 1}, {0, 0, 0})
     elseif itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'type') == 'weapon' then
-        love.graphics.print('* ' .. (itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'name') or 'None') .. ' (' .. (itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'stat') or 'None') .. ' ATT)', 52, 274)
+        drawText('* ' .. (itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'name') or 'None') .. ' (' .. (itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'stat') or 'None') .. ' ATT)', 52, 274, {1, 1, 1}, {0, 0, 0})
     elseif itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'type') == 'armor' then
-        love.graphics.print('* ' .. (itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'name') or 'None') .. ' (' .. (itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'stat') or 'None') .. ' DEF)', 52, 274)
+        drawText('* ' .. (itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'name') or 'None') .. ' (' .. (itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'stat') or 'None') .. ' DEF)', 52, 274, {1, 1, 1}, {0, 0, 0})
     end
 
-    love.graphics.print("* " .. (itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'description') or 'None'), 52, 302)
+    drawText("* " .. (itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'description') or 'None'), 52, 302, {1, 1, 1}, {0, 0, 0})
 
     if global.subChoice == 0 then
-        love.graphics.setColor(1, 1, 1, .5)
-        love.graphics.print("<", 448, 342)
+        drawText('<', 448, 342, {1, 1, 1, .5}, {0, 0, 0, .5})
     else
-        love.graphics.setColor(1, 1, 1, 1)
-        love.graphics.print("<", 448 - offset, 342)
+        drawText('<', 448 - offset, 342, {1, 1, 1}, {0, 0, 0})
     end
 
-    love.graphics.setColor(1, 1, 1, 1)
-    love.graphics.print(global.subChoice + 1 .. '/' .. #Player.inventory, 502, 342)
+    drawText(global.subChoice + 1 .. '/' .. #Player.inventory, 502, 342, {1, 1, 1}, {0, 0, 0})
 
     if global.subChoice == #Player.inventory - 1 then
-        love.graphics.setColor(1, 1, 1, .5)
-        love.graphics.print(">", 556, 342)
+        drawText('>', 556, 342, {1, 1, 1, .5}, {0, 0, 0, .5})
     else
-        love.graphics.setColor(1, 1, 1, 1)
-        love.graphics.print(">", 556 + offset, 342)
+        drawText('>', 556 + offset, 342, {1, 1, 1}, {0, 0, 0})
     end
 end
 

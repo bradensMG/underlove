@@ -1,4 +1,4 @@
-global = {gameState = 'BattleEngine', battleState = 'enemyTurn', choice = 0, subChoice = 0}
+global = {gameState = 'BattleEngine', battleState = 'buttons', choice = 0, subChoice = 0}
 local FPS = 30
 local debugMode = true
 
@@ -13,6 +13,8 @@ fonts = {
 }
 
 local i = 0
+
+outlineWidth = 2
 
 for _, font in pairs(fonts) do
 	i = i + 1
