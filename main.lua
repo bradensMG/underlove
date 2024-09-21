@@ -194,7 +194,8 @@ function love.errorhandler(msg)
 	end
 
 	if love.audio then
-		local err = love.audio.newSource('assets/sound/sfx/snd_hurt1.wav', 'stream')
+		love.audio.stop()
+		local err = love.audio.newSource('assets/sound/sfx/heartbeatbreaker.wav', 'stream')
 		love.audio.play(err)
 	end
 
@@ -238,9 +239,9 @@ function love.errorhandler(msg)
 		if not love.graphics.isActive() then return end
 		local pos = 70
 		love.graphics.clear(0, 0, 0)
-		-- local broken = love.graphics.newImage('assets/images/ut-heart-broken.png')
+		local broken = love.graphics.newImage('assets/images/ut-heart-broken.png')
 		love.graphics.setColor(1, 0, 0)
-		-- love.graphics.draw(broken, crashx, crashy)
+		love.graphics.draw(broken, crashx, crashy)
 		love.graphics.setFont(fonts.determination)
 		love.graphics.print('ERROR!', 5, 5)
 		love.graphics.setColor(1, 1, 1)
