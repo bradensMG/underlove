@@ -21,7 +21,7 @@ local sfx = {
 
 Player.stats = {name = 'chara', love = 1, hp = 20, maxhp = 20, armor = 3, weapon = 2, atk = 0, def = 0}
 
-Player.mode = 'red'
+Player.mode = 'blue'
 
 Player.inventory = {4, 1, 1, 5, 6}
 
@@ -108,30 +108,33 @@ function Player:update(dt)
             heart.y = heart.y + ((love.keyboard.isDown('down')and 1 or 0) - (love.keyboard.isDown('up')and 1 or 0)) * 4 / ((love.keyboard.isDown('x')and 1 or 0) + 1) * dt * 30
         end
         if Player.mode == 'blue' then
-            heart.y = heart.y + heart.gravity
             heart.x = heart.x + ((love.keyboard.isDown('right')and 1 or 0) - (love.keyboard.isDown('left')and 1 or 0)) * 4 / ((love.keyboard.isDown('x')and 1 or 0) + 1) * dt * 30
+
+            if heart.y < maxDown then
+                heart.gravity = heart.gravity + 0.75 * dt * 30
+            end
+        
             if heart.y >= maxDown then
-                heart.jumpstage = 1
                 heart.gravity = 0
+                heart.jumpstage = 1
                 heart.jumptimer = 0
             end
-            if heart.jumpstage == 3 then
-                heart.gravity = heart.gravity + 1 * dt * 30
+        
+            if love.keyboard.isDown('up') and heart.jumpstage == 1 then
+                heart.jumpstage = 2
             end
-            if heart.jumpstage == 1 then
-                if love.keyboard.isDown('up') then
-                    heart.gravity = -6 * dt * 30
-                    heart.jumptimer = heart.jumptimer + (dt * 30)
-                else
-                    if heart.y < maxDown then
-                        heart.gravity = -1 * dt * 30
-                        heart.jumpstage = 3
-                    end
-                end
-                if heart.jumptimer > 10 then
-                    heart.jumpstage = 3
-                end
+        
+            if love.keyboard.isDown('up') and heart.jumpstage == 2 and heart.jumptimer < 9 then
+                heart.gravity = -6
+                heart.jumptimer = heart.jumptimer + 1 * dt * 30
             end
+        
+            if not love.keyboard.isDown('up') and heart.jumpstage == 2 and heart.jumptimer < 8 then
+                heart.jumpstage = 3
+                heart.gravity = -1
+            end
+        
+            heart.y = heart.y + heart.gravity * dt * 30
         end
         heart.x = math.max(maxLeft, math.min(heart.x, maxRight))
         heart.y = math.max(maxUp, math.min(heart.y, maxDown))
