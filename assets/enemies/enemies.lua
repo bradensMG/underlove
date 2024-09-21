@@ -21,6 +21,7 @@ enemies.two = {
 enemies.stats = {amount = 2, canFlee = true}
 
 enemies.encounter = {text = '* The potent posers pose[break]  proposterously!'}
+enemies.bgm = love.audio.newSource('assets/sound/mus/fortheworld.mp3', 'stream')
 
 function enemies:update(dt)
 

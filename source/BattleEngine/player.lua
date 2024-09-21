@@ -223,6 +223,8 @@ function Player:update(dt)
             heart.show = true
         end
     end
+    crashx = heart.x - 2
+    crashy = heart.y
 end
 
 function Player:draw()

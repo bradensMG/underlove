@@ -13,6 +13,7 @@
 [RhenaudTheLukark](https://github.com/RhenaudTheLukark) - Creator of CYF, where the Poseur and Posette sprites come from.</br>
 [Davidobot's post on the LOVE2D forum](https://love2d.org/forums/viewtopic.php?p=199030&sid=5e50e42e22e4538ca0f3f7b0717aa2f2#p199030) - FPS Limiter </br>
 [Toby Fox](https://x.com/tobyfox) - Developer of UNDERTALE. </br>
-[Temmie Chang](https://x.com/tuyoki) - Developer of UNDERTALE. </br> </br>
+[Temmie Chang](https://x.com/tuyoki) - Developer of UNDERTALE. </br> 
+[DUSTTALE on SoundCloud (david)](https://soundcloud.com/mortemobire/for-the-world) - Composer of the background track (not for the engine i just liked it so i put it in as a placeholder :sob:) /br>
 
 <p>This engine is developed for fun, you're more than welcome to use or make modifications to it! I don't recommend using it in its current state as it's still very unfinished, but hopefully soon it'll be in a state that it can be useful to everyone!</p>

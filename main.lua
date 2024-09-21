@@ -39,6 +39,10 @@ function love.keypressed(key)
     elseif key == "f4" then
 		fullscreen = not fullscreen
 		love.window.setFullscreen(fullscreen, "desktop")
+	elseif key == '1' then
+		love.graphics.captureScreenshot('screenie.png')
+	elseif key == '2' then
+		error('forceCrash')
 	end
 end
 
@@ -234,7 +238,9 @@ function love.errorhandler(msg)
 		if not love.graphics.isActive() then return end
 		local pos = 70
 		love.graphics.clear(0, 0, 0)
+		-- local broken = love.graphics.newImage('assets/images/ut-heart-broken.png')
 		love.graphics.setColor(1, 0, 0)
+		-- love.graphics.draw(broken, crashx, crashy)
 		love.graphics.setFont(fonts.determination)
 		love.graphics.print('ERROR!', 5, 5)
 		love.graphics.setColor(1, 1, 1)
@@ -257,7 +263,7 @@ function love.errorhandler(msg)
 
 	control = ''
 	if love.system then
-		control = control .. "\n\nPress CTRL+C or tap to copy this error\nPress CTRL+Q to quit the game"
+		control = control .. "\n\nPress CTRL+C or tap to copy this error\nPress CTRL+R to restart the game"
 	end
 
 	return function()
@@ -270,8 +276,8 @@ function love.errorhandler(msg)
 				return 1
 			elseif e == "keypressed" and a == "c" and love.keyboard.isDown("lctrl", "rctrl") then
 				copyToClipboard()
-			elseif e == "keypressed" and a == "q" and love.keyboard.isDown("lctrl", "rctrl") then
-				love.event.quit()
+			elseif e == "keypressed" and a == "r" and love.keyboard.isDown("lctrl", "rctrl") then
+				return 'restart'
 			elseif e == "touchpressed" then
 				local name = love.window.getTitle()
 				if #name == 0 or name == "Untitled" then name = "Game" end

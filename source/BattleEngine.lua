@@ -26,6 +26,10 @@ function BattleEngine:update(dt)
     Player:update(dt)
     Writer:update(dt)
     Enemies:update(dt)
+
+    Enemies.bgm:setVolume(0.5)
+    Enemies.bgm:setLooping(true)
+    Enemies.bgm:play()
 end
 
 function BattleEngine:draw()
