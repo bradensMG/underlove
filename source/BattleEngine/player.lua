@@ -21,7 +21,7 @@ local sfx = {
 
 Player.stats = {name = 'chara', love = 1, hp = 20, maxhp = 20, armor = 3, weapon = 2, atk = 0, def = 0}
 
-Player.mode = 'blue'
+Player.mode = 'red'
 
 Player.inventory = {4, 1, 1, 5, 6}
 

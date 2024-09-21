@@ -25,6 +25,8 @@ enemies.stats = {amount = 2, canFlee = true}
 enemies.encounter = {text = '* The potent posers pose[break]  proposterously!'}
 enemies.bgm = love.audio.newSource('assets/sound/mus/fortheworld.mp3', 'stream')
 
+enemies.bg = love.graphics.newImage('assets/enemies/images/background.png')
+
 local outlineWidth = 1
 
 local function drawGraphic(image, x, y, color, outlineColor)

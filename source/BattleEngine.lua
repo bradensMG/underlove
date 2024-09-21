@@ -13,7 +13,7 @@ function BattleEngine:load()
     Writer = require('source.writer')
 
     if global.battleState == 'buttons' then gotoMenu() else -- go to menu
-        Ui.arenaTo = {x = 320, y = 320, width = 155, height = 135} -- go to enemyturn
+        Ui.arenaTo = {x = 320, y = 320, width = 135, height = 135} -- go to enemyturn
     end
 
     Player = require('source.BattleEngine.player')
@@ -33,16 +33,17 @@ function BattleEngine:update(dt)
 end
 
 function BattleEngine:draw()
-    love.graphics.setColor(0, 0.3, 0.15)
+    local color = {40, 110, 70}
+    love.graphics.setColor(color[1]/255, color[2]/255, color[3]/255)
     love.graphics.rectangle('fill', 0, 0, 640, 480)
     love.graphics.setColor(1, 1, 1)
 
     -- love.graphics.draw(bg[0], 0, -1)
     
+    Enemies:draw()
     Ui:draw()
     Player:draw()
     Writer:draw()
-    Enemies:draw()
 end
 
 function gotoMenu()

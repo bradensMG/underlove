@@ -1,8 +1,10 @@
-global = {gameState = 'BattleEngine', battleState = 'enemyTurn', choice = 0, subChoice = 0}
+global = {gameState = 'BattleEngine', battleState = 'buttons', choice = 0, subChoice = 0}
 local FPS = 30
 local debugMode = true
 
 BattleEngine = require 'source.BattleEngine'
+camera = require 'lib.camera'
+cam = camera()
 
 fonts = {
     determination = love.graphics.newFont('assets/fonts/determination-mono.ttf', 32),
@@ -54,6 +56,7 @@ function love.load(arg)
 
     yourCanvasName = love.graphics.newCanvas(640, 480)
     if global.gameState == 'BattleEngine' then BattleEngine:load() end
+	
 end
 
 function love.update(dt)
@@ -93,7 +96,9 @@ end
 function love.draw()
     connect()
 
+	cam:attach()
     if global.gameState == 'BattleEngine' then BattleEngine:draw() end
+	cam:detach()
 
     disconnect()
 

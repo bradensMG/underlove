@@ -24,10 +24,10 @@ local arenaCur = {
 }
 
 local function setHeartParams()
-    maxLeft = math.floor(arenaCur.x - (arenaCur.width / 2) + 5)
-    maxUp = math.floor(arenaCur.y - (arenaCur.height / 2) + 5)
-    maxDown = math.floor(arenaCur.y + (arenaCur.height / 2) - 20)
-    maxRight = math.floor(arenaCur.x + (arenaCur.width / 2) - 20)
+    maxLeft = math.floor(arenaCur.x - (arenaCur.width / 2) + 6)
+    maxUp = math.floor(arenaCur.y - (arenaCur.height / 2) + 6)
+    maxDown = math.floor(arenaCur.y + (arenaCur.height / 2) - 21)
+    maxRight = math.floor(arenaCur.x + (arenaCur.width / 2) - 21)
 end
 
 local function drawText(text, x, y, color, outlineColor)
@@ -109,7 +109,7 @@ local function stats()
 end
 
 local function arena()
-    love.graphics.setColor(0, 0, 0, .5)
+    love.graphics.setColor(0, 0, 0, .75)
     love.graphics.rectangle('fill', arenaCur.x - (arenaCur.width / 2), arenaCur.y - (arenaCur.height / 2), arenaCur.width, arenaCur.height)
 
     love.graphics.setColor(0, 0, 0)
