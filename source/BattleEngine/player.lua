@@ -80,7 +80,7 @@ function Player:update(dt)
                 Writer:stop()
                 global.subChoice = 0
                 global.battleState = 'item'
-            elseif #Player.inventory == 0 then
+            elseif global.choice == 2 and #Player.inventory == 0 then
                 sfx.err:stop()
                 sfx.err:play()
             end
