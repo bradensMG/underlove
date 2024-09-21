@@ -24,10 +24,10 @@ local arenaCur = {
 }
 
 local function setHeartParams()
-    maxLeft = math.floor(arenaCur.x - (arenaCur.width / 2) + 3)
-    maxUp = math.floor(arenaCur.y - (arenaCur.height / 2) + 3)
-    maxDown = math.floor(arenaCur.y + (arenaCur.height / 2) - 18)
-    maxRight = math.floor(arenaCur.x + (arenaCur.width / 2) - 18)
+    maxLeft = math.floor(arenaCur.x - (arenaCur.width / 2) + 5)
+    maxUp = math.floor(arenaCur.y - (arenaCur.height / 2) + 5)
+    maxDown = math.floor(arenaCur.y + (arenaCur.height / 2) - 20)
+    maxRight = math.floor(arenaCur.x + (arenaCur.width / 2) - 20)
 end
 
 local function drawText(text, x, y, color, outlineColor)

@@ -13,7 +13,7 @@ function BattleEngine:load()
     Writer = require('source.writer')
 
     if global.battleState == 'buttons' then gotoMenu() else -- go to menu
-        Ui.arenaTo = {x = 320, y = 320, width = 135, height = 135} -- go to enemyturn
+        Ui.arenaTo = {x = 320, y = 320, width = 155, height = 135} -- go to enemyturn
     end
 
     Player = require('source.BattleEngine.player')
