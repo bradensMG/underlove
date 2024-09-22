@@ -2,28 +2,29 @@ enemies = {}
 
 function doAct()
     if Player.chosenEnemy == 0 then
-        if enemies.one.acts[global.subChoice+1] == 'Check' then
-            Writer:setParams("* you pressed check but i'm too[break]  lazy to actually do something[break]  with acting right now", 52, 274, fonts.determination, 0.02, 1)
+        if enemies[1].acts[global.subChoice+1] == 'Check' then
+            Writer:setParams("[clear]* POSEUR: ATT - 1 DEF - 1          [break]* Passionate poseur and wants[break]  more people to pose with.", 52, 274, fonts.determination, 0.02, 1)
         end
-        if enemies.one.acts[global.subChoice+1] == 'Pose' then
-            Writer:setParams("* you posed               [break]* ok", 52, 274, fonts.determination, 0.02, 1)
+        if enemies[1].acts[global.subChoice+1] == 'Pose' then
+            Writer:setParams("[clear]* You posed with Poseur.          [break]* It feels content with you, and[break]  is [yellow][wave]SPARING[clear] you now.", 52, 274, fonts.determination, 0.02, 1)
+            enemies[1].canSpare = true
         end
-        if enemies.one.acts[global.subChoice+1] == 'Kill' then
-            Writer:setParams("* kill! your game crashes", 52, 274, fonts.determination, 0.02, 1)
+        if enemies[1].acts[global.subChoice+1] == 'Kill' then
+            Writer:setParams("[clear]* kill! your game crashes", 52, 274, fonts.determination, 0.02, 1)
         end
     elseif Player.chosenEnemy == 1 then
-        if enemies.one.acts[global.subChoice+1] == 'Check' then
-            Writer:setParams("* you pressed check but i'm too[break]  lazy to actually do something[break]  with acting right now", 52, 274, fonts.determination, 0.02, 1)
+        if enemies[1].acts[global.subChoice+1] == 'Check' then
+            Writer:setParams("[clear]* POSETTE: ATT - 5 DEF - 5          [break]* Poses with Poseur.          [break]* Nothing much more.", 52, 274, fonts.determination, 0.02, 1)
         end
-        if enemies.one.acts[global.subChoice+1] == 'Pose' then
-            Writer:setParams("* you posed again              [break]* ok", 52, 274, fonts.determination, 0.02, 1)
+        if enemies[1].acts[global.subChoice+1] == 'Pose' then
+            Writer:setParams("[clear]* You posed with Posette.          [break]* It's impressed.", 52, 274, fonts.determination, 0.02, 1)
         end
     elseif Player.chosenEnemy == 2 then
         -- nothing here because there isn't a third enemy
     end
 end
 
-enemies.one = {
+enemies[1] = {
     name = 'Poseur',
     x = 200,
     y = 135,
@@ -31,10 +32,11 @@ enemies.one = {
     xOff = 0,
     yOff = 0,
     def = 1,
-    atk = 1
+    atk = 1,
+    canSpare = false
 }
 
-enemies.two = {
+enemies[2] = {
     name = 'Posette',
     x = 440,
     y = 135,
@@ -42,11 +44,12 @@ enemies.two = {
     xOff = 0,
     yOff = 0,
     def = 5,
-    atk = 5
+    atk = 5,
+    canSpare = false
 }
 
-enemies.one.acts = {'Check', 'Pose', 'Kill'}
-enemies.two.acts = {'Check', 'Pose'}
+enemies[1].acts = {'Check', 'Pose', 'Kill'}
+enemies[2].acts = {'Check', 'Pose'}
 
 local color
 
@@ -80,10 +83,10 @@ function enemies:draw()
     color = {1, 1, 1}
 
     if enemies.stats.amount > 0 then
-        drawGraphic(enemies.one.image, enemies.one.x - enemies.one.image:getWidth()/2 + enemies.one.xOff, enemies.one.y - enemies.one.image:getHeight()/2 + enemies.one.yOff, color, {0, 0, 0})
+        drawGraphic(enemies[1].image, enemies[1].x - enemies[1].image:getWidth()/2 + enemies[1].xOff, enemies[1].y - enemies[1].image:getHeight()/2 + enemies[1].yOff, color, {0, 0, 0})
     end
     if enemies.stats.amount > 1 then
-        drawGraphic(enemies.two.image, enemies.two.x - enemies.two.image:getWidth()/2 + enemies.two.xOff, enemies.two.y - enemies.two.image:getHeight()/2 + enemies.two.yOff, color, {0, 0, 0})
+        drawGraphic(enemies[2].image, enemies[2].x - enemies[2].image:getWidth()/2 + enemies[2].xOff, enemies[2].y - enemies[2].image:getHeight()/2 + enemies[2].yOff, color, {0, 0, 0})
     end
 end
 

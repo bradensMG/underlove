@@ -60,13 +60,6 @@ end
 function love.update(dt)
     if global.gameState == 'BattleEngine' then BattleEngine:update(dt) end
     input = {up = false, down = false, left = false, right = false, primary = false, secondary = false}
-	--[[
-	local deskwidth, deskheight = love.window.getDesktopDimensions()
-	local width, height = love.window.getMode()
-	local xoffset = math.sin(love.timer.getTime()) * 200
-	local yoffset = math.cos(love.timer.getTime()) * 100
-	love.window.setPosition(deskwidth / 2 - (width / 2) + xoffset, deskheight / 2 - (height / 2) + yoffset)
-	]]
 end
 
 local function connect()

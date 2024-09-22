@@ -194,60 +194,30 @@ function Player:update(dt)
         heart.x, heart.y = 55+(xoff*215), 279+(yoff*32)
         local prevXoff, prevYoff = xoff, yoff
 
-        if xoff == 0 then
-            if yoff == 0 then
-                global.subChoice = 0
-            elseif yoff == 1 then
-                global.subChoice = 2
-            elseif yoff == 2 then
-                global.subChoice = 4
-            end
-        elseif xoff == 1 then
-            if yoff == 0 then
-                global.subChoice = 1
-            elseif yoff == 1 then
-                global.subChoice = 3
-            elseif yoff == 2 then
-                global.subChoice = 5
-            end
-        end
-        
+        local choices = {
+            {0, 2, 4},
+            {1, 3, 5}
+        }
+
+        global.subChoice = choices[xoff + 1][yoff + 1]
+
         if input.right and xoff == 0 then
-            if yoff == 0 and Player.actAmount > 1 then
-                xoff = 1
-            elseif yoff == 1 and Player.actAmount > 3 then
-                xoff = 1
-            elseif yoff == 2 and Player.actAmount > 5 then
+            if (yoff == 0 and Player.actAmount > 1) or (yoff == 1 and Player.actAmount > 3) or (yoff == 2 and Player.actAmount > 5) then
                 xoff = 1
             end
         elseif input.left and xoff == 1 then
             xoff = 0
         end
-        
-        if input.up then
-            if yoff == 1 then
-                yoff = 0
-            elseif yoff == 2 then
-                yoff = 1
-            end
+
+        if input.up and yoff > 0 then
+            yoff = yoff - 1
         elseif input.down then
-            if xoff == 0 then
-                if yoff == 1 and Player.actAmount > 4 then
-                    yoff = 2
-                end
-                if yoff == 0 and Player.actAmount > 2 then
-                    yoff = 1
-                end
-            end
-            if xoff == 1 then
-                if yoff == 1 and Player.actAmount > 5 then
-                    yoff = 2
-                end
-                if yoff == 0 and Player.actAmount > 3 then
-                    yoff = 1
-                end
+            local maxY = (xoff == 0 and {2, 4} or {4, 5})
+            if (yoff < 2 and Player.actAmount > maxY[yoff + 1]) then
+                yoff = yoff + 1
             end
         end
+
         
         if (prevXoff ~= xoff or prevYoff ~= yoff) then
             sfx.move:stop()
@@ -337,7 +307,7 @@ function Player:update(dt)
     end
     if global.battleState == 'doAct' then
         if Writer.isDone and input.primary then
-            if enemies.one.acts[global.subChoice+1] == 'Kill' then
+            if enemies[1].acts[global.subChoice+1] == 'Kill' then
                 error('i told you')
             end
             global.choice = lastButton

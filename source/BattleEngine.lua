@@ -62,12 +62,12 @@ function gotoMenu()
 end
 
 function doFlee()
-    Writer:setParams("* Don't waste my time.", 85, 306, fonts.determination, 0.02, 1)
+    Writer:setParams("[clear]* Don't waste my time.", 85, 306, fonts.determination, 0.02, 1)
 end
 
 function useItem()
 
-    Writer:setParams("* You equipped the " .. itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'name') .. '.', 52, 274, fonts.determination, 0.02, 1)
+    Writer:setParams("[clear]* You equipped the " .. itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'name') .. '.', 52, 274, fonts.determination, 0.02, 1)
 
     if itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'type') == 'consumable' then
         if type(itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'stat')) == 'number' then
@@ -76,9 +76,9 @@ function useItem()
             Player.stats.hp = Player.stats.maxhp
         end
         if Player.stats.hp >= Player.stats.maxhp then
-            Writer:setParams("* You ate the " .. itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'name') .. '.     [break]* Your HP was maxed out!', 52, 274, fonts.determination, 0.02, 1)
+            Writer:setParams("[clear]* You ate the " .. itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'name') .. '.     [break]* Your HP was maxed out!', 52, 274, fonts.determination, 0.02, 1)
         else
-            Writer:setParams("* You ate the " .. itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'name') .. '.     [break]* You recovered ' .. itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'stat') .. ' HP.', 52, 274, fonts.determination, 0.02, 1)
+            Writer:setParams("[clear]* You ate the " .. itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'name') .. '.     [break]* You recovered ' .. itemManager:getPropertyfromID(Player.inventory[global.subChoice + 1], 'stat') .. ' HP.', 52, 274, fonts.determination, 0.02, 1)
         end
         table.remove(Player.inventory, global.subChoice + 1)
     end

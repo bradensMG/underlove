@@ -148,14 +148,14 @@ end
 local function doActText()
     love.graphics.setFont(fonts.determination)
     if Player.chosenEnemy == 0 then
-        Player.actAmount = #Enemies.one.acts
+        Player.actAmount = #enemies[1].acts
         local xOffset = 85
         local yOffset = 274
         local xSpacing = 215
         local ySpacing = 32
         
-        for i = 1, #Enemies.one.acts do
-            local act = Enemies.one.acts[i]
+        for i = 1, #enemies[1].acts do
+            local act = enemies[1].acts[i]
             local x = xOffset + ((i - 1) % 2) * xSpacing
             local y = yOffset + math.floor((i - 1) / 2) * ySpacing
             
@@ -163,14 +163,14 @@ local function doActText()
         end
     end
     if Player.chosenEnemy == 1 then
-        Player.actAmount = #Enemies.two.acts
+        Player.actAmount = #enemies[2].acts
         local xOffset = 85
         local yOffset = 274
         local xSpacing = 215
         local ySpacing = 32
         
-        for i = 1, #Enemies.two.acts do
-            local act = Enemies.two.acts[i]
+        for i = 1, #enemies[2].acts do
+            local act = enemies[2].acts[i]
             local x = xOffset + ((i - 1) % 2) * xSpacing
             local y = yOffset + math.floor((i - 1) / 2) * ySpacing
             
@@ -178,14 +178,14 @@ local function doActText()
         end
     end
     if Player.chosenEnemy == 2 then
-        Player.actAmount = #Enemies.three.acts
+        Player.actAmount = #enemies[3].acts
         local xOffset = 85
         local yOffset = 274
         local xSpacing = 215
         local ySpacing = 32
         
-        for i = 1, #Enemies.two.acts do
-            local act = Enemies.two.acts[i]
+        for i = 1, #enemies[2].acts do
+            local act = enemies[2].acts[i]
             local x = xOffset + ((i - 1) % 2) * xSpacing
             local y = yOffset + math.floor((i - 1) / 2) * ySpacing
             
@@ -196,23 +196,36 @@ end
 
 local function doChooseText()
     love.graphics.setFont(fonts.determination)
-    if enemies.stats.amount > 0 then
-        drawText('* ' .. enemies.one.name, 85, 274, {1, 1, 1}, {0, 0, 0})
-    end
-    if enemies.stats.amount > 1 then
-        drawText('* ' .. enemies.two.name, 85, 306, {1, 1, 1}, {0, 0, 0})
-    end
-    if enemies.stats.amount > 2 then
-        drawText('* ' .. enemies.three.name, 85, 341, {1, 1, 1}, {0, 0, 0})
-    end
+    for i = 1, math.min(enemies.stats.amount, 3) do
+        local enemy = enemies[i]
+        local yPosition = 274 + (i - 1) * 32  -- Adjust the vertical spacing as needed
+        local txt = '* ' .. enemy.name
+    
+        drawText(txt, 85, yPosition, {1, 1, 1}, {0, 0, 0})
+    
+        love.graphics.setColor(0, 0, 0)
+        love.graphics.rectangle('fill', 106 + (#txt * 16) - 2, yPosition + 4, 100 + 4, 16 + 4)
+        love.graphics.setColor(0, 0.8, 0)
+        love.graphics.rectangle('fill', 106 + (#txt * 16), yPosition + 6, 100, 16)
+    end    
 end
 
 local function doMercyText()
-    love.graphics.setColor(1, 1, 1)
+    love.graphics.print(tostring(enemies[1].canSpare))
     love.graphics.setFont(fonts.determination)
-    drawText('* Spare', 85, 274, {1, 1, 1}, {0, 0, 0})
+
+    local color = {1, 1, 1}
+    for i = 1, 3 do
+        if Enemies[i] and Enemies[i].canSpare then
+            color = {1, 1, 0}  -- Change color if canSpare is true
+            break
+        end
+    end
+    
+    drawText('* Spare', 85, 274, color, {0, 0, 0})
     if enemies.stats.canFlee then
-        drawText('* Flee', 85, 306, {1, 1, 1}, {0, 0, 0})
+        local color = {1, 1, 1}
+        drawText('* Flee', 85, 306, color, {0, 0, 0})
     end
 end
 
