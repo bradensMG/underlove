@@ -23,7 +23,8 @@ local colors = {
     green = {0, 1, 0},
     blue = {0, 0, 1},
     cyan = {0, 1, 1},
-    yellow = {1, 1, 0}
+    yellow = {1, 1, 0},
+    weirdRed = {1, .2, .2}
 }
 
 local function drawText(text, x, y, color, outlineColor)
@@ -122,7 +123,7 @@ function Writer:draw()
                     elseif code == 'shake' then
                         animation = 'shake'
                     elseif code == 'clear' then
-                        animation = nil
+                        animation = 'none'
                         color = 'white'
                     else
                         if colors[code] then
@@ -134,8 +135,8 @@ function Writer:draw()
             else
                 if not animation ~= nil then
                     if animation == 'wave' then
-                        shakeX = math.sin(love.timer.getTime() * -8 + animi) * 1.5
-                        shakeY = math.cos(love.timer.getTime() * -8 + animi) * 1.5
+                        shakeX = math.floor(math.sin(love.timer.getTime() * -8 + animi) * 1.5)
+                        shakeY = math.floor(math.cos(love.timer.getTime() * -8 + animi) * 1.5)
                     elseif animation == 'shake' then
                         letterShakeAmount = 1
                         shakeX = love.math.random(-letterShakeAmount, letterShakeAmount)
@@ -146,12 +147,17 @@ function Writer:draw()
                 love.graphics.setColor(currentColor)
     
                 -- love.graphics.print(char, x + shakeX, y + shakeY)
-                drawText(char, x + shakeX, y + shakeY, currentColor, {0, 0, 0})
+                if animation ~= 'none' then
+                    drawText(char, x + shakeX, y + shakeY, currentColor, {0, 0, 0})
+                else
+                    drawText(char, x, y, currentColor, {0, 0, 0})
+                end
+
                 x = x + love.graphics.getFont():getWidth(char)
             end
             i = i + 1
             if char ~= ' ' then
-                animi = animi + 1
+                animi = animi + 0.5
             end
         end
     end

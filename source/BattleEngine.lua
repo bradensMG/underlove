@@ -3,7 +3,7 @@ BattleEngine = {}
 maxLeft, maxUp, maxDown, maxRight = 0, 0, 0, 0
 
 local bg = {}
-playMusic = true
+playMusic = false
 
 function BattleEngine:load()
     bg[0] = love.graphics.newImage('assets/images/spr_battlebg_0.png')

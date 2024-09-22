@@ -106,14 +106,14 @@ function love.draw()
 		love.graphics.rectangle('fill', 5, 5, width, height, 5)
 
 		love.graphics.setColor(1, 1, 1, 1)
-		love.graphics.setLineWidth(1)
+		love.graphics.setLineWidth(2)
 		love.graphics.setLineStyle('smooth')
 		love.graphics.rectangle('line', 5, 5, width, height, 5)
 
 		love.graphics.setColor(0, 0, 0)
-		love.graphics.setLineWidth(1)
+		love.graphics.setLineWidth(2)
 		love.graphics.setLineStyle('smooth')
-		love.graphics.rectangle('line', 4, 4, width + 2, height + 2, 5)
+		love.graphics.rectangle('line', 3, 3, width + 4, height + 4, 5)
 		
 		love.graphics.setFont(fonts.consolas)
 		love.graphics.setColor(1, 1, 1)

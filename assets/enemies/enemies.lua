@@ -52,7 +52,7 @@ local color
 
 enemies.stats = {amount = 2, canFlee = true}
 
-enemies.encounter = {text = '* The potent posers pose[break]  proposterously!'}
+enemies.encounter = {text = '[clear]* The [weirdRed][shake]potent posers[clear] pose[break]  [cyan][wave]proposterously!'}
 enemies.bgm = love.audio.newSource('assets/sound/mus/fortheworld.mp3', 'stream')
 
 enemies.bg = love.graphics.newImage('assets/enemies/images/background.png')
