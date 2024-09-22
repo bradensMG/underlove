@@ -198,15 +198,15 @@ local function doChooseText()
     love.graphics.setFont(fonts.determination)
     for i = 1, math.min(enemies.stats.amount, 3) do
         local enemy = enemies[i]
-        local yPosition = 274 + (i - 1) * 32  -- Adjust the vertical spacing as needed
+        local yPosition = 274 + (i - 1) * 32
         local txt = '* ' .. enemy.name
     
         drawText(txt, 85, yPosition, {1, 1, 1}, {0, 0, 0})
     
         love.graphics.setColor(0, 0, 0)
-        love.graphics.rectangle('fill', 106 + (#txt * 16) - 2, yPosition + 4, 100 + 4, 16 + 4)
+        love.graphics.rectangle('fill', 106 + (#txt * 16) - 2, yPosition + 4, 125 + 4, 16 + 4)
         love.graphics.setColor(0, 0.8, 0)
-        love.graphics.rectangle('fill', 106 + (#txt * 16), yPosition + 6, 100, 16)
+        love.graphics.rectangle('fill', 106 + (#txt * 16), yPosition + 6, 125, 16)
     end    
 end
 
