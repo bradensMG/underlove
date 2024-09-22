@@ -324,6 +324,16 @@ function Player:update(dt)
             buttonPos()
             gotoMenu()
         end
+        if input.primary then
+            if global.subChoice == 1 then
+                playMusic = false
+                Enemies.bgm:setLooping(false)
+                Enemies.bgm:stop()
+                global.choice = -1
+                doFlee()
+                global.battleState = 'flee'
+            end
+        end
     end
     if global.battleState == 'doAct' then
         if Writer.isDone and input.primary then
@@ -344,6 +354,12 @@ function Player:update(dt)
             gotoMenu()
             buttonPos()
             heart.show = true
+        end
+    end
+    if global.battleState == 'flee' then
+        heart.x = heart.x - 3  * dt * 30
+        if heart.x < 0 then
+            error('you fled but i dont feel like adding anything special')
         end
     end
     crashx = heart.x - 2

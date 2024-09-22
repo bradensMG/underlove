@@ -3,6 +3,7 @@ BattleEngine = {}
 maxLeft, maxUp, maxDown, maxRight = 0, 0, 0, 0
 
 local bg = {}
+playMusic = true
 
 function BattleEngine:load()
     bg[0] = love.graphics.newImage('assets/images/spr_battlebg_0.png')
@@ -27,9 +28,11 @@ function BattleEngine:update(dt)
     Writer:update(dt)
     Enemies:update(dt)
 
-    Enemies.bgm:setVolume(0.5)
-    Enemies.bgm:setLooping(true)
-    Enemies.bgm:play()
+    if playMusic then
+        Enemies.bgm:setVolume(0.5)
+        Enemies.bgm:setLooping(true)
+        Enemies.bgm:play()
+    end
 end
 
 function BattleEngine:draw()
@@ -56,6 +59,10 @@ function gotoMenu()
         rotation = 0
     }
     Writer:setParams(Enemies.encounter.text, 52, 274, fonts.determination, 0.02, 1)
+end
+
+function doFlee()
+    Writer:setParams("* Don't waste my time.", 85, 306, fonts.determination, 0.02, 1)
 end
 
 function useItem()
