@@ -17,10 +17,7 @@ local i = 0
 outlineWidth = 2
 
 for _, font in pairs(fonts) do
-	i = i + 1
-	if i ~= 5 then
-		font:setFilter("nearest", "nearest")
-	end
+	font:setFilter("nearest", "nearest")
 end
 
 input = {up = false, down = false, left = false, right = false, primary = false, secondary = false}
@@ -54,7 +51,6 @@ function love.load(arg)
 
     yourCanvasName = love.graphics.newCanvas(640, 480)
     if global.gameState == 'BattleEngine' then BattleEngine:load() end
-	
 end
 
 function love.update(dt)
@@ -93,24 +89,24 @@ function love.draw()
 
 	if debugMode then
 		local width = 230
-		local height = 62
+		local height = 81
 
 		love.graphics.setColor(0.05, 0, 0.05, .5)
 		love.graphics.rectangle('fill', 5, 5, width, height, 5)
 
 		love.graphics.setColor(1, 1, 1, 1)
 		love.graphics.setLineWidth(2)
-		love.graphics.setLineStyle('smooth')
+		love.graphics.setLineStyle('rough')
 		love.graphics.rectangle('line', 5, 5, width, height, 5)
 
 		love.graphics.setColor(0, 0, 0)
 		love.graphics.setLineWidth(2)
-		love.graphics.setLineStyle('smooth')
+		love.graphics.setLineStyle('rough')
 		love.graphics.rectangle('line', 3, 3, width + 4, height + 4, 5)
 		
 		love.graphics.setFont(fonts.consolas)
 		love.graphics.setColor(1, 1, 1)
-		love.graphics.print('FPS: ' .. love.timer.getFPS() .. '\ngameState: ' .. global.gameState .. '\nbattleState: ' .. global.battleState, 10, 10)
+		love.graphics.print('FPS: ' .. love.timer.getFPS() .. '\ngameState: ' .. global.gameState .. '\nbattleState: ' .. global.battleState .. '\nRAM Usage: ' .. math.floor(collectgarbage("count")) .. ' KB', 10, 10)
 	end
 end
 

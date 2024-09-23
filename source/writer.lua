@@ -135,8 +135,8 @@ function Writer:draw()
             else
                 if not animation ~= nil then
                     if animation == 'wave' then
-                        shakeX = math.floor(math.sin(love.timer.getTime() * -8 + animi) * 1.5)
-                        shakeY = math.floor(math.cos(love.timer.getTime() * -8 + animi) * 1.5)
+                        shakeX = math.sin(love.timer.getTime() * -8 + animi) * 1.5
+                        shakeY = math.cos(love.timer.getTime() * -8 + animi) * 1.5
                     elseif animation == 'shake' then
                         letterShakeAmount = 1
                         shakeX = love.math.random(-letterShakeAmount, letterShakeAmount)
