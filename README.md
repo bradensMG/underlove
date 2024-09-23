@@ -2,13 +2,13 @@
 <p>UNDERLÖVE is an UNDERTALE engine made with the LÖVE2D game framework. This is a remake of my previous engine, being remade entirely from scratch to put development convinience over accuracy. This is very much a work in progress still but I decided to make this repository public in case anyone wanted to see the engine remake's development.</p>
 
 # Engine Screenshots
-!["9/21/24 screenshot - Menu."](./github/1_0_21_24.png "9/21/24 screenshot - Menu.")
-!["9/21/24 screenshot - Choosing enemy."](./github/2_0_21_24.png "9/21/24 screenshot - Choosing enemy.")
-!["9/21/24 recording - Acting."](./github/3_0_21_24.png "9/21/24 recording - Acting.")
-!["9/21/24 recording - Items."](./github/4_0_21_24.png "9/21/24 recording - Items.")
-!["9/21/24 recording - Mercy."](./github/5_0_21_24.png "9/21/24 recording - Mercy.")
-!["9/21/24 recording - Red soul."](./github/6_0_21_24.png "9/21/24 recording - Red soul.")
-!["9/21/24 recording - Blue soul."](./github/7_0_21_24.png "9/21/24 recording - Blue soul.")
+!["9/21/24 screenshot - Menu."](./github/1_9_21_24.png "9/21/24 screenshot - Menu.")
+!["9/21/24 screenshot - Choosing enemy."](./github/2_9_21_24.png "9/21/24 screenshot - Choosing enemy.")
+!["9/21/24 recording - Acting."](./github/3_9_21_24.png "9/21/24 recording - Acting.")
+!["9/21/24 recording - Items."](./github/4_9_21_24.png "9/21/24 recording - Items.")
+!["9/21/24 recording - Mercy."](./github/5_9_21_24.png "9/21/24 recording - Mercy.")
+!["9/21/24 recording - Red soul."](./github/6_9_21_24.png "9/21/24 recording - Red soul.")
+!["9/21/24 recording - Blue soul."](./github/7_9_21_24.png "9/21/24 recording - Blue soul.")
 
 # Credits
 [bradensmediocregames](https://github.com/bradensMG/) - I am the only one working on this engine. </br>
