@@ -119,7 +119,7 @@ local function arena()
         arenaCur.width / 2, -arenaCur.height / 2,
         -arenaCur.width / 2, -arenaCur.height / 2
     }
-    love.graphics.setColor(0, 0, 0, .5)
+    love.graphics.setColor(0, 0, .075, .5)
     love.graphics.setLineStyle('rough')
     love.graphics.setLineWidth(5)
     love.graphics.polygon('fill', verts)
@@ -204,7 +204,7 @@ local function doChooseText()
         drawText(txt, 85, yPosition, {1, 1, 1}, {0, 0, 0})
     
         love.graphics.setColor(0, 0, 0)
-        love.graphics.rectangle('fill', 106 + (#txt * 16) - 2, yPosition + 4, 125 + 4, 16 + 4)
+        love.graphics.rectangle('fill', 106 + (#txt * 16) - outlineWidth, yPosition+6 - outlineWidth, 125 + outlineWidth*2, 16 + outlineWidth*2)
         love.graphics.setColor(0, 0.8, 0)
         love.graphics.rectangle('fill', 106 + (#txt * 16), yPosition + 6, 125, 16)
     end    
@@ -217,7 +217,7 @@ local function doMercyText()
     local color = {1, 1, 1}
     for i = 1, 3 do
         if Enemies[i] and Enemies[i].canSpare then
-            color = {1, 1, 0}  -- Change color if canSpare is true
+            color = {1, 1, 0}
             break
         end
     end

@@ -3,7 +3,9 @@ BattleEngine = {}
 maxLeft, maxUp, maxDown, maxRight = 0, 0, 0, 0
 
 local bg = {}
-playMusic = false
+playMusic = true
+
+local bgoffset = 0
 
 function BattleEngine:load()
     bg[0] = love.graphics.newImage('assets/images/spr_battlebg_0.png')
@@ -22,6 +24,21 @@ function BattleEngine:load()
     itemManager = require('source.BattleEngine.itemManager')
 end
 
+local function doBackground()
+    love.graphics.setLineWidth(2)
+    love.graphics.setLineStyle('rough')
+    for i = 1, 48 do
+        bgoffset = bgoffset - .02
+        if bgoffset <= -72 then
+            bgoffset = 0
+        end
+        love.graphics.setColor(0, 1, .5, .2)
+        love.graphics.line(0 + math.floor(i*36 + bgoffset*2), 0, math.floor(0 + i*36 + bgoffset*2), 480)
+        love.graphics.setColor(0, 1, .5, .4)
+        love.graphics.line(0, math.floor(0 + i*36 + bgoffset/2), 640, math.floor(0 + i*36 + bgoffset/2))
+    end
+end
+
 function BattleEngine:update(dt)
     Ui:update(dt)
     Player:update(dt)
@@ -36,13 +53,14 @@ function BattleEngine:update(dt)
 end
 
 function BattleEngine:draw()
-    local color = {40, 110, 70}
+    local color = {0, 0, 15}
     love.graphics.setColor(color[1]/255, color[2]/255, color[3]/255)
     love.graphics.rectangle('fill', 0, 0, 640, 480)
     love.graphics.setColor(1, 1, 1)
 
     -- love.graphics.draw(bg[0], 0, -1)
-    
+
+    doBackground()
     Enemies:draw()
     Ui:draw()
     Player:draw()
