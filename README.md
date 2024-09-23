@@ -2,8 +2,8 @@
 <p>UNDERLÖVE is an UNDERTALE engine made with the LÖVE2D game framework. This is a remake of my previous engine, being remade entirely from scratch to put development convinience over accuracy. This is very much a work in progress still but I decided to make this repository public in case anyone wanted to see the engine remake's development.</p>
 
 # Table of Contents
-[Engine Screenshots](https://github.com/bradensMG/underlove?tab=readme-ov-file#Engine_Screenshots) - I am the only one working on this engine. </br>
-[Credits](https://github.com/bradensMG/underlove?tab=readme-ov-file#Credits) - I am the only one working on this engine. </br>
+[Engine Screenshots](https://github.com/bradensMG/underlove?tab=readme-ov-file#Engine-Screenshots) </br>
+[Credits](https://github.com/bradensMG/underlove?tab=readme-ov-file#Credits) </br>
 
 # Engine Screenshots
 !["9/21/24 screenshot - Menu."](./github/1_9_21_24.png "9/21/24 screenshot - Menu.")
