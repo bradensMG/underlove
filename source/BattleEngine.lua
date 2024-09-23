@@ -28,14 +28,14 @@ local function doBackground()
     love.graphics.setLineWidth(2)
     love.graphics.setLineStyle('rough')
     for i = 1, 48 do
-        bgoffset = bgoffset - .02
-        if bgoffset <= -72 then
+        bgoffset = bgoffset - love.timer.getDelta() / 2
+        if bgoffset <= -84 then
             bgoffset = 0
         end
         love.graphics.setColor(0, 1, .5, .2)
-        love.graphics.line(0 + math.floor(i*36 + bgoffset*2), 0, math.floor(0 + i*36 + bgoffset*2), 480)
+        love.graphics.line(0 + math.floor(i*42 + bgoffset*2), 0, math.floor(0 + i*42 + bgoffset*2), 480)
         love.graphics.setColor(0, 1, .5, .4)
-        love.graphics.line(0, math.floor(0 + i*36 + bgoffset/2), 640, math.floor(0 + i*36 + bgoffset/2))
+        love.graphics.line(0, math.floor(0 + i*42 + bgoffset/2), 640, math.floor(0 + i*42 + bgoffset/2))
     end
 end
 

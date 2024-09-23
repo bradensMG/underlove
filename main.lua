@@ -68,7 +68,7 @@ local function disconnect()
 	local screenW,screenH = love.graphics.getDimensions() -- Get Dimensions of the window
 	local canvasW,canvasH = yourCanvasName:getDimensions() -- Get Dimensions of the game canvas
 	local scale = math.min(screenW/canvasW , screenH/canvasH) -- Scale canvas to the screen, You can also change this with 1 if you don't want to scale. Or wrap it in a math.floor to only scale integers.
-	--local scale = math.floor(math.min(screenW/canvasW , screenH/canvasH)) -- Scale to the nearest integer 
+	-- local scale = math.floor(math.min(screenW/canvasW , screenH/canvasH)) -- Scale to the nearest integer 
 	--local scale = 1 -- Don't scale
 
 	love.graphics.push()
