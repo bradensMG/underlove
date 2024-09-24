@@ -84,13 +84,16 @@ function enemies:update(dt)
 end
 
 function enemies:draw()
-    color = {1, 1, 1}
-
-    if enemies.stats.amount > 0 then
-        drawGraphic(enemies[1].image, enemies[1].x - enemies[1].image:getWidth()/2 + enemies[1].xOff, enemies[1].y - enemies[1].image:getHeight()/2 + enemies[1].yOff, color, {0, 0, 0})
-    end
-    if enemies.stats.amount > 1 then
-        drawGraphic(enemies[2].image, enemies[2].x - enemies[2].image:getWidth()/2 + enemies[2].xOff, enemies[2].y - enemies[2].image:getHeight()/2 + enemies[2].yOff, color, {0, 0, 0})
+    for i = 1, math.min(enemies.stats.amount, 3) do
+        local enemy = enemies[i]
+        if enemy.state == 'alive' then
+            color = {1, 1, 1}
+        elseif enemy.state == 'spared' then
+            color = {1, 1, 1, .5}
+        elseif enemy.state == 'dead' then
+            color = {1, 1, 1, .0}
+        end
+        drawGraphic(enemy.image, enemy.x - enemy.image:getWidth()/2 + enemy.xOff, enemy.y - enemy.image:getHeight()/2 + enemy.yOff, color, {0, 0, 0})
     end
 end
 

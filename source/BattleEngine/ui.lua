@@ -209,15 +209,24 @@ local function doChooseText()
         local enemy = enemies[i]
         local yPosition = 274 + (i - 1) * 32
         local txt = '* ' .. enemy.name
+
+        local opacity
+        if enemy.state == 'alive' then
+            opacity = 1
+        else
+            opacity = .5
+        end
     
-        drawText(txt, 85, yPosition, {1, 1, 1}, {0, 0, 0})
+        drawText(txt, 85, yPosition, {1, 1, 1, opacity}, {0, 0, 0})
     
-        love.graphics.setColor(0, 0, 0)
-        love.graphics.rectangle('fill', 106 + (#txt * 16) - outlineWidth, yPosition+6 - outlineWidth, 125 + outlineWidth*2, 16 + outlineWidth*2)
-        love.graphics.setColor(0.8, 0, 0)
-        love.graphics.rectangle('fill', 106 + (#txt * 16), yPosition + 6, (enemy.maxhp / enemy.maxhp) * 125, 16)
-        love.graphics.setColor(0, 0.8, 0)
-        love.graphics.rectangle('fill', 106 + (#txt * 16), yPosition + 6, (enemy.hp / enemy.maxhp) * 125, 16)
+        if opacity == 1 then
+            love.graphics.setColor(0, 0, 0)
+            love.graphics.rectangle('fill', 106 + (#txt * 16) - outlineWidth, yPosition+6 - outlineWidth, 125 + outlineWidth*2, 16 + outlineWidth*2)
+            love.graphics.setColor(0.8, 0, 0)
+            love.graphics.rectangle('fill', 106 + (#txt * 16), yPosition + 6, (enemy.maxhp / enemy.maxhp) * 125, 16)
+            love.graphics.setColor(0, 0.8, 0)
+            love.graphics.rectangle('fill', 106 + (#txt * 16), yPosition + 6, (enemy.hp / enemy.maxhp) * 125, 16)
+        end
     end    
 end
 

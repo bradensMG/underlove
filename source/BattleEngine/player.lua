@@ -178,7 +178,7 @@ function Player:update(dt)
         end
         if input.primary then
             input.primary = false
-            if global.choice == 1 then
+            if global.choice == 1 and enemies[global.subChoice + 1].state == 'alive' then
                 Player.chosenEnemy = global.subChoice
                 sfx.select:stop()
                 sfx.select:play()
@@ -187,6 +187,9 @@ function Player:update(dt)
                 yoff = 0
                 Writer:stop()
                 global.battleState = 'act'
+            else
+                sfx.err:stop()
+                sfx.err:play()
             end
         end
     end
@@ -295,7 +298,15 @@ function Player:update(dt)
             gotoMenu()
         end
         if input.primary then
-            if global.subChoice == 1 then
+            if global.subChoice == 0 then
+                for i = 1, math.min(enemies.stats.amount, 3) do
+                    local enemy = enemies[i]
+                    if enemy.canSpare then
+                        enemy.state = 'spared'
+                        enemy.canSpare = false
+                    end
+                end
+            elseif global.subChoice == 1 then
                 playMusic = false
                 Enemies.bgm:setLooping(false)
                 Enemies.bgm:stop()
