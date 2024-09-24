@@ -71,6 +71,16 @@ local function drawQuad(image, quad, x, y, color, outlineColor)
 end
 
 local function buttons()
+    local color
+    local outlineClr
+    if global.choice < 0 or global.choice > 3 then
+        color = {1, 1, 1, .5}
+        outlineClr = {0, 0, 0, 0}
+    else
+        color = {1, 1, 1}
+        outlineClr = {0, 0, 0}
+    end
+
     local positions = {
         fight = 32,
         act = 185,
@@ -79,7 +89,7 @@ local function buttons()
     }
     
     for i, name in ipairs(buttonNames) do
-        drawQuad(buttonImages[name .. 'bt'], buttonQuads[name .. 'Quads'][(global.choice == (i-1)) and 2 or 1], positions[name], 432, {1, 1, 1}, {0, 0, 0})
+        drawQuad(buttonImages[name .. 'bt'], buttonQuads[name .. 'Quads'][(global.choice == (i-1)) and 2 or 1], positions[name], 432, color, outlineClr)
     end
 end
 
@@ -88,7 +98,6 @@ local function stats()
         Player.stats.hp = Player.stats.maxhp
     end
 
-    love.graphics.setColor(1, 1, 1)
     love.graphics.setFont(fonts.mnc)
     drawText(Player.stats.name .. '   LV ' .. Player.stats.love, 30, 400, {1, 1, 1}, {0, 0, 0})
 
@@ -205,8 +214,10 @@ local function doChooseText()
     
         love.graphics.setColor(0, 0, 0)
         love.graphics.rectangle('fill', 106 + (#txt * 16) - outlineWidth, yPosition+6 - outlineWidth, 125 + outlineWidth*2, 16 + outlineWidth*2)
+        love.graphics.setColor(0.8, 0, 0)
+        love.graphics.rectangle('fill', 106 + (#txt * 16), yPosition + 6, (enemy.maxhp / enemy.maxhp) * 125, 16)
         love.graphics.setColor(0, 0.8, 0)
-        love.graphics.rectangle('fill', 106 + (#txt * 16), yPosition + 6, 125, 16)
+        love.graphics.rectangle('fill', 106 + (#txt * 16), yPosition + 6, (enemy.hp / enemy.maxhp) * 125, 16)
     end    
 end
 

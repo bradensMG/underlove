@@ -25,7 +25,7 @@ function BattleEngine:load()
 end
 
 local function doBackground()
-    love.graphics.setLineWidth(2)
+    love.graphics.setLineWidth(3)
     love.graphics.setLineStyle('rough')
     for i = 1, 48 do
         bgoffset = bgoffset - love.timer.getDelta() / 2

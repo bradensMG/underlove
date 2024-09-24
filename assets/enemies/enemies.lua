@@ -33,7 +33,9 @@ enemies[1] = {
     yOff = 0,
     def = 1,
     atk = 1,
-    canSpare = false
+    canSpare = false,
+    hp = 50,
+    maxhp = 50
 }
 
 enemies[2] = {
@@ -45,7 +47,9 @@ enemies[2] = {
     yOff = 0,
     def = 5,
     atk = 5,
-    canSpare = false
+    canSpare = false,
+    hp = 100,
+    maxhp = 100
 }
 
 enemies[1].acts = {'Check', 'Pose', 'Kill'}
