@@ -34,6 +34,7 @@ enemies[1] = {
     def = 1,
     atk = 1,
     canSpare = false,
+    state = 'alive',
     hp = 50,
     maxhp = 50
 }
@@ -48,6 +49,7 @@ enemies[2] = {
     def = 5,
     atk = 5,
     canSpare = false,
+    state = 'alive',
     hp = 100,
     maxhp = 100
 }
@@ -60,7 +62,7 @@ local color
 enemies.stats = {amount = 2, canFlee = true}
 
 enemies.encounter = {text = '[clear]* The [weirdRed][shake]potent posers[clear] pose[break]  [cyan][wave]proposterously!'}
-enemies.bgm = love.audio.newSource('assets/sound/mus/fortheworld.mp3', 'stream')
+enemies.bgm = love.audio.newSource('assets/enemies/bgm.mp3', 'stream')
 
 local outlineWidth = 0
 

@@ -46,7 +46,7 @@ function BattleEngine:update(dt)
     Enemies:update(dt)
 
     if playMusic then
-        Enemies.bgm:setVolume(0.5)
+        Enemies.bgm:setVolume(0.7)
         Enemies.bgm:setLooping(true)
         Enemies.bgm:play()
     end
