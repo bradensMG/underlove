@@ -12,8 +12,6 @@ fonts = {
 	consolas = love.graphics.newFont('assets/fonts/Consolas.ttf', 16)
 }
 
-local i = 0
-
 outlineWidth = 2
 
 for _, font in pairs(fonts) do
@@ -82,9 +80,7 @@ end
 
 function love.draw()
     connect()
-
     if global.gameState == 'BattleEngine' then BattleEngine:draw() end
-
     disconnect()
 
 	if debugMode then

@@ -3,9 +3,14 @@ BattleEngine = {}
 maxLeft, maxUp, maxDown, maxRight = 0, 0, 0, 0
 
 local bg = {}
-playMusic = true
+playMusic = false
 
 local bgoffset = 0
+
+local particles = {dust = {}}
+particles.dust[1] = love.graphics.newImage('assets/images/particles/spr_dustcloud_0.png')
+particles.dust[2] = love.graphics.newImage('assets/images/particles/spr_dustcloud_1.png')
+particles.dust[3] = love.graphics.newImage('assets/images/particles/spr_dustcloud_2.png')
 
 function BattleEngine:load()
     bg[0] = love.graphics.newImage('assets/images/spr_battlebg_0.png')
@@ -27,15 +32,16 @@ end
 local function doBackground()
     love.graphics.setLineWidth(3)
     love.graphics.setLineStyle('rough')
-    for i = 1, 48 do
-        bgoffset = bgoffset - love.timer.getDelta() / 2
-        if bgoffset <= -84 then
-            bgoffset = 0
-        end
+    
+    for i = 1, 21 do
+        local lineX = i * 42 + bgoffset * 2
+        local lineY = 0 + i * 42 + bgoffset / 2
+
         love.graphics.setColor(0, 1, .5, .2)
-        love.graphics.line(0 + math.floor(i*42 + bgoffset*2), 0, math.floor(0 + i*42 + bgoffset*2), 480)
+        love.graphics.line(lineX, 0, lineX, 480)
+        
         love.graphics.setColor(0, 1, .5, .4)
-        love.graphics.line(0, math.floor(0 + i*42 + bgoffset/2), 640, math.floor(0 + i*42 + bgoffset/2))
+        love.graphics.line(0, lineY, 640, lineY)
     end
 end
 
@@ -44,6 +50,11 @@ function BattleEngine:update(dt)
     Player:update(dt)
     Writer:update(dt)
     Enemies:update(dt)
+
+    bgoffset = bgoffset - dt * 30
+    if bgoffset <= -84 then
+        bgoffset = 0
+    end
 
     if playMusic then
         Enemies.bgm:setVolume(0.7)
