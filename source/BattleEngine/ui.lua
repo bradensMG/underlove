@@ -231,7 +231,6 @@ local function doChooseText()
 end
 
 local function doMercyText()
-    love.graphics.print(tostring(enemies[1].canSpare))
     love.graphics.setFont(fonts.determination)
 
     local color = {1, 1, 1}

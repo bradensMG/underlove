@@ -61,7 +61,10 @@ local color
 
 enemies.stats = {amount = 2, canFlee = true}
 
-enemies.encounter = {text = '[clear]* The [weirdRed][shake]potent posers[clear] pose[break]  [cyan][wave]proposterously!'}
+enemies.encounter = {
+    text = '[clear]* The [weirdRed][shake]potent posers[clear] pose[break]  [cyan][wave]proposterously!',
+    startFirst = false
+}
 enemies.bgm = love.audio.newSource('assets/enemies/bgm2.mp3', 'stream')
 
 local outlineWidth = 0

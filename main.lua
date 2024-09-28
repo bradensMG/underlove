@@ -1,4 +1,4 @@
-global = {gameState = 'BattleEngine', battleState = 'buttons', choice = 0, subChoice = 0}
+global = {gameState = 'BattleEngine', battleState = nil, choice = 0, subChoice = 0}
 local FPS = 30
 local debugMode = true
 
@@ -75,7 +75,6 @@ local function disconnect()
     love.graphics.setColor(1, 1, 1)
 	love.graphics.draw(yourCanvasName) -- Draw the canvas
 	love.graphics.pop() -- pop transformation state
-
 end
 
 function love.draw()

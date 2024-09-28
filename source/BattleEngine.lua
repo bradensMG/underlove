@@ -3,7 +3,7 @@ BattleEngine = {}
 maxLeft, maxUp, maxDown, maxRight = 0, 0, 0, 0
 
 local bg = {}
-playMusic = true
+playMusic = false
 
 local bgoffset = 0
 
@@ -17,6 +17,14 @@ function BattleEngine:load()
     bg[1] = love.graphics.newImage('assets/images/spr_battlebg_1.png')
 
     Enemies = require('assets.enemies.enemies')
+
+    if enemies.encounter.startFirst then
+        global.battleState = 'enemyTurn'
+        global.choice = -1
+    else
+        global.battleState = 'buttons'
+    end
+
     Ui = require('source.BattleEngine.ui')
     Writer = require('source.writer')
 
