@@ -3,7 +3,7 @@ BattleEngine = {}
 maxLeft, maxUp, maxDown, maxRight = 0, 0, 0, 0
 
 local bg = {}
-playMusic = false
+playMusic = true
 
 local bgoffset = 0
 

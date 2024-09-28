@@ -22,6 +22,8 @@ function love.keypressed(key)
 	elseif key == '2' then
 		error('forceCrash')
 	elseif key == 'r' then
+		love.audio.stop()
+		love.graphics.clear()
 		love.load()
 	end
 end
