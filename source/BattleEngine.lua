@@ -17,6 +17,7 @@ function BattleEngine:load()
     bg[1] = love.graphics.newImage('assets/images/spr_battlebg_1.png')
 
     Enemies = require('assets.enemies.enemies')
+    Enemies:load()
 
     if enemies.encounter.startFirst then
         global.battleState = 'enemyTurn'
@@ -33,6 +34,7 @@ function BattleEngine:load()
     end
 
     Player = require('source.BattleEngine.player')
+    Player:load()
 
     itemManager = require('source.BattleEngine.itemManager')
 end

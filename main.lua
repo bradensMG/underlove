@@ -1,24 +1,5 @@
-global = {gameState = 'BattleEngine', battleState = nil, choice = 0, subChoice = 0}
 local FPS = 30
 local debugMode = true
-
-BattleEngine = require 'source.BattleEngine'
-
-fonts = {
-    determination = love.graphics.newFont('assets/fonts/determination-mono.ttf', 32),
-    mnc = love.graphics.newFont('assets/fonts/Mars_Needs_Cunnilingus.ttf', 23),
-    dotumche = love.graphics.newFont('assets/fonts/dotumche.ttf', 13),
-    default = love.graphics.newFont(12),
-	consolas = love.graphics.newFont('assets/fonts/Consolas.ttf', 16)
-}
-
-outlineWidth = 2
-
-for _, font in pairs(fonts) do
-	font:setFilter("nearest", "nearest")
-end
-
-input = {up = false, down = false, left = false, right = false, primary = false, secondary = false}
 
 function love.keypressed(key)
     if key == 'up' then
@@ -40,10 +21,31 @@ function love.keypressed(key)
 		love.graphics.captureScreenshot('screenie.png')
 	elseif key == '2' then
 		error('forceCrash')
+	elseif key == 'r' then
+		love.load()
 	end
 end
 
 function love.load(arg)
+	global = {gameState = 'BattleEngine', battleState = nil, choice = 0, subChoice = 0}
+
+	BattleEngine = require 'source.BattleEngine'
+
+	fonts = {
+		determination = love.graphics.newFont('assets/fonts/determination-mono.ttf', 32),
+		mnc = love.graphics.newFont('assets/fonts/Mars_Needs_Cunnilingus.ttf', 23),
+		dotumche = love.graphics.newFont('assets/fonts/dotumche.ttf', 13),
+		default = love.graphics.newFont(12),
+		consolas = love.graphics.newFont('assets/fonts/Consolas.ttf', 16)
+	}
+
+	outlineWidth = 2
+
+	for _, font in pairs(fonts) do
+		font:setFilter("nearest", "nearest")
+	end
+
+	input = {up = false, down = false, left = false, right = false, primary = false, secondary = false}
     love.graphics.setDefaultFilter('nearest', 'nearest')
     love.graphics.setBackgroundColor(0, 0, 0)
 

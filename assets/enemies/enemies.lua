@@ -1,5 +1,8 @@
 enemies = {}
 
+local color
+local outlineWidth = 0
+
 function doAct()
     if Player.chosenEnemy == 0 then
         if enemies[1].acts[global.subChoice+1] == 'Check' then
@@ -24,51 +27,6 @@ function doAct()
     end
 end
 
-enemies[1] = {
-    name = 'Poseur',
-    x = 200,
-    y = 135,
-    image = love.graphics.newImage('assets/enemies/images/poseur.png'),
-    xOff = 0,
-    yOff = 0,
-    def = 1,
-    atk = 1,
-    canSpare = false,
-    state = 'alive',
-    hp = 50,
-    maxhp = 50
-}
-
-enemies[2] = {
-    name = 'Posette',
-    x = 440,
-    y = 135,
-    image = love.graphics.newImage('assets/enemies/images/posette.png'),
-    xOff = 0,
-    yOff = 0,
-    def = 5,
-    atk = 5,
-    canSpare = false,
-    state = 'alive',
-    hp = 100,
-    maxhp = 100
-}
-
-enemies[1].acts = {'Check', 'Pose', 'Kill'}
-enemies[2].acts = {'Check', 'Pose'}
-
-local color
-
-enemies.stats = {amount = 2, canFlee = true}
-
-enemies.encounter = {
-    text = '[clear]* The [weirdRed][shake]potent posers[clear] pose[break]  [cyan][wave]proposterously!',
-    startFirst = false
-}
-enemies.bgm = love.audio.newSource('assets/enemies/bgm2.mp3', 'stream')
-
-local outlineWidth = 0
-
 local function drawGraphic(image, x, y, color, outlineColor)
     for i = -outlineWidth, outlineWidth do
         love.graphics.setColor(outlineColor)
@@ -82,8 +40,51 @@ local function drawGraphic(image, x, y, color, outlineColor)
     love.graphics.draw(image, x, y)
 end
 
-function enemies:update(dt)
+function enemies:load()
+    enemies[1] = {
+        name = 'Poseur',
+        x = 200,
+        y = 135,
+        image = love.graphics.newImage('assets/enemies/images/poseur.png'),
+        xOff = 0,
+        yOff = 0,
+        def = 1,
+        atk = 1,
+        canSpare = false,
+        state = 'alive',
+        hp = 50,
+        maxhp = 50
+    }
+    
+    enemies[2] = {
+        name = 'Posette',
+        x = 440,
+        y = 135,
+        image = love.graphics.newImage('assets/enemies/images/posette.png'),
+        xOff = 0,
+        yOff = 0,
+        def = 5,
+        atk = 5,
+        canSpare = false,
+        state = 'alive',
+        hp = 100,
+        maxhp = 100
+    }
+    
+    enemies[1].acts = {'Check', 'Pose', 'Kill'}
+    enemies[2].acts = {'Check', 'Pose'}
+    
+    enemies.stats = {amount = 2, canFlee = true}
+    
+    enemies.encounter = {
+        text = '[clear]* The [weirdRed][shake]potent posers[clear] pose[break]  [cyan][wave]proposterously!',
+        startFirst = false
+    }
+    enemies.bgm = love.audio.newSource('assets/enemies/bgm2.mp3', 'stream')
+end
 
+function enemies:update(dt)
+    
 end
 
 function enemies:draw()

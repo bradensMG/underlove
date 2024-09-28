@@ -19,12 +19,6 @@ local sfx = {
     err = love.audio.newSource('assets/sound/sfx/err.mp3', 'static')
 }
 
-Player.stats = {name = 'chara', love = 1, hp = 20, maxhp = 20, armor = 3, weapon = 2, atk = 0, def = 0}
-Player.mode = 'red'
-Player.inventory = {4, 1, 1, 5, 6}
-Player.chosenEnemy = 0
-Player.actAmount = 0
-
 local color
 local lastButton
 local xoff = 0
@@ -70,6 +64,14 @@ local function drawGraphic(image, x, y, color, outlineColor)
     end
     love.graphics.setColor(color)
     love.graphics.draw(image, x, y)
+end
+
+function Player:load()
+    Player.stats = {name = 'chara', love = 1, hp = 20, maxhp = 20, armor = 3, weapon = 2, atk = 0, def = 0}
+    Player.mode = 'red'
+    Player.inventory = {4, 1, 1, 5, 6}
+    Player.chosenEnemy = 0
+    Player.actAmount = 0
 end
 
 function Player:update(dt)

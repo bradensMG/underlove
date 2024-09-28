@@ -1,6 +1,6 @@
 Ui = {}
 
-local buttonNames = { 'fight', 'act', 'item', 'mercy' }
+local buttonNames = {'fight', 'act', 'item', 'mercy'}
 local buttonImages = {}
 local buttonQuads = {}
 
