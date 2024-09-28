@@ -342,7 +342,7 @@ function Player:update(dt)
     if global.battleState == 'flee' then
         heart.x = heart.x - 3  * dt * 30
         if heart.x < 0 then
-            error('you fled but i dont feel like adding anything special')
+            reload()
         end
     end
     crashx = heart.x - 2

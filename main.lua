@@ -1,6 +1,13 @@
 local FPS = 30
 local debugMode = true
 
+function reload()
+	love.audio.stop()
+	love.graphics.clear()
+	love.load()
+	playMusic = true
+end
+
 function love.keypressed(key)
     if key == 'up' then
         input.up = true
@@ -22,9 +29,7 @@ function love.keypressed(key)
 	elseif key == '2' then
 		error('forceCrash')
 	elseif key == 'r' then
-		love.audio.stop()
-		love.graphics.clear()
-		love.load()
+		reload()
 	end
 end
 
