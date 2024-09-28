@@ -82,9 +82,6 @@ function Writer:update(dt)
         if char == '[' then
             local codeEnd = text:find("]", i)
             local code = text:sub(i + 1, codeEnd - 1)
-            if code == 's' then
-                -- do nothing ; i don't recommend using this command, as it makes sound and i don't know how to fix it
-            end
             i = codeEnd + 1
         end
         if input.secondary then

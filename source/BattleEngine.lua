@@ -3,7 +3,7 @@ BattleEngine = {}
 maxLeft, maxUp, maxDown, maxRight = 0, 0, 0, 0
 
 local bg = {}
-playMusic = false
+playMusic = true
 
 local bgoffset = 0
 
@@ -57,7 +57,7 @@ function BattleEngine:update(dt)
     end
 
     if playMusic then
-        Enemies.bgm:setVolume(0.7)
+        Enemies.bgm:setVolume(0.4)
         Enemies.bgm:setLooping(true)
         Enemies.bgm:play()
     end
