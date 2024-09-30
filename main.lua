@@ -35,7 +35,24 @@ function love.keypressed(key)
 	end
 end
 
+function love.gamepadpressed(joystick, button)
+    if button == 'dpup' then
+        input.up = true
+	elseif button == 'dpdown' then
+        input.down = true
+	elseif button == 'dpleft' then
+        input.left = true
+	elseif button == 'dpright' then
+        input.right = true
+	elseif button == 'a' then
+		input.primary = true
+	elseif button == 'b' then
+		input.secondary = true
+	end
+end
+
 function love.load(arg)
+	-- love.audio.setVolume(0)
 	global = {gameState = 'BattleEngine', battleState = nil, choice = 0, subChoice = 0}
 
 	BattleEngine = require 'source.BattleEngine'
@@ -60,6 +77,9 @@ function love.load(arg)
     love.graphics.setBackgroundColor(0, 0, 0)
 
     yourCanvasName = love.graphics.newCanvas(640, 480)
+	local joysticks = love.joystick.getJoysticks()
+    joystick = joysticks[1]
+
     if global.gameState == 'BattleEngine' then BattleEngine:load() end
 end
 

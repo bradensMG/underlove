@@ -92,6 +92,7 @@ function Player:update(dt)
                 global.choice = 3
             end
         elseif input.primary then
+            joystick:setVibration(0.25, 0.25, 0.1)
             if global.choice == 0 or global.choice == 1 then
                 sfx.select:stop()
                 sfx.select:play()
