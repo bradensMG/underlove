@@ -118,7 +118,7 @@ function love.draw()
 		local width = 230
 		local height = 81
 
-		love.graphics.setColor(0.05, 0, 0.05, .5)
+		love.graphics.setColor(0, 0, 0, .5)
 		love.graphics.rectangle('fill', 5, 5, width, height, 5)
 
 		love.graphics.setColor(1, 1, 1, 1)

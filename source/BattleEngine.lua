@@ -47,10 +47,10 @@ local function doBackground()
         local lineX = i * 42 + bgoffset * 2
         local lineY = 0 + i * 42 + bgoffset / 2
 
-        love.graphics.setColor(0, 1, .5, .2)
+        love.graphics.setColor(0, 1, .5, .15)
         love.graphics.line(lineX, 0, lineX, 480)
         
-        love.graphics.setColor(0, 1, .5, .4)
+        love.graphics.setColor(0, 1, .5, .3)
         love.graphics.line(0, lineY, 640, lineY)
     end
 end
@@ -74,7 +74,7 @@ function BattleEngine:update(dt)
 end
 
 function BattleEngine:draw()
-    local color = {0, 0, 15}
+    local color = {0, 0, 0}
     love.graphics.setColor(color[1]/255, color[2]/255, color[3]/255)
     love.graphics.rectangle('fill', 0, 0, 640, 480)
     love.graphics.setColor(1, 1, 1)

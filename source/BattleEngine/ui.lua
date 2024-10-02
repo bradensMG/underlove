@@ -128,7 +128,7 @@ local function arena()
         arenaCur.width / 2, -arenaCur.height / 2,
         -arenaCur.width / 2, -arenaCur.height / 2
     }
-    love.graphics.setColor(0, 0, .075, .5)
+    love.graphics.setColor(0, 0, 0, .5)
     love.graphics.setLineStyle('rough')
     love.graphics.setLineWidth(5)
     love.graphics.polygon('fill', verts)

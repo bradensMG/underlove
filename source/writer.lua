@@ -24,7 +24,8 @@ local colors = {
     blue = {0, 0, 1},
     cyan = {0, 1, 1},
     yellow = {1, 1, 0},
-    weirdRed = {1, .2, .4}
+    weirdRed = {1, .2, .4},
+    orange = {1, .4, .2}
 }
 
 local function drawText(text, x, y, color, outlineColor)
