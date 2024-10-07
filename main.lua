@@ -52,7 +52,7 @@ function love.gamepadpressed(joystick, button)
 end
 
 function love.load(arg)
-	-- love.audio.setVolume(0)
+	love.audio.setVolume(0)
 	global = {gameState = 'BattleEngine', battleState = nil, choice = 0, subChoice = 0}
 
 	BattleEngine = require 'source.BattleEngine'

@@ -73,12 +73,11 @@ end
 local function buttons()
     local color
     local outlineClr
+    outlineClr = {0, 0, 0}
     if global.choice < 0 or global.choice > 3 then
         color = {1, 1, 1, .5}
-        outlineClr = {0, 0, 0, 0}
     else
         color = {1, 1, 1}
-        outlineClr = {0, 0, 0}
     end
 
     local positions = {

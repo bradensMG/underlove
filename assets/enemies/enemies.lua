@@ -2,6 +2,11 @@ enemies = {}
 
 local color
 local outlineWidth = 0
+local bgoffset = 0
+
+local bg = {}
+bg[0] = love.graphics.newImage('assets/images/spr_battlebg_0.png')
+bg[1] = love.graphics.newImage('assets/images/spr_battlebg_1.png')
 
 function doAct()
     if Player.chosenEnemy == 0 then
@@ -44,7 +49,7 @@ function enemies:load()
     enemies[1] = {
         name = 'Poseur',
         x = 200,
-        y = 135,
+        y = 137,
         image = love.graphics.newImage('assets/enemies/images/poseur.png'),
         xOff = 0,
         yOff = 0,
@@ -59,7 +64,7 @@ function enemies:load()
     enemies[2] = {
         name = 'Posette',
         x = 440,
-        y = 135,
+        y = 137,
         image = love.graphics.newImage('assets/enemies/images/posette.png'),
         xOff = 0,
         yOff = 0,
@@ -80,11 +85,15 @@ function enemies:load()
         text = '[clear]* The [orange][shake]potent posers[clear] pose[break]  [cyan][wave]proposterously!',
         startFirst = false
     }
+
     enemies.bgm = love.audio.newSource('assets/enemies/bgm2.mp3', 'stream')
 end
 
 function enemies:update(dt)
-    
+    bgoffset = bgoffset - dt * 30
+    if bgoffset <= -84 then
+        bgoffset = 0
+    end
 end
 
 function enemies:draw()
@@ -99,6 +108,30 @@ function enemies:draw()
         end
         drawGraphic(enemy.image, enemy.x - enemy.image:getWidth()/2 + enemy.xOff, enemy.y - enemy.image:getHeight()/2 + enemy.yOff, color, {0, 0, 0})
     end
+end
+
+function enemies:background()
+    love.graphics.setColor(0, .3, .175)
+    love.graphics.rectangle('fill', 0, 0, 640, 480)
+    love.graphics.setColor(1, 1, 1)
+    
+    -- love.graphics.draw(bg[1], 0, -1)
+
+    --[[
+    love.graphics.setLineWidth(3)
+    love.graphics.setLineStyle('rough')
+    
+    for i = 1, 21 do
+        local lineX = i * 42 + bgoffset * 2
+        local lineY = 0 + i * 42 + bgoffset / 2
+
+        love.graphics.setColor(0, 1, .5, .15)
+        love.graphics.line(lineX, 0, lineX, 480)
+        
+        love.graphics.setColor(0, 1, .5, .3)
+        love.graphics.line(0, lineY, 640, lineY)
+    end
+    ]]
 end
 
 return enemies
