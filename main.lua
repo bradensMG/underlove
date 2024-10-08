@@ -3,6 +3,8 @@ local debugMode = true
 require 'source.errhand'
 require 'source.fpsLimiter'
 
+Enemies = require('assets.enemies.testEnemy')
+
 function reload()
 	love.audio.stop()
 	love.graphics.clear()
@@ -27,10 +29,16 @@ function love.keypressed(key)
 		fullscreen = not fullscreen
 		love.window.setFullscreen(fullscreen, "desktop")
 	elseif key == '1' then
-		love.graphics.captureScreenshot('screenie.png')
+		love.graphics.captureScreenshot('screenie.png') 
 	elseif key == '2' then
 		error('forceCrash')
 	elseif key == 'r' then
+		reload()
+	elseif key == 'q' then
+		Enemies = require('assets.enemies.testSans')
+		reload()
+	elseif key == 'w' then
+		Enemies = require('assets.enemies.testEnemy')
 		reload()
 	end
 end
@@ -52,7 +60,7 @@ function love.gamepadpressed(joystick, button)
 end
 
 function love.load(arg)
-	love.audio.setVolume(0)
+	-- love.audio.setVolume(0)
 	global = {gameState = 'BattleEngine', battleState = nil, choice = 0, subChoice = 0}
 
 	BattleEngine = require 'source.BattleEngine'

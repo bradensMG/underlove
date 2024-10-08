@@ -10,7 +10,6 @@ particles.dust[2] = love.graphics.newImage('assets/images/particles/spr_dustclou
 particles.dust[3] = love.graphics.newImage('assets/images/particles/spr_dustcloud_2.png')
 
 function BattleEngine:load()
-    Enemies = require('assets.enemies.enemies')
     Enemies:load()
 
     if enemies.encounter.startFirst then

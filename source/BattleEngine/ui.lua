@@ -216,9 +216,15 @@ local function doChooseText()
             opacity = .5
         end
     
-        drawText(txt, 85, yPosition, {1, 1, 1, opacity}, {0, 0, 0})
+        if enemy.canSpare then
+            color = {1, 1, 0, opacity}
+        else
+            color = {1, 1, 1, opacity}
+        end
+
+        drawText(txt, 85, yPosition, color, {0, 0, 0})
     
-        if opacity == 1 then
+        if opacity == 1 and enemies.encounter.showHPbar then
             love.graphics.setColor(0, 0, 0)
             love.graphics.rectangle('fill', 106 + (#txt * 16) - outlineWidth, yPosition+6 - outlineWidth, 125 + outlineWidth*2, 16 + outlineWidth*2)
             love.graphics.setColor(0.8, 0, 0)
@@ -232,11 +238,13 @@ end
 local function doMercyText()
     love.graphics.setFont(fonts.determination)
 
-    local color = {1, 1, 1}
-    for i = 1, 3 do
-        if Enemies[i] and Enemies[i].canSpare then
+    local color
+    color = {1, 1, 1}
+    
+    for i=1, math.min(enemies.stats.amount) do
+        if enemies[i].canSpare then
             color = {1, 1, 0}
-            break
+            print('fuck')
         end
     end
     

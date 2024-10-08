@@ -243,7 +243,7 @@ function Player:update(dt)
             lastButton = global.choice
             global.battleState = 'doAct'
             global.choice = -1
-            doAct()
+            Enemies:doAct()
             heart.show = false
         end
     end
