@@ -67,7 +67,17 @@ local function drawGraphic(image, x, y, color, outlineColor)
 end
 
 function Player:load()
-    Player.stats = {name = 'chara', love = 1, hp = 20, maxhp = 20, armor = 3, weapon = 2, atk = 0, def = 0}
+    Player.stats = {
+        name = 'chara',
+        love = 19,
+        hp = 92,
+        maxhp = 92,
+        hasKR = true,
+        armor = 3,
+        weapon = 2,
+        atk = 0,
+        def = 0
+    }
     Player.mode = 'red'
     Player.inventory = {4, 1, 1, 5, 6}
     Player.chosenEnemy = 0
@@ -92,9 +102,6 @@ function Player:update(dt)
                 global.choice = 3
             end
         elseif input.primary then
-            if joystick then
-                joystick:setVibration(0.25, 0.25, 0.1)
-            end
             if global.choice == 0 or global.choice == 1 then
                 sfx.select:stop()
                 sfx.select:play()

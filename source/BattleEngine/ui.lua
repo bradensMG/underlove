@@ -15,6 +15,7 @@ end
 local ref = love.graphics.newImage('assets/images/refs/main.png')
 
 local hpname = love.graphics.newImage("assets/images/ui/spr_hpname_0.png")
+local krGraphic = love.graphics.newImage("assets/images/ui/spr_krmeter_0.png")
 
 local arenaCur = {
     x = 320,
@@ -101,6 +102,7 @@ local function stats()
     drawText(Player.stats.name .. '   LV ' .. Player.stats.love, 30, 400, {1, 1, 1}, {0, 0, 0})
 
     drawGraphic(hpname, 240, 400, {1, 1, 1}, {0, 0, 0})
+    drawGraphic(krGraphic, 395, 405, {1, 1, 1}, {0, 0, 0})
 
     love.graphics.setColor(0, 0, 0, 1)
     love.graphics.rectangle('fill', 275 - outlineWidth, 400 - outlineWidth, (Player.stats.maxhp * 1.2) + outlineWidth*2, 21 + outlineWidth*2)
@@ -110,10 +112,18 @@ local function stats()
     love.graphics.rectangle('fill', 275, 400, (Player.stats.hp * 1.2), 21)
 
     love.graphics.setColor(1, 1, 1)
-    if (Player.stats.hp > -1 and Player.stats.hp < 10) then
-        drawText("0" .. Player.stats.hp .. " / " .. Player.stats.maxhp, 289 + (Player.stats.maxhp * 1.2), 400, {1, 1, 1}, {0, 0, 0})
+    if Player.stats.hasKR then
+        if (Player.stats.hp > -1 and Player.stats.hp < 10) then
+            drawText("0" .. Player.stats.hp .. " / " .. Player.stats.maxhp, 320 + (Player.stats.maxhp * 1.2), 400, {1, 1, 1}, {0, 0, 0})
+        else
+            drawText(Player.stats.hp .. " / " .. Player.stats.maxhp, 320 + (Player.stats.maxhp * 1.2), 400, {1, 1, 1}, {0, 0, 0})
+        end
     else
-        drawText(Player.stats.hp .. " / " .. Player.stats.maxhp, 289 + (Player.stats.maxhp * 1.2), 400, {1, 1, 1}, {0, 0, 0})
+        if (Player.stats.hp > -1 and Player.stats.hp < 10) then
+            drawText("0" .. Player.stats.hp .. " / " .. Player.stats.maxhp, 289 + (Player.stats.maxhp * 1.2), 400, {1, 1, 1}, {0, 0, 0})
+        else
+            drawText(Player.stats.hp .. " / " .. Player.stats.maxhp, 289 + (Player.stats.maxhp * 1.2), 400, {1, 1, 1}, {0, 0, 0})
+        end
     end
 end
 
@@ -244,7 +254,6 @@ local function doMercyText()
     for i=1, math.min(enemies.stats.amount) do
         if enemies[i].canSpare then
             color = {1, 1, 0}
-            print('fuck')
         end
     end
     

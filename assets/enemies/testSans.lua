@@ -2,7 +2,6 @@ enemies = {}
 
 local color
 local outlineWidth = 0
--- local bgoffset = 0
 
 local bg = {}
 bg[0] = love.graphics.newImage('assets/images/spr_battlebg_0.png')
@@ -51,7 +50,7 @@ function enemies:load()
     
     enemies.encounter = {
         text = "[clear]* You feel like you're going[break]  to have a [red][shake]bad time.",
-        startFirst = false,
+        startFirst = true,
         showHPbar = false
     }
 
@@ -82,27 +81,7 @@ function enemies:draw()
 end
 
 function enemies:background()
-    love.graphics.setColor(0, .3, .175)
-    love.graphics.rectangle('fill', 0, 0, 640, 480)
-    love.graphics.setColor(1, 1, 1)
-    
-    -- love.graphics.draw(bg[1], 0, -1)
 
-    --[[
-    love.graphics.setLineWidth(3)
-    love.graphics.setLineStyle('rough')
-    
-    for i = 1, 21 do
-        local lineX = i * 42 + bgoffset * 2
-        local lineY = 0 + i * 42 + bgoffset / 2
-
-        love.graphics.setColor(0, 1, .5, .15)
-        love.graphics.line(lineX, 0, lineX, 480)
-        
-        love.graphics.setColor(0, 1, .5, .3)
-        love.graphics.line(0, lineY, 640, lineY)
-    end
-    ]]
 end
 
 return enemies

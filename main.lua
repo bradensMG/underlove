@@ -3,7 +3,7 @@ local debugMode = true
 require 'source.errhand'
 require 'source.fpsLimiter'
 
-Enemies = require('assets.enemies.testEnemy')
+Enemies = require('assets.enemies.testSans')
 
 function reload()
 	love.audio.stop()
@@ -28,44 +28,32 @@ function love.keypressed(key)
     elseif key == "f4" then
 		fullscreen = not fullscreen
 		love.window.setFullscreen(fullscreen, "desktop")
-	elseif key == '1' then
-		love.graphics.captureScreenshot('screenie.png') 
-	elseif key == '2' then
-		error('forceCrash')
-	elseif key == 'r' then
-		reload()
-	elseif key == 'q' then
-		Enemies = require('assets.enemies.testSans')
-		reload()
-	elseif key == 'w' then
-		Enemies = require('assets.enemies.testEnemy')
-		reload()
 	end
-end
-
-function love.gamepadpressed(joystick, button)
-    if button == 'dpup' then
-        input.up = true
-	elseif button == 'dpdown' then
-        input.down = true
-	elseif button == 'dpleft' then
-        input.left = true
-	elseif button == 'dpright' then
-        input.right = true
-	elseif button == 'a' then
-		input.primary = true
-	elseif button == 'b' then
-		input.secondary = true
+	if debugMode then
+		if key == '1' then
+			love.graphics.captureScreenshot('screenie.png') 
+		elseif key == '2' then
+			error('forceCrash')
+		elseif key == 'r' then
+			reload()
+		elseif key == 'q' then
+			Enemies = require('assets.enemies.testSans')
+			reload()
+		elseif key == 'w' then
+			Enemies = require('assets.enemies.testEnemy')
+			reload()
+		end
 	end
 end
 
 function love.load(arg)
-	-- love.audio.setVolume(0)
+	love.audio.setVolume(1)
 	global = {gameState = 'BattleEngine', battleState = nil, choice = 0, subChoice = 0}
 
 	BattleEngine = require 'source.BattleEngine'
 
 	fonts = {
+
 		determination = love.graphics.newFont('assets/fonts/determination-mono.ttf', 32),
 		mnc = love.graphics.newFont('assets/fonts/Mars_Needs_Cunnilingus.ttf', 23),
 		dotumche = love.graphics.newFont('assets/fonts/dotumche.ttf', 13),
@@ -86,7 +74,6 @@ function love.load(arg)
 
     yourCanvasName = love.graphics.newCanvas(640, 480)
 	local joysticks = love.joystick.getJoysticks()
-    joystick = joysticks[1]
 
     if global.gameState == 'BattleEngine' then BattleEngine:load() end
 end

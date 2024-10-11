@@ -2,7 +2,7 @@ enemies = {}
 
 local color
 local outlineWidth = 0
-local bgoffset = 0
+local bgoffset
 
 local bg = {}
 bg[0] = love.graphics.newImage('assets/images/spr_battlebg_0.png')
@@ -46,6 +46,7 @@ local function drawGraphic(image, x, y, color, outlineColor)
 end
 
 function enemies:load()
+    bgoffset = 0
     enemies[1] = {
         name = 'Poseur',
         x = 200,
@@ -112,13 +113,12 @@ function enemies:draw()
 end
 
 function enemies:background()
-    love.graphics.setColor(0, .3, .175)
+    love.graphics.setColor(0, 0, 0)
     love.graphics.rectangle('fill', 0, 0, 640, 480)
     love.graphics.setColor(1, 1, 1)
     
     -- love.graphics.draw(bg[1], 0, -1)
 
-    --[[
     love.graphics.setLineWidth(3)
     love.graphics.setLineStyle('rough')
     
@@ -132,7 +132,6 @@ function enemies:background()
         love.graphics.setColor(0, 1, .5, .3)
         love.graphics.line(0, lineY, 640, lineY)
     end
-    ]]
 end
 
 return enemies
