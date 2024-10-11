@@ -3,7 +3,7 @@ local debugMode = true
 require 'source.errhand'
 require 'source.fpsLimiter'
 
-Enemies = require('assets.enemies.testSans')
+Enemies = require('assets.enemies.testEnemy')
 
 function reload()
 	love.audio.stop()
@@ -83,25 +83,23 @@ function love.update(dt)
     input = {up = false, down = false, left = false, right = false, primary = false, secondary = false}
 end
 
+-- didn't make these two functions :( sulfur gave them to me from the love2d forums but we can't find the source
 local function connect()
     love.graphics.setCanvas(yourCanvasName)
     love.graphics.clear()
 end
 
 local function disconnect()
-    love.graphics.setCanvas() -- Set rendering to the screen
-	local screenW,screenH = love.graphics.getDimensions() -- Get Dimensions of the window
-	local canvasW,canvasH = yourCanvasName:getDimensions() -- Get Dimensions of the game canvas
-	local scale = math.min(screenW/canvasW , screenH/canvasH) -- Scale canvas to the screen, You can also change this with 1 if you don't want to scale. Or wrap it in a math.floor to only scale integers.
-	-- local scale = math.floor(math.min(screenW/canvasW , screenH/canvasH)) -- Scale to the nearest integer 
-	--local scale = 1 -- Don't scale
-
+    love.graphics.setCanvas()
+	local screenW,screenH = love.graphics.getDimensions()
+	local canvasW,canvasH = yourCanvasName:getDimensions()
+	local scale = math.min(screenW/canvasW , screenH/canvasH)
 	love.graphics.push()
-	love.graphics.translate( math.floor((screenW - canvasW * scale)/2) , math.floor((screenH - canvasH * scale)/2)) -- Move to the appropiate top left corner
-	love.graphics.scale(scale,scale) -- Scale
+	love.graphics.translate( math.floor((screenW - canvasW * scale)/2) , math.floor((screenH - canvasH * scale)/2))
+	love.graphics.scale(scale,scale)
     love.graphics.setColor(1, 1, 1)
-	love.graphics.draw(yourCanvasName) -- Draw the canvas
-	love.graphics.pop() -- pop transformation state
+	love.graphics.draw(yourCanvasName)
+	love.graphics.pop()
 end
 
 function love.draw()
