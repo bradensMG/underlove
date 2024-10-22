@@ -65,6 +65,10 @@ function gotoMenu()
     Writer:setParams(Enemies.encounter.text, 52, 274, fonts.determination, 0.02, 1)
 end
 
+function doFight()
+    targetChoiceFrame = 0
+end
+
 function doFlee()
     Writer:setParams("[clear]* Don't waste my time.", 85, 306, fonts.determination, 0.02, 1)
 end

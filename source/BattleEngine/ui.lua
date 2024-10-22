@@ -25,6 +25,22 @@ local arenaCur = {
     rotation = 0
 }
 
+local targetChoiceX = 0
+local direction = nil
+local targetChoiceAnim = false
+local moving = true
+local speed = 12
+
+local fightUi = {
+    target = love.graphics.newImage('assets/images/ui/spr_target_0.png'),
+    targetChoice = {}
+}
+
+fightUi.targetChoice = {
+    love.graphics.newImage('assets/images/ui/spr_targetchoice_0.png'),
+    love.graphics.newImage('assets/images/ui/spr_targetchoice_1.png')
+}
+
 local function setHeartParams()
     maxLeft = math.floor(arenaCur.x - (arenaCur.width / 2) + 6)
     maxUp = math.floor(arenaCur.y - (arenaCur.height / 2) + 6)
@@ -102,7 +118,7 @@ local function stats()
     drawText(Player.stats.name .. '   LV ' .. Player.stats.love, 30, 400, {1, 1, 1}, {0, 0, 0})
 
     drawGraphic(hpname, 240, 400, {1, 1, 1}, {0, 0, 0})
-    drawGraphic(krGraphic, 395, 405, {1, 1, 1}, {0, 0, 0})
+    if Player.stats.hasKR then drawGraphic(krGraphic, 395, 405, {1, 1, 1}, {0, 0, 0}) end
 
     love.graphics.setColor(0, 0, 0, 1)
     love.graphics.rectangle('fill', 275 - outlineWidth, 400 - outlineWidth, (Player.stats.maxhp * 1.2) + outlineWidth*2, 21 + outlineWidth*2)
@@ -295,8 +311,42 @@ local function doItemText()
     end
 end
 
-function Ui:load()
-    
+local function doFightUi()
+    love.graphics.draw(fightUi.target, 320 - (fightUi.target:getWidth()/2), 320 - (fightUi.target:getHeight()/2))
+    love.graphics.draw(fightUi.targetChoice[math.floor(targetChoiceFrame*speed)+1], targetChoiceX, 256)
+end
+
+local function updateFightUi(dt)
+    speed = 15
+    if targetChoiceAnim then
+        targetChoiceFrame = targetChoiceFrame + love.timer.getDelta()
+        if targetChoiceFrame >= 2/speed then
+            targetChoiceFrame = 0
+        end
+    end
+
+    if input.primary then
+        moving = false
+        targetChoiceAnim = true
+    end
+
+    if moving then
+        targetChoiceX = targetChoiceX + direction * 30 * dt
+    end
+end
+
+function Ui:initFight()
+    targetChoiceX = 0
+    direction = nil
+    targetChoiceAnim = false
+    moving = true
+    if love.math.random(0, 1) == 0 then
+        targetChoiceX = 586
+        direction = -13
+    else
+        targetChoiceX = 30
+        direction = 13
+    end
 end
 
 function Ui:draw()
@@ -307,20 +357,22 @@ function Ui:draw()
     -- love.graphics.draw(ref)
     if global.battleState == 'chooseEnemy' then
         doChooseText()
-    end
-    if global.battleState == 'act' then
+    elseif global.battleState == 'fight' then
+        doFightUi()
+    elseif global.battleState == 'act' then
         doActText()
-    end
-    if global.battleState == 'item' then
+    elseif global.battleState == 'item' then
         doItemText()
-    end
-    if global.battleState == 'mercy' then
+    elseif global.battleState == 'mercy' then
         doMercyText()
     end
 end
 
 function Ui:update(dt)
     updateArena()
+    if global.battleState == 'fight' then
+        updateFightUi(dt)
+    end
 end
 
 return Ui

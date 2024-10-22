@@ -2,15 +2,7 @@ Player = {}
 
 local lastButton
 
-local heart = {
-    image = love.graphics.newImage('assets/images/ut-heart.png'),
-    x = Ui.arenaTo.x - 8,
-    y = Ui.arenaTo.y - 8,
-    gravity = 0,
-    jumpstage = 3,
-    jumptimer = 0,
-    show = true
-}
+local heart = {}
 
 local sfx = {
     move = love.audio.newSource('assets/sound/sfx/menumove.wav', 'static'),
@@ -69,14 +61,23 @@ end
 function Player:load()
     Player.stats = {
         name = 'chara',
-        love = 19,
-        hp = 92,
-        maxhp = 92,
-        hasKR = true,
+        love = 1,
+        hp = 20,
+        maxhp = 20,
+        hasKR = false,
         armor = 3,
         weapon = 2,
         atk = 0,
         def = 0
+    }
+    heart = {
+        image = love.graphics.newImage('assets/images/ut-heart.png'),
+        x = Ui.arenaTo.x - 8,
+        y = Ui.arenaTo.y - 8,
+        gravity = 0,
+        jumpstage = 3,
+        jumptimer = 0,
+        show = true
     }
     Player.mode = 'red'
     Player.inventory = {4, 1, 1, 5, 6}
@@ -199,6 +200,14 @@ function Player:update(dt)
                 yoff = 0
                 Writer:stop()
                 global.battleState = 'act'
+            elseif global.choice == 0 and enemies[global.subChoice + 1].state == 'alive' then
+                global.battleState = 'fight'
+                Ui:initFight()
+                doFight()
+                heart.show = false
+                global.choice = -1
+                sfx.select:stop()
+                sfx.select:play()
             else
                 sfx.err:stop()
                 sfx.err:play()
