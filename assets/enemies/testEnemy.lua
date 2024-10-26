@@ -2,7 +2,6 @@ enemies = {}
 
 local color
 local outlineWidth = 0
-local bgoffset
 
 local bg = {}
 bg[0] = love.graphics.newImage('assets/images/spr_battlebg_0.png')
@@ -83,7 +82,7 @@ function enemies:load()
     enemies.stats = {amount = 2, canFlee = true}
     
     enemies.encounter = {
-        text = '[clear]* The [orange][shake]potent posers[clear] pose[break]  [cyan][wave]proposterously!',
+        text = '[clear]* The [red][shake]potent posers[clear] pose[break]  [cyan][wave]proposterously!',
         startFirst = false,
         showHPbar = true
     }
@@ -92,10 +91,7 @@ function enemies:load()
 end
 
 function enemies:update(dt)
-    bgoffset = bgoffset - dt * 30
-    if bgoffset <= -84 then
-        bgoffset = 0
-    end
+    -- nothing
 end
 
 function enemies:draw()
@@ -113,25 +109,9 @@ function enemies:draw()
 end
 
 function enemies:background()
-    love.graphics.setColor(0, 0, 0)
+    love.graphics.setColor(0, .25, .5)
     love.graphics.rectangle('fill', 0, 0, 640, 480)
     love.graphics.setColor(1, 1, 1)
-    
-    -- love.graphics.draw(bg[1], 0, -1)
-
-    love.graphics.setLineWidth(3)
-    love.graphics.setLineStyle('rough')
-    
-    for i = 1, 21 do
-        local lineX = i * 42 + bgoffset * 2
-        local lineY = 0 + i * 42 + bgoffset / 2
-
-        love.graphics.setColor(0, 1, .5, .15)
-        love.graphics.line(lineX, 0, lineX, 480)
-        
-        love.graphics.setColor(0, 1, .5, .3)
-        love.graphics.line(0, lineY, 640, lineY)
-    end
 end
 
 return enemies
