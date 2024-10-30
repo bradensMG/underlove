@@ -90,12 +90,6 @@ end
 local function buttons()
     local color
     local outlineClr
-    outlineClr = {0, 0, 0}
-    if global.choice < 0 or global.choice > 3 then
-        color = {1, 1, 1, .5}
-    else
-        color = {1, 1, 1}
-    end
 
     local positions = {
         fight = 32,
@@ -105,7 +99,7 @@ local function buttons()
     }
     
     for i, name in ipairs(buttonNames) do
-        drawQuad(buttonImages[name .. 'bt'], buttonQuads[name .. 'Quads'][(global.choice == (i-1)) and 2 or 1], positions[name], 432, color, outlineClr)
+        drawQuad(buttonImages[name .. 'bt'], buttonQuads[name .. 'Quads'][(global.choice == (i-1)) and 2 or 1], positions[name], 432, {1, 1, 1}, {0, 0, 0})
     end
 end
 
@@ -312,7 +306,7 @@ local function doItemText()
 end
 
 local function doFightUi()
-    love.graphics.draw(fightUi.target, 320 - (fightUi.target:getWidth()/2), 320 - (fightUi.target:getHeight()/2))
+    drawGraphic(fightUi.target, 320 - (fightUi.target:getWidth()/2), 320 - (fightUi.target:getHeight()/2), {1, 1, 1}, {0, 0, 0})
     love.graphics.draw(fightUi.targetChoice[math.floor(targetChoiceFrame*speed)+1], targetChoiceX, 256)
 end
 
@@ -327,7 +321,12 @@ local function updateFightUi(dt)
 
     if input.primary then
         moving = false
-        targetChoiceAnim = true
+        startEnemyTurn()
+    end
+
+    if targetChoiceX > 586 or targetChoiceX < 30 then
+        moving = false
+        startEnemyTurn()
     end
 
     if moving then
@@ -336,6 +335,7 @@ local function updateFightUi(dt)
 end
 
 function Ui:initFight()
+    Writer:stop()
     targetChoiceX = 0
     direction = nil
     targetChoiceAnim = false

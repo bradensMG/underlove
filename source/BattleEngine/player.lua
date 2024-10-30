@@ -16,6 +16,11 @@ local lastButton
 local xoff = 0
 local yoff = 0
 
+function placeSoul()
+    heart.x = Ui.arenaTo.x - 8
+    heart.y = Ui.arenaTo.y - 8
+end
+
 if global.battleState == 'enemyTalk' then
     heart.x = Ui.arenaTo.x - 8
     heart.y = Ui.arenaTo.y - 8
@@ -132,6 +137,7 @@ function Player:update(dt)
         buttonPos()
     end
     if global.battleState == 'enemyTurn' then
+        heart.show = true
         if Player.mode == 'red' then
             heart.x = heart.x + ((love.keyboard.isDown('right')and 1 or 0) - (love.keyboard.isDown('left')and 1 or 0)) * 4 / ((love.keyboard.isDown('x')and 1 or 0) + 1) * dt * 30
             heart.y = heart.y + ((love.keyboard.isDown('down')and 1 or 0) - (love.keyboard.isDown('up')and 1 or 0)) * 4 / ((love.keyboard.isDown('x')and 1 or 0) + 1) * dt * 30

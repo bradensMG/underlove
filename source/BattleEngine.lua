@@ -23,7 +23,7 @@ function BattleEngine:load()
     Writer = require('source.writer')
 
     if global.battleState == 'buttons' then gotoMenu() else -- go to menu
-        Ui.arenaTo = {x = 320, y = 320, width = 135, height = 135, rotation = 0} -- go to enemyturn
+        startEnemyTurn()
     end
 
     Player = require('source.BattleEngine.player')
@@ -103,6 +103,12 @@ function useItem()
         Player.inventory[global.subChoice + 1] = lastArmor
     end
 
+end
+
+function startEnemyTurn()
+    global.battleState = 'enemyTurn'
+    Ui.arenaTo = {x = 320, y = 320, width = 135, height = 135, rotation = 0}
+    placeSoul()
 end
 
 return BattleEngine

@@ -109,7 +109,7 @@ function enemies:draw()
 end
 
 function enemies:background()
-    love.graphics.setColor(0, .25, .5)
+    love.graphics.setColor(0.15, 0, 0.3)
     love.graphics.rectangle('fill', 0, 0, 640, 480)
     love.graphics.setColor(1, 1, 1)
 end

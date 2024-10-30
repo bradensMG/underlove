@@ -1,5 +1,5 @@
 local debugMode = true
-local FPS = 0
+local FPS = 30
 
 currentEncounter = 'testEnemy'
 Enemies = require('assets.enemies.' .. currentEncounter)
@@ -36,8 +36,6 @@ function love.keypressed(key)
 	if debugMode then
 		if key == '1' then
 			love.graphics.captureScreenshot('screenie.png') 
-		elseif key == '2' then
-			error('forceCrash')
 		elseif key == 'r' then
 			reload()
 		end
@@ -72,7 +70,6 @@ function love.load(arg)
     love.graphics.setBackgroundColor(0, 0, 0)
 
     yourCanvasName = love.graphics.newCanvas(640, 480)
-	local joysticks = love.joystick.getJoysticks()
 
     if global.gameState == 'BattleEngine' then BattleEngine:load() end
 end
